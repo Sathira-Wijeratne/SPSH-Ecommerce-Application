@@ -52,6 +52,9 @@ namespace SPSH_Ecommerce_Application.Controllers
         public async Task<IActionResult> Update(string id, User updatedUser)
         {
             var usersCollection = _mongoDBService.GetUsersCollection();
+
+            updatedUser.Id = id;
+
             var result = await usersCollection.ReplaceOneAsync(u => u.Id == id, updatedUser);
             if (result.MatchedCount == 0)
             {

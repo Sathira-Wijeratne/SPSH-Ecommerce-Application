@@ -1,4 +1,6 @@
-﻿namespace SPSH_Ecommerce_Application.Models
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding;
+
+namespace SPSH_Ecommerce_Application.Models
 {
     public class Product
     {

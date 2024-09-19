@@ -86,16 +86,23 @@ namespace SPSH_Ecommerce_Application.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> Update(string id, Product updatedProduct)
+        public async Task<IActionResult> Update(string id, [FromBody] Product updatedProduct)
         {
             var productsCollection = _mongoDBService.GetProductsCollection();
+
+            // Ensure the updatedProduct does not have its Id modified (ignore the Id from the body)
+            updatedProduct.Id = id; 
+
             var result = await productsCollection.ReplaceOneAsync(p => p.Id == id, updatedProduct);
+
             if (result.MatchedCount == 0)
             {
                 return NotFound(new { message = "Product not found" });
             }
+
             return NoContent();
         }
+
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(string id)

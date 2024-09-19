@@ -67,14 +67,21 @@ namespace SPSH_Ecommerce_Application.Controllers
     }
 
     [HttpPut("{id}")]
-    public async Task<IActionResult> Update(string id, Order updatedProduct)
+    public async Task<IActionResult> Update(string id, [FromBody] Order updatedOrder)
     {
         var ordersCollection = _mongoDBService.GetOrdersCollection();
-        var result = await ordersCollection.ReplaceOneAsync(o => o.Id == id, updatedProduct);
-        if (result.MatchedCount == 0)
+
+        var existingOrder = await ordersCollection.Find(o => o.Id == id).FirstOrDefaultAsync();
+
+        if (existingOrder == null)
         {
             return NotFound(new { message = "Order not found" });
         }
+
+        existingOrder.Status = updatedOrder.Status;
+
+        var result = await ordersCollection.ReplaceOneAsync(o => o.Id == id, existingOrder);
+
         return NoContent();
     }
 
