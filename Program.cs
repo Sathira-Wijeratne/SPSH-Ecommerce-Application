@@ -1,4 +1,5 @@
 
+using SPSH_Ecommerce_Application.Services;
 
 namespace SPSH_Ecommerce_Application
 {
@@ -9,6 +10,11 @@ namespace SPSH_Ecommerce_Application
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
+            //MongoDB
+            builder.Services.Configure<MongoDBSettings>(
+                builder.Configuration.GetSection("MongoDB"));
+
+            builder.Services.AddSingleton<MongoDBService>();
 
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
