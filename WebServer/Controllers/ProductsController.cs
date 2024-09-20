@@ -89,5 +89,16 @@ namespace SPSH_Ecommerce_Application.Controllers
             }
             return NoContent();
         }
+
+        // route to fetch only the product stocks
+        [HttpGet("stocks")]
+        public async Task<ActionResult<List<object>>> GetStocks()
+        {
+            var productsCollection = _mongoDBService.GetProductsCollection();
+            var stocks = await productsCollection
+                .Find(p=> true).Project(p=>new { p.ProductId, p.Stock }).ToListAsync();
+
+            return Ok(stocks);
+        }
     }
 }
