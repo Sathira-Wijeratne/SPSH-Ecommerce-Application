@@ -90,5 +90,13 @@ namespace SPSH_Ecommerce_Application.Controllers
         }
         return NoContent();
     }
+
+    [HttpGet("status/{OrderId}")]
+    public async Task<ActionResult<List<object>>> GetStatus(string OrderId)
+        {
+            var ordersCollection = _mongoDBService.GetOrdersCollection();
+            var result = await ordersCollection.Find(o => o.OrderId == OrderId).Project(o => new {o.OrderId, o.Status}).ToListAsync();
+            return Ok(result);
+        }
 }
 }
