@@ -1,9 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿/*
+ * Description: This file contains the ProductsController, responsible for handling
+ * CRUD operations for products, including retrieving, creating, updating, and deleting products.
+ */
+
+using Microsoft.AspNetCore.Mvc;
 using MongoDB.Driver;
 using SPSH_Ecommerce_Application.Models;
 using SPSH_Ecommerce_Application.Services;
-
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace SPSH_Ecommerce_Application.Controllers
 {
@@ -13,11 +16,13 @@ namespace SPSH_Ecommerce_Application.Controllers
     {
         private readonly MongoDBService _mongoDBService;
 
+        // Constructor to initialize the MongoDB service dependency
         public ProductsController(MongoDBService mongoDBService)
         {
             _mongoDBService = mongoDBService;
         }
 
+        // Retrieves all products from the database
         [HttpGet]
         public async Task<ActionResult<List<Product>>> Get()
         {
@@ -26,6 +31,7 @@ namespace SPSH_Ecommerce_Application.Controllers
             return Ok(products);
         }
 
+        // Retrieves a specific product by its ProductId from the database
         [HttpGet("{ProductId}")]
         public async Task<ActionResult<Product>> Get(string ProductId)
         {
@@ -38,6 +44,7 @@ namespace SPSH_Ecommerce_Application.Controllers
             return Ok(product);
         }
 
+        // Creates a new product in the database
         [HttpPost]
         public async Task<ActionResult> Create([FromBody] Product product)
         {
@@ -49,14 +56,14 @@ namespace SPSH_Ecommerce_Application.Controllers
             return CreatedAtAction(nameof(Get), new { ProductId = product.Id }, product);
         }
 
+        // Updates an existing product by its ProductId
         [HttpPut("{ProductId}")]
         public async Task<IActionResult> Update(string ProductId, [FromBody] Product updatedProduct)
         {
             var productsCollection = _mongoDBService.GetProductsCollection();
-
-            // Ensure the updatedProduct does not have its Id modified (ignore the Id from the body)
             var existingProduct = await productsCollection.Find(p => p.ProductId == ProductId).FirstOrDefaultAsync();
 
+            // Retain the original Id and ProductId
             updatedProduct.Id = existingProduct.Id;
             updatedProduct.ProductId = ProductId;  
 
@@ -70,7 +77,7 @@ namespace SPSH_Ecommerce_Application.Controllers
             return NoContent();
         }
 
-
+        // Deletes a product from the database by its ProductId
         [HttpDelete("{ProductId}")]
         public async Task<IActionResult> Delete(string ProductId)
         {
