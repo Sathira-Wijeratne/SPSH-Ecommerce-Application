@@ -17,7 +17,7 @@ namespace SPSH_Ecommerce_Application.Controllers
         }
 
         [HttpGet("{customerEmail}")]
-        public async Task<ActionResult<List<Order>>> Get(string customerEmail)
+        public async Task<ActionResult<List<Cart>>> Get(string customerEmail)
         {
             var CartCollection = _mongoDBService.GetCartsCollection();
             var orders = await CartCollection.Find(c => c.CustomerEmail == customerEmail).ToListAsync();
@@ -26,7 +26,7 @@ namespace SPSH_Ecommerce_Application.Controllers
         }
 
         [HttpGet("{customerEmail}/{productId}")]
-        public async Task<ActionResult<List<Order>>> Get(string customerEmail, string productId)
+        public async Task<ActionResult<List<Cart>>> Get(string customerEmail, string productId)
         {
             var CartCollection = _mongoDBService.GetCartsCollection();
             var orders = await CartCollection.Find(c => c.CustomerEmail == customerEmail && c.ProductId == productId).FirstOrDefaultAsync();
