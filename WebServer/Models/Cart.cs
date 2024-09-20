@@ -8,6 +8,6 @@
         public string ProductName { get; set; }
         public string vendorEmail { get; set; }
         public int ProductQty { get; set; }
-        public double ProductPrice { get; set; }
+        public decimal ProductPrice { get; set; }
     }
 }
