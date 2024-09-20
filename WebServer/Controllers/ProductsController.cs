@@ -9,42 +9,6 @@ namespace SPSH_Ecommerce_Application.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    /*public class ProductsController : ControllerBase
-    {
-        // GET: api/<ProductsController>
-        [HttpGet]
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "value1", "value2" };
-        }
-
-        // GET api/<ProductsController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
-        {
-            return "value";
-        }
-
-        // POST api/<ProductsController>
-        [HttpPost]
-        public void Post([FromBody] string value)
-        {
-        }
-
-        // PUT api/<ProductsController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        // DELETE api/<ProductsController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
-    }*/
-
-    //above is auto generated routes
     public class ProductsController : ControllerBase
     {
         private readonly MongoDBService _mongoDBService;
@@ -62,11 +26,11 @@ namespace SPSH_Ecommerce_Application.Controllers
             return Ok(products);
         }
 
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Product>> Get(string id)
+        [HttpGet("{ProductId}")]
+        public async Task<ActionResult<Product>> Get(string ProductId)
         {
             var productsCollection = _mongoDBService.GetProductsCollection();
-            var product = await productsCollection.Find(p => p.Id == id).FirstOrDefaultAsync();
+            var product = await productsCollection.Find(p => p.ProductId == ProductId).FirstOrDefaultAsync();
             if (product == null)
             {
                 return NotFound(new { message = "Product not found" });
@@ -82,18 +46,21 @@ namespace SPSH_Ecommerce_Application.Controllers
 
             var productsCollection = _mongoDBService.GetProductsCollection();
             await productsCollection.InsertOneAsync(product);
-            return CreatedAtAction(nameof(Get), new { id = product.Id }, product);
+            return CreatedAtAction(nameof(Get), new { ProductId = product.Id }, product);
         }
 
-        [HttpPut("{id}")]
-        public async Task<IActionResult> Update(string id, [FromBody] Product updatedProduct)
+        [HttpPut("{ProductId}")]
+        public async Task<IActionResult> Update(string ProductId, [FromBody] Product updatedProduct)
         {
             var productsCollection = _mongoDBService.GetProductsCollection();
 
             // Ensure the updatedProduct does not have its Id modified (ignore the Id from the body)
-            updatedProduct.Id = id; 
+            var existingProduct = await productsCollection.Find(p => p.ProductId == ProductId).FirstOrDefaultAsync();
 
-            var result = await productsCollection.ReplaceOneAsync(p => p.Id == id, updatedProduct);
+            updatedProduct.Id = existingProduct.Id;
+            updatedProduct.ProductId = ProductId;  
+
+            var result = await productsCollection.ReplaceOneAsync(p => p.ProductId == ProductId, updatedProduct);
 
             if (result.MatchedCount == 0)
             {
@@ -104,11 +71,11 @@ namespace SPSH_Ecommerce_Application.Controllers
         }
 
 
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(string id)
+        [HttpDelete("{ProductId}")]
+        public async Task<IActionResult> Delete(string ProductId)
         {
             var productsCollection = _mongoDBService.GetProductsCollection();
-            var result = await productsCollection.DeleteOneAsync(p => p.Id == id);
+            var result = await productsCollection.DeleteOneAsync(p => p.ProductId == ProductId);
             if (result.DeletedCount == 0)
             {
                 return NotFound(new { message = "Product not found" });
