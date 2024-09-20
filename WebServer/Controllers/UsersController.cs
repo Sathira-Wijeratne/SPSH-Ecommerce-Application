@@ -1,4 +1,9 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿/*
+ * Description: This file contains the UsersController, responsible for handling
+ * CRUD operations for users, including retrieving, creating, updating, and deleting users.
+ */
+
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Driver;
 using SPSH_Ecommerce_Application.Models;
@@ -12,11 +17,13 @@ namespace SPSH_Ecommerce_Application.Controllers
     {
         private readonly MongoDBService _mongoDBService;
 
+        // Constructor to initialize the MongoDB service dependency
         public UsersController(MongoDBService mongoDBService)
         {
             _mongoDBService = mongoDBService;
         }
 
+        // Retrieves all users from the database
         [HttpGet]
         public async Task<ActionResult<List<User>>> Get()
         {
@@ -25,6 +32,7 @@ namespace SPSH_Ecommerce_Application.Controllers
             return Ok(users);
         }
 
+        // Retrieves a specific user by email from the database
         [HttpGet("{email}")]
         public async Task<ActionResult<User>> Get(string email)
         {
@@ -37,6 +45,7 @@ namespace SPSH_Ecommerce_Application.Controllers
             return Ok(user);
         }
 
+        // Creates a new user in the database
         [HttpPost]
         public async Task<ActionResult> Create([FromBody] User user)
         {
@@ -48,6 +57,7 @@ namespace SPSH_Ecommerce_Application.Controllers
             return CreatedAtAction(nameof(Get), new { email = user.Email }, user);
         }
 
+        // Updates an existing user by email
         [HttpPut("{email}")]
         public async Task<IActionResult> Update(string email, User updatedUser)
         {
@@ -66,6 +76,7 @@ namespace SPSH_Ecommerce_Application.Controllers
             return NoContent();
         }
 
+        // Deletes a user from the database by email
         [HttpDelete("{email}")]
         public async Task<IActionResult> Delete(string email)
         {
