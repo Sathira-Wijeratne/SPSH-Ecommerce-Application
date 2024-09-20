@@ -25,11 +25,11 @@ namespace SPSH_Ecommerce_Application.Controllers
             return Ok(users);
         }
 
-        [HttpGet("{id}")]
-        public async Task<ActionResult<User>> Get(string id)
+        [HttpGet("{email}")]
+        public async Task<ActionResult<User>> Get(string email)
         {
             var usersCollection = _mongoDBService.GetUsersCollection();
-            var user = await usersCollection.Find(u => u.Id == id).FirstOrDefaultAsync();
+            var user = await usersCollection.Find(u => u.Email == email).FirstOrDefaultAsync();
             if (user == null)
             {
                 return NotFound(new { message = "User not found" });
@@ -45,17 +45,20 @@ namespace SPSH_Ecommerce_Application.Controllers
 
             var usersCollection = _mongoDBService.GetUsersCollection();
             await usersCollection.InsertOneAsync(user);
-            return CreatedAtAction(nameof(Get), new { id = user.Id }, user);
+            return CreatedAtAction(nameof(Get), new { email = user.Email }, user);
         }
 
-        [HttpPut("{id}")]
-        public async Task<IActionResult> Update(string id, User updatedUser)
+        [HttpPut("{email}")]
+        public async Task<IActionResult> Update(string email, User updatedUser)
         {
             var usersCollection = _mongoDBService.GetUsersCollection();
 
-            updatedUser.Id = id;
+            var existingUser= await usersCollection.Find(u => u.Email == email).FirstOrDefaultAsync();
 
-            var result = await usersCollection.ReplaceOneAsync(u => u.Id == id, updatedUser);
+            updatedUser.Id = existingUser.Id;
+            updatedUser.Email = email;
+
+            var result = await usersCollection.ReplaceOneAsync(u => u.Email == email, updatedUser);
             if (result.MatchedCount == 0)
             {
                 return NotFound(new { message = "User not found" });
@@ -63,11 +66,11 @@ namespace SPSH_Ecommerce_Application.Controllers
             return NoContent();
         }
 
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(string id)
+        [HttpDelete("{email}")]
+        public async Task<IActionResult> Delete(string email)
         {
             var usersCollection = _mongoDBService.GetUsersCollection();
-            var result = await usersCollection.DeleteOneAsync(u => u.Id == id);
+            var result = await usersCollection.DeleteOneAsync(u => u.Email == email);
             if (result.DeletedCount == 0)
             {
                 return NotFound(new { message = "User not found" });
