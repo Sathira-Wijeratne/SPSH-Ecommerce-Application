@@ -33,6 +33,11 @@ namespace SPSH_Ecommerce_Application.Services
         {
             return _database.GetCollection<Cart>("Carts");
         }
+
+        public IMongoCollection<Rate> GetRatesCollection()
+        {
+            return _database.GetCollection<Rate>("Rates");
+        }
     }
 
     public class MongoDBSettings

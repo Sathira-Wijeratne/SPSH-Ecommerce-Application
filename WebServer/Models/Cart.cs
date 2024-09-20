@@ -14,5 +14,6 @@ namespace SPSH_Ecommerce_Application.Models
         public string VendorEmail { get; set; }
         public int ProductQty { get; set; }
         public decimal ProductPrice { get; set; }
+        public string ImageBase64 { get; set; }
     }
 }
