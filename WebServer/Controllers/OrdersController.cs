@@ -33,11 +33,11 @@ namespace SPSH_Ecommerce_Application.Controllers
     }
 
     // Retrieves a specific order by its ID from the database
-    [HttpGet("{id}")]
-    public async Task<ActionResult<Order>> Get(string id)
+    [HttpGet("{OrderId}")]
+    public async Task<ActionResult<Order>> Get(string OrderId)
     {
         var ordersCollection = _mongoDBService.GetOrdersCollection();
-        var order = await ordersCollection.Find(o => o.Id == id).FirstOrDefaultAsync();
+        var order = await ordersCollection.Find(o => o.OrderId == OrderId).FirstOrDefaultAsync();
         if (order == null)
         {
             return NotFound(new { message = "Order not found" });
@@ -55,16 +55,16 @@ namespace SPSH_Ecommerce_Application.Controllers
 
         var ordersCollection = _mongoDBService.GetOrdersCollection();
         await ordersCollection.InsertOneAsync(order);
-        return CreatedAtAction(nameof(Get), new { id = order.Id }, order);
+        return CreatedAtAction(nameof(Get), new { orderId = order.OrderId }, order);
     }
 
     // Updates the status of an existing order.
-    [HttpPut("{id}")]
-    public async Task<IActionResult> Update(string id, [FromBody] Order updatedOrder)
+    [HttpPut("{OrderId}")]
+    public async Task<IActionResult> Update(string OrderId, [FromBody] Order updatedOrder)
     {
         var ordersCollection = _mongoDBService.GetOrdersCollection();
 
-        var existingOrder = await ordersCollection.Find(o => o.Id == id).FirstOrDefaultAsync();
+        var existingOrder = await ordersCollection.Find(o => o.OrderId == OrderId).FirstOrDefaultAsync();
 
         if (existingOrder == null)
         {
@@ -73,17 +73,17 @@ namespace SPSH_Ecommerce_Application.Controllers
 
         existingOrder.Status = updatedOrder.Status;
 
-        var result = await ordersCollection.ReplaceOneAsync(o => o.Id == id, existingOrder);
+        var result = await ordersCollection.ReplaceOneAsync(o => o.OrderId == OrderId, existingOrder);
 
         return NoContent();
     }
 
     // Deletes an order from the database by its ID.
-    [HttpDelete("{id}")]
-    public async Task<IActionResult> Delete(string id)
+    [HttpDelete("{OrderId}")]
+    public async Task<IActionResult> Delete(string OrderId)
     {
         var ordersCollection = _mongoDBService.GetOrdersCollection();
-        var result = await ordersCollection.DeleteOneAsync(o => o.Id == id);
+        var result = await ordersCollection.DeleteOneAsync(o => o.OrderId == OrderId);
         if (result.DeletedCount == 0)
         {
             return NotFound(new { message = "Order not found" });
@@ -91,6 +91,7 @@ namespace SPSH_Ecommerce_Application.Controllers
         return NoContent();
     }
 
+    // Gets order status from orderId
     [HttpGet("status/{OrderId}")]
     public async Task<ActionResult<List<object>>> GetStatus(string OrderId)
         {
