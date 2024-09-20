@@ -1,4 +1,8 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿/*
+ * Description: This file is responsible for handling API requests related to Order management,
+ * including CRUD operations (Create, Read, Update, Delete) for orders in the e-commerce system
+ */
+
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Driver;
 using SPSH_Ecommerce_Application.Services;
@@ -12,11 +16,13 @@ namespace SPSH_Ecommerce_Application.Controllers
 {
     private readonly MongoDBService _mongoDBService;
 
+    // Constructor for initializing the MongoDB service dependency
     public OrdersController(MongoDBService mongoDBService)
     {
         _mongoDBService = mongoDBService;
     }
 
+    // Retrieves all orders from the database
     [HttpGet]
     public async Task<ActionResult<List<Order>>> Get()
     {
@@ -26,6 +32,7 @@ namespace SPSH_Ecommerce_Application.Controllers
         return Ok(orders);
     }
 
+    // Retrieves a specific order by its ID from the database
     [HttpGet("{id}")]
     public async Task<ActionResult<Order>> Get(string id)
     {
@@ -39,6 +46,7 @@ namespace SPSH_Ecommerce_Application.Controllers
         return Ok(order);
     }
 
+    // Creates a new order in the database
     [HttpPost]
     public async Task<ActionResult> Create([FromBody] Order order)
     {
@@ -50,6 +58,7 @@ namespace SPSH_Ecommerce_Application.Controllers
         return CreatedAtAction(nameof(Get), new { id = order.Id }, order);
     }
 
+    // Updates the status of an existing order.
     [HttpPut("{id}")]
     public async Task<IActionResult> Update(string id, [FromBody] Order updatedOrder)
     {
@@ -69,6 +78,7 @@ namespace SPSH_Ecommerce_Application.Controllers
         return NoContent();
     }
 
+    // Deletes an order from the database by its ID.
     [HttpDelete("{id}")]
     public async Task<IActionResult> Delete(string id)
     {
