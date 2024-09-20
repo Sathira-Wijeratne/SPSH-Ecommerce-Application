@@ -11,7 +11,7 @@ namespace SPSH_Ecommerce_Application.Models
         public string CustomerEmail { get; set; }
         public string ProductId { get; set; }
         public string ProductName { get; set; }
-        public string vendorEmail { get; set; }
+        public string VendorEmail { get; set; }
         public int ProductQty { get; set; }
         public decimal ProductPrice { get; set; }
     }
