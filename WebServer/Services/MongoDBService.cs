@@ -28,6 +28,11 @@ namespace SPSH_Ecommerce_Application.Services
         {
             return _database.GetCollection<User>("Users");
         }
+
+        public IMongoCollection<Cart> GetCartsCollection()
+        {
+            return _database.GetCollection<Cart>("Carts");
+        }
     }
 
     public class MongoDBSettings
