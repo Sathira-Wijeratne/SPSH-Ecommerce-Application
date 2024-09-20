@@ -90,5 +90,28 @@ namespace SPSH_Ecommerce_Application.Controllers
         }
         return NoContent();
     }
-}
+
+        [HttpPut("update-note/{orderId}")]
+        public async Task<IActionResult> UpdateNoteForOrder(string orderId, [FromBody] string newNote)
+        {
+            var ordersCollection = _mongoDBService.GetOrdersCollection();
+
+            // Define the filter to match all orders with the specified OrderId
+            var filter = Builders<Order>.Filter.Eq(o => o.OrderId, orderId);
+
+            // Define the update to set the Note field with the new value
+            var update = Builders<Order>.Update.Set(o => o.Note, newNote);
+
+            // Update all matching documents
+            var result = await ordersCollection.UpdateManyAsync(filter, update);
+
+            if (result.MatchedCount == 0)
+            {
+                return NotFound(new { message = "No orders found for the specified OrderId" });
+            }
+
+            return Ok(new { message = $"{result.ModifiedCount} order(s) updated with new note" });
+        }
+
+    }
 }
