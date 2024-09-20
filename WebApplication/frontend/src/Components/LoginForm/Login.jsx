@@ -22,7 +22,7 @@ const Login =()=>{
                 <button type="submit">Login</button>
 
                 <div className="register-Link">
-                    <p>Don't have an account? <a href="#">Register</a></p>
+                    {/* <p>Don't have an account? <a href="#">Register</a></p> */}
                 </div>
             </form>
 
