@@ -23,13 +23,6 @@ namespace SPSH_Ecommerce_Application.Controllers
         var ordersCollection = _mongoDBService.GetOrdersCollection();
         var orders = await ordersCollection.Find(o => true).ToListAsync();
 
-            TimeZoneInfo indiaTimeZone = TimeZoneInfo.FindSystemTimeZoneById("India Standard Time");
-
-        foreach(var order in orders)
-            {
-                order.OrderDate = TimeZoneInfo.ConvertTimeFromUtc(order.OrderDate, indiaTimeZone);
-            }
-
         return Ok(orders);
     }
 
@@ -43,10 +36,6 @@ namespace SPSH_Ecommerce_Application.Controllers
             return NotFound(new { message = "Order not found" });
         }
 
-        // Convert UTC OrderDate to IST when displaying
-        TimeZoneInfo indiaTimeZone = TimeZoneInfo.FindSystemTimeZoneById("India Standard Time");
-        order.OrderDate = TimeZoneInfo.ConvertTimeFromUtc(order.OrderDate, indiaTimeZone);
-
         return Ok(order);
     }
 
@@ -55,11 +44,6 @@ namespace SPSH_Ecommerce_Application.Controllers
     {
         if (order == null)
             return BadRequest(new { message = "Order data is missing" });
-
-        // Store the order date as UTC
-        order.OrderDate = DateTime.UtcNow;
-
-        Console.WriteLine("OrderDate: " + order.OrderDate);
 
         var ordersCollection = _mongoDBService.GetOrdersCollection();
         await ordersCollection.InsertOneAsync(order);
