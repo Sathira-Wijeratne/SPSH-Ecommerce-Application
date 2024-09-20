@@ -10,6 +10,7 @@ namespace SPSH_Ecommerce_Application.Models
         [BsonRepresentation(BsonType.ObjectId)]
         public string Id { get; set; }
         public string ProductId { get; set; }
+        public string ProductCategory {  get; set; }
         public string VendorEmail { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
