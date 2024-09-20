@@ -1,4 +1,8 @@
-﻿using MongoDB.Bson.Serialization.Attributes;
+﻿/*
+ * Description: This file defines the Order model, representing a customer's order
+ */
+
+using MongoDB.Bson.Serialization.Attributes;
 using MongoDB.Bson;
 
 namespace SPSH_Ecommerce_Application.Models
