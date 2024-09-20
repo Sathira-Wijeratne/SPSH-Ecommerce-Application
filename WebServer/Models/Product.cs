@@ -1,4 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc.ModelBinding;
+﻿/*
+ * Description: This file defines the Product model, representing product details within the e-commerce application.
+ */
+
 using MongoDB.Bson.Serialization.Attributes;
 using MongoDB.Bson;
 
