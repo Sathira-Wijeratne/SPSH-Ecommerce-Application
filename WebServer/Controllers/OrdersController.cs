@@ -13,114 +13,121 @@ namespace SPSH_Ecommerce_Application.Controllers
     [Route("api/[controller]")]
     [ApiController]
     public class OrdersController : ControllerBase
-{
-    private readonly MongoDBService _mongoDBService;
-
-    // Constructor for initializing the MongoDB service dependency
-    public OrdersController(MongoDBService mongoDBService)
     {
-        _mongoDBService = mongoDBService;
-    }
+        private readonly MongoDBService _mongoDBService;
 
-    // Retrieves all orders from the database
-    [HttpGet]
-    public async Task<ActionResult<List<Order>>> Get()
-    {
-        var ordersCollection = _mongoDBService.GetOrdersCollection();
-        var orders = await ordersCollection.Find(o => true).ToListAsync();
-
-        return Ok(orders);
-    }
-
-    // Retrieves a specific order by its ID from the database
-    [HttpGet("{OrderId}")]
-    public async Task<ActionResult<Order>> Get(string OrderId)
-    {
-        var ordersCollection = _mongoDBService.GetOrdersCollection();
-        var order = await ordersCollection.Find(o => o.OrderId == OrderId).FirstOrDefaultAsync();
-        if (order == null)
+        // Constructor for initializing the MongoDB service dependency
+        public OrdersController(MongoDBService mongoDBService)
         {
-            return NotFound(new { message = "Order not found" });
+            _mongoDBService = mongoDBService;
         }
 
-        return Ok(order);
-    }
-
-    // Creates a new order in the database
-    [HttpPost]
-    public async Task<ActionResult> Create([FromBody] Order order)
-    {
-        if (order == null)
-            return BadRequest(new { message = "Order data is missing" });
-
-        var ordersCollection = _mongoDBService.GetOrdersCollection();
-        await ordersCollection.InsertOneAsync(order);
-        return CreatedAtAction(nameof(Get), new { orderId = order.OrderId }, order);
-    }
-
-    // Updates the status of an existing order.
-    [HttpPut("{OrderId}")]
-    public async Task<IActionResult> Update(string OrderId, [FromBody] Order updatedOrder)
-    {
-        var ordersCollection = _mongoDBService.GetOrdersCollection();
-
-        var existingOrder = await ordersCollection.Find(o => o.OrderId == OrderId).FirstOrDefaultAsync();
-
-        if (existingOrder == null)
-        {
-            return NotFound(new { message = "Order not found" });
-        }
-
-        existingOrder.Status = updatedOrder.Status;
-
-        var result = await ordersCollection.ReplaceOneAsync(o => o.OrderId == OrderId, existingOrder);
-
-            return Ok(new { message = $"Order {OrderId} has been updated successfully" });
-        }
-
-    // Deletes an order from the database by its ID.
-    [HttpDelete("{OrderId}")]
-    public async Task<IActionResult> Delete(string OrderId)
-    {
-        var ordersCollection = _mongoDBService.GetOrdersCollection();
-        var result = await ordersCollection.DeleteOneAsync(o => o.OrderId == OrderId);
-        if (result.DeletedCount == 0)
-        {
-            return NotFound(new { message = "Order not found" });
-        }
-        return Ok(new { message = $"Order {OrderId} has been deleted successfully" });
-    }
-
-    // Gets order status from orderId
-    [HttpGet("status/{OrderId}")]
-    public async Task<ActionResult<List<object>>> GetStatus(string OrderId)
+        // Retrieves all orders from the database
+        [HttpGet]
+        public async Task<ActionResult<List<Order>>> Get()
         {
             var ordersCollection = _mongoDBService.GetOrdersCollection();
-            var result = await ordersCollection.Find(o => o.OrderId == OrderId).Project(o => new {o.OrderId, o.Status}).ToListAsync();
-            return Ok(result);
+            var orders = await ordersCollection.Find(o => true).ToListAsync();
+
+            return Ok(orders);
         }
 
-    // Cancels and order from orderId
-     [HttpPatch("cancel/{OrderId}")]
-     public async Task<IActionResult> CancelOrder(string OrderId)
+        // Retrieves a specific order by its ID from the database
+        [HttpGet("{OrderId}")]
+        public async Task<ActionResult<Order>> Get(string OrderId)
         {
             var ordersCollection = _mongoDBService.GetOrdersCollection();
-            var existingOrder = await ordersCollection.Find(o=> o.OrderId == OrderId).FirstOrDefaultAsync();
+            var order = await ordersCollection.Find(o => o.OrderId == OrderId).FirstOrDefaultAsync();
+            if (order == null)
+            {
+                return NotFound(new { message = "Order not found" });
+            }
+
+            return Ok(order);
+        }
+
+        // Creates a new order in the database
+        [HttpPost]
+        public async Task<ActionResult> Create([FromBody] Order order)
+        {
+            if (order == null)
+                return BadRequest(new { message = "Order data is missing" });
+
+            var ordersCollection = _mongoDBService.GetOrdersCollection();
+            await ordersCollection.InsertOneAsync(order);
+            return CreatedAtAction(nameof(Get), new { orderId = order.OrderId }, order);
+        }
+
+        // Updates the status of an existing order.
+        /*[HttpPut("{OrderId}")]
+        public async Task<IActionResult> Update(string OrderId, [FromBody] Order updatedOrder)
+        {
+            var ordersCollection = _mongoDBService.GetOrdersCollection();
+
+            var existingOrder = await ordersCollection.Find(o => o.OrderId == OrderId).FirstOrDefaultAsync();
 
             if (existingOrder == null)
             {
                 return NotFound(new { message = "Order not found" });
             }
 
-            var update = Builders<Order>.Update.Set(o => o.Status, "Cancelled");
-            var result = await ordersCollection.UpdateOneAsync(o => o.OrderId == OrderId, update);
+            existingOrder.Status = updatedOrder.Status;
+
+            var result = await ordersCollection.ReplaceOneAsync(o => o.OrderId == OrderId, existingOrder);
+
+                return Ok(new { message = $"Order {OrderId} has been updated successfully" });
+            }*/
+
+        // Deletes an order from the database by its ID.
+        [HttpDelete("{OrderId}")]
+        public async Task<IActionResult> Delete(string OrderId)
+        {
+            var ordersCollection = _mongoDBService.GetOrdersCollection();
+            var result = await ordersCollection.DeleteManyAsync(o => o.OrderId == OrderId);
+            if (result.DeletedCount == 0)
+            {
+                return NotFound(new { message = "Order not found" });
+            }
+            return Ok(new { message = $"Order {OrderId} has been deleted successfully" });
+        }
+
+        // Gets order status from orderId
+        [HttpGet("status/{OrderId}")]
+        public async Task<ActionResult<List<object>>> GetStatus(string OrderId)
+        {
+            var ordersCollection = _mongoDBService.GetOrdersCollection();
+            var result = await ordersCollection.Find(o => o.OrderId == OrderId).Project(o => new { o.OrderId, o.Status }).FirstOrDefaultAsync();
+            return Ok(result);
+        }
+
+        // Manage order status from orderId
+        [HttpPatch("manage/{OrderId}")]
+        public async Task<IActionResult> ManageOrder(string OrderId, [FromQuery] string Status)
+        {
+            var ordersCollection = _mongoDBService.GetOrdersCollection();
+            var existingOrder = await ordersCollection.Find(o => o.OrderId == OrderId).FirstOrDefaultAsync();
+
+            if (existingOrder == null)
+            {
+                return NotFound(new { message = "Order not found" });
+            }
+
+            var validStatuses = new List<string> { "Cancelled", "Delivered", "Closed", "Processing" };
+
+            if (!validStatuses.Contains(Status))
+            {
+                return BadRequest(new { message = $"Invalid status. Valid statuses are: {string.Join(", ", validStatuses)}" });
+            }
+
+            var update = Builders<Order>.Update.Set(o => o.Status, Status);
+            var result = await ordersCollection.UpdateManyAsync(o => o.OrderId == OrderId, update);
 
             if (result.MatchedCount == 0)
             {
                 return NotFound(new { message = "Failed to update order status" });
             }
 
-            return Ok(new { message = $"Order {OrderId} has been cancelled successfully" });
+            return Ok(new { message = $"Order {OrderId} has been updated to status: {Status}" });
         }
-}
+    }
 }
