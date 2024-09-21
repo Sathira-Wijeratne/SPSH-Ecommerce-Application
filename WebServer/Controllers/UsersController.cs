@@ -80,7 +80,7 @@ namespace SPSH_Ecommerce_Application.Controllers
             {
                 return NotFound(new { message = "User not found" });
             }
-            return NoContent();
+            return Ok(new { message = $"User has been updated successfully" });
         }
 
         // Deletes a user from the database by email
@@ -93,7 +93,7 @@ namespace SPSH_Ecommerce_Application.Controllers
             {
                 return NotFound(new { message = "User not found" });
             }
-            return NoContent();
+            return Ok(new { message = $"User has been deleted successfully" });
         }
     }
 }

@@ -82,7 +82,7 @@ namespace SPSH_Ecommerce_Application.Controllers
                 return NotFound(new { message = "Product Category not found" });
             }
 
-            return NoContent();
+            return Ok(new { message = $"Category has been updated successfully" });
         }
 
         // Deletes a product category from the database by its name
@@ -95,7 +95,7 @@ namespace SPSH_Ecommerce_Application.Controllers
             {
                 return NotFound(new { message = "Product Category not found" });
             }
-            return NoContent();
+            return Ok(new { message = $"{CategoryName} category has been deleted successfully" });
         }
 
         // Retrieves only the active product categories from the database

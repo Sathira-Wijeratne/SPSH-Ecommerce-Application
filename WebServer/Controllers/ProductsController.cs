@@ -81,7 +81,7 @@ namespace SPSH_Ecommerce_Application.Controllers
                 return NotFound(new { message = "Product not found" });
             }
 
-            return NoContent();
+            return Ok(new { message = $"Product {ProductId} has been updated successfully" });
         }
 
         // Deletes a product from the database by its ProductId
@@ -94,7 +94,7 @@ namespace SPSH_Ecommerce_Application.Controllers
             {
                 return NotFound(new { message = "Product not found" });
             }
-            return NoContent();
+            return Ok(new { message = $"Product {ProductId} has been deleted successfully" });
         }
 
         // route to fetch only the product stocks
