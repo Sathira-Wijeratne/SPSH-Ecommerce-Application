@@ -54,6 +54,11 @@ namespace SPSH_Ecommerce_Application.Controllers
             return BadRequest(new { message = "Order data is missing" });
 
         var ordersCollection = _mongoDBService.GetOrdersCollection();
+        var result = await ordersCollection.Find(o => o.OrderId == order.OrderId).FirstOrDefaultAsync();
+        if (result != null)
+        {
+            return Conflict(new { message = "Order ID already exists" });
+        }
         await ordersCollection.InsertOneAsync(order);
         return CreatedAtAction(nameof(Get), new { orderId = order.OrderId }, order);
     }
@@ -75,8 +80,8 @@ namespace SPSH_Ecommerce_Application.Controllers
 
         var result = await ordersCollection.ReplaceOneAsync(o => o.OrderId == OrderId, existingOrder);
 
-        return NoContent();
-    }
+            return Ok(new { message = $"Order {OrderId} has been updated successfully" });
+        }
 
     // Deletes an order from the database by its ID.
     [HttpDelete("{OrderId}")]
@@ -98,6 +103,28 @@ namespace SPSH_Ecommerce_Application.Controllers
             var ordersCollection = _mongoDBService.GetOrdersCollection();
             var result = await ordersCollection.Find(o => o.OrderId == OrderId).Project(o => new {o.OrderId, o.Status}).ToListAsync();
             return Ok(result);
+        }
+
+     [HttpPatch("cancel/{OrderId}")]
+     public async Task<IActionResult> CancelOrder(string OrderId)
+        {
+            var ordersCollection = _mongoDBService.GetOrdersCollection();
+            var existingOrder = await ordersCollection.Find(o=> o.OrderId == OrderId).FirstOrDefaultAsync();
+
+            if (existingOrder == null)
+            {
+                return NotFound(new { message = "Order not found" });
+            }
+
+            var update = Builders<Order>.Update.Set(o => o.Status, "Cancelled");
+            var result = await ordersCollection.UpdateOneAsync(o => o.OrderId == OrderId, update);
+
+            if (result.MatchedCount == 0)
+            {
+                return NotFound(new { message = "Failed to update order status" });
+            }
+
+            return Ok(new { message = $"Order {OrderId} has been cancelled successfully" });
         }
 }
 }
