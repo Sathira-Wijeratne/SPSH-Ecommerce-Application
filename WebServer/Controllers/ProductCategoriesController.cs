@@ -53,6 +53,13 @@ namespace SPSH_Ecommerce_Application.Controllers
                 return BadRequest(new { message = "ProductCategory data is missing" });
 
             var productCategoriesCollection = _mongoDBService.GetProductCategoriesCollection();
+
+            var result = await productCategoriesCollection.Find(o => o.CategoryName == productCategory.CategoryName).FirstOrDefaultAsync();
+            if (result != null)
+            {
+                return Conflict(new { message = "Category already exists" });
+            }
+
             await productCategoriesCollection.InsertOneAsync(productCategory);
             return CreatedAtAction(nameof(Get), new { CategoryName = productCategory.Id }, productCategory);
         }

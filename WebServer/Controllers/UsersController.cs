@@ -53,6 +53,13 @@ namespace SPSH_Ecommerce_Application.Controllers
                 return BadRequest(new { message = "User data is missing" });
 
             var usersCollection = _mongoDBService.GetUsersCollection();
+
+            var result = await usersCollection.Find(o => o.Email == user.Email).FirstOrDefaultAsync();
+            if (result != null)
+            {
+                return Conflict(new { message = "User already exists" });
+            }
+
             await usersCollection.InsertOneAsync(user);
             return CreatedAtAction(nameof(Get), new { email = user.Email }, user);
         }

@@ -52,6 +52,13 @@ namespace SPSH_Ecommerce_Application.Controllers
                 return BadRequest(new { message = "Product data is missing" });
 
             var productsCollection = _mongoDBService.GetProductsCollection();
+
+            var result = await productsCollection.Find(o => o.ProductId == product.ProductId).FirstOrDefaultAsync();
+            if (result != null)
+            {
+                return Conflict(new { message = "Product ID already exists" });
+            }
+
             await productsCollection.InsertOneAsync(product);
             return CreatedAtAction(nameof(Get), new { ProductId = product.Id }, product);
         }
