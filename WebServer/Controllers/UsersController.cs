@@ -95,5 +95,35 @@ namespace SPSH_Ecommerce_Application.Controllers
             }
             return Ok(new { message = $"User has been deleted successfully" });
         }
+
+        // Activates or deactivates a user account
+        [HttpPatch("set-activation/{email}")]
+        public async Task<IActionResult> SetActivation(string email, [FromQuery] bool activate)
+        {
+            var usersCollection = _mongoDBService.GetUsersCollection();
+            var existingUser = await usersCollection.Find(u => u.Email == email).FirstOrDefaultAsync();
+
+            if (existingUser == null)
+            {
+                return NotFound(new { message = "User not found" });
+            }
+
+            if (existingUser.Activated == activate)
+            {
+                var currentStatus = activate ? "already activated" : "already deactivated";
+                return BadRequest(new { message = $"User account is {currentStatus}" });
+            }
+
+            var update = Builders<User>.Update.Set(u => u.Activated, activate);
+            var result = await usersCollection.UpdateOneAsync(u => u.Email == email, update);
+
+            if (result.MatchedCount == 0)
+            {
+                return NotFound(new { message = "Failed to activate user" });
+            }
+
+            var status = activate ? "activated" : "deactivated";
+            return Ok(new { message = $"User account with email : {email} has been {status} successfully" });
+        }
     }
 }
