@@ -15,11 +15,13 @@ body {
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background: url('./Components/Assets/loginimage.jpg')no-repeat;
+  background-color: aliceblue;
+  /* background: url('./Components/Assets/loginimage.jpg')no-repeat;
   background-size: cover;
-  background-position: center;
+  background-position: center; */
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',monospace;
 }
+
