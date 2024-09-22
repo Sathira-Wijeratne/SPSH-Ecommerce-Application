@@ -83,6 +83,36 @@ namespace SPSH_Ecommerce_Application.Controllers
             return Ok(new { message = $"User has been updated successfully" });
         }
 
+        // Updates the password and role of an existing user by email
+        /*[HttpPatch("update/{email}")]
+        public async Task<IActionResult> UpdateUserPasswordAndRole(string email, [FromBody] User updatedUser)
+        {
+            var usersCollection = _mongoDBService.GetUsersCollection();
+
+            // Find the existing user by email
+            var existingUser = await usersCollection.Find(u => u.Email == email).FirstOrDefaultAsync();
+
+            if (existingUser == null)
+            {
+                return NotFound(new { message = "User not found" });
+            }
+
+            // Update only the Password and Role fields
+            var update = Builders<User>.Update
+                .Set(u => u.Password, updatedUser.Password)
+                .Set(u => u.Role, updatedUser.Role);
+
+            var result = await usersCollection.UpdateOneAsync(u => u.Email == email, update);
+
+            if (result.MatchedCount == 0)
+            {
+                return NotFound(new { message = "Failed to update user" });
+            }
+
+            return Ok(new { message = $"User with email {email} has been updated successfully" });
+        }*/
+
+
         // Deletes a user from the database by email
         [HttpDelete("{email}")]
         public async Task<IActionResult> Delete(string email)
