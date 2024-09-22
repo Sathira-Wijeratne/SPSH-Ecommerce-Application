@@ -113,5 +113,33 @@ namespace SPSH_Ecommerce_Application.Controllers
             return Ok(new { message = $"{result.ModifiedCount} order(s) updated with new note" });
         }
 
+        // Retrieves orders by status
+        [HttpGet("status/{status}")]
+        public async Task<ActionResult<Order>> GetByStatus(string status)
+        {
+            var ordersCollection = _mongoDBService.GetOrdersCollection();
+            var orders = await ordersCollection.Find(o => o.Status == status).ToListAsync();
+            if (orders == null)
+            {
+                return NotFound(new { message = "Orders not found" });
+            }
+
+            return Ok(orders);
+        }
+
+        // Retrieves orders by status and customer email
+        [HttpGet("status-customer/{status}/{customerEmail}")]
+        public async Task<ActionResult<Order>> GetByStatusCustomer(string status, string customerEmail)
+        {
+            var ordersCollection = _mongoDBService.GetOrdersCollection();
+            var orders = await ordersCollection.Find(o => o.Status == status && o.CustomerEmail == customerEmail).ToListAsync();
+            if (orders == null)
+            {
+                return NotFound(new { message = "Orders not found" });
+            }
+
+            return Ok(orders);
+        }
+
     }
 }
