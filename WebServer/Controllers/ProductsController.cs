@@ -99,7 +99,22 @@ namespace SPSH_Ecommerce_Application.Controllers
             var filter = Builders<Product>.Filter.Regex(p => p.Name, new MongoDB.Bson.BsonRegularExpression(Name, "i"));
             var products = await productsCollection.Find(filter).ToListAsync();
 
-            //var products = await productsCollection.Find(p => p.Name == Name).ToListAsync();
+            if (products == null)
+            {
+                return NotFound(new { message = "Products not found" });
+            }
+            return Ok(products);
+        }
+
+        // Retrieves products match with the given product category
+        [HttpGet("search-category/{ProductCategory}")]
+        public async Task<ActionResult<Product>> SearchByCategory(string ProductCategory)
+        {
+            var productsCollection = _mongoDBService.GetProductsCollection();
+
+            var filter = Builders<Product>.Filter.Regex(p => p.ProductCategory, new MongoDB.Bson.BsonRegularExpression(ProductCategory, "i"));
+            var products = await productsCollection.Find(filter).ToListAsync();
+
             if (products == null)
             {
                 return NotFound(new { message = "Products not found" });
