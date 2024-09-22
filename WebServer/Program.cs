@@ -1,4 +1,7 @@
 
+using MongoDB.Bson.Serialization.Serializers;
+using MongoDB.Bson.Serialization;
+using MongoDB.Bson;
 using SPSH_Ecommerce_Application.Services;
 
 namespace SPSH_Ecommerce_Application
@@ -10,7 +13,10 @@ namespace SPSH_Ecommerce_Application
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
-            //MongoDB
+            // MongoDB decimal serialization configuration
+            BsonSerializer.RegisterSerializer(typeof(decimal), new DecimalSerializer(BsonType.Decimal128));
+            BsonSerializer.RegisterSerializer(typeof(decimal?), new NullableSerializer<decimal>(new DecimalSerializer(BsonType.Decimal128)));
+            //MongoDB configuration
             builder.Services.Configure<MongoDBSettings>(
                 builder.Configuration.GetSection("MongoDB"));
 
