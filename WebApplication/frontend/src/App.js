@@ -1,7 +1,7 @@
 import "./App.css";
 import './index.css';
 
-import Login from './Components/LoginForm/Login'
+import Login from './Components/loginScreen/Login'
 
 function App() {
   return(
