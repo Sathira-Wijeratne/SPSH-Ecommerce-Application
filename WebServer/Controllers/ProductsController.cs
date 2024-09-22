@@ -89,5 +89,22 @@ namespace SPSH_Ecommerce_Application.Controllers
             }
             return NoContent();
         }
+
+        // Retrieves products match with the given name
+        [HttpGet("search-name/{Name}")]
+        public async Task<ActionResult<Product>> SearchByName(string Name)
+        {
+            var productsCollection = _mongoDBService.GetProductsCollection();
+
+            var filter = Builders<Product>.Filter.Regex(p => p.Name, new MongoDB.Bson.BsonRegularExpression(Name, "i"));
+            var products = await productsCollection.Find(filter).ToListAsync();
+
+            //var products = await productsCollection.Find(p => p.Name == Name).ToListAsync();
+            if (products == null)
+            {
+                return NotFound(new { message = "Products not found" });
+            }
+            return Ok(products);
+        }
     }
 }
