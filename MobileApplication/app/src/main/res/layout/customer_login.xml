@@ -7,4 +7,55 @@
     android:layout_height="match_parent"
     tools:context=".CustomerLoginActivity">
 
+    <LinearLayout
+        android:id="@+id/login_main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:background="@drawable/background_wave">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/log_in_text"
+            android:textSize="36sp"
+            android:textColor="@color/white"
+            android:gravity="center"
+            android:layout_marginTop="24dp"/>
+
+        <EditText
+            android:id="@+id/loginEmailEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:autofillHints=""
+            android:hint="@string/loginEmail"
+            android:inputType="textEmailAddress"
+            android:layout_marginTop="32dp"
+            android:background="@drawable/edittext_background"
+            android:padding="16dp"/>
+
+        <EditText
+            android:id="@+id/loginPasswordEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:autofillHints=""
+            android:hint="@string/loginPassword"
+            android:inputType="textPassword"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/edittext_background"
+            android:padding="16dp"/>
+
+        <Button
+            android:id="@+id/loginButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/loginButton"
+            android:backgroundTint="@color/purple_500"
+            android:textColor="@color/white"
+            android:layout_marginTop="24dp"
+            android:padding="16dp"/>
+    </LinearLayout>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
