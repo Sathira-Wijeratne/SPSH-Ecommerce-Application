@@ -112,7 +112,7 @@ namespace SPSH_Ecommerce_Application.Controllers
                 return NotFound(new { message = "Order not found" });
             }
 
-            var validStatuses = new List<string> { "Cancelled", "Delivered", "Closed", "Processing" };
+            var validStatuses = new List<string> { "Cancelled", "Delivered", "Completed", "Processing" };
 
             if (!validStatuses.Contains(Status))
             {
