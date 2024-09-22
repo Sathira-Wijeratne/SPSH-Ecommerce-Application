@@ -1,5 +1,7 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import './Login.css';
+ 
 import { FaUser, FaLock } from "react-icons/fa";
 import backgroundImage from "../assets/loginimage.jpg";
 
@@ -7,7 +9,9 @@ import backgroundImage from "../assets/loginimage.jpg";
 
 
 const Login = () => {
+    const navigate = useNavigate();
 
+    //Background Image related inline css 
     const myStyle = {
         backgroundImage: `url(${backgroundImage})`,
         height: "100vh",
@@ -19,6 +23,13 @@ const Login = () => {
         backgroundSize: "cover",
         backgroundRepeat: "no-repeat",
     };
+
+    //Function to navigate to Admin Dashboard Screen 
+    const onClickLogin=(e)=>{
+        e.preventDefault();
+        navigate("/Admin/AdminDashboard")
+    }
+
 
 
 
@@ -38,7 +49,7 @@ const Login = () => {
                         <input type="password" placeholder="Password" required />
                         <FaLock className="icon" />
                     </div>
-                    <button type="submit">Login</button>
+                    <button type="submit" onClick={onClickLogin}>Login</button>
 
                     <div className="register-Link">
                         {/* <p>Don't have an account? <a href="#">Register</a></p> */}
