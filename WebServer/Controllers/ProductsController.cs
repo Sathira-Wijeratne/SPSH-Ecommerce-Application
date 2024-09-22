@@ -121,5 +121,16 @@ namespace SPSH_Ecommerce_Application.Controllers
             }
             return Ok(products);
         }
+
+        // route to fetch only the product id, name and stocks for a given vendor
+        [HttpGet("stocks-vendor/{VendorEmail}")]
+        public async Task<ActionResult<List<object>>> GetStocksByVendor(string VendorEmail)
+        {
+            var productsCollection = _mongoDBService.GetProductsCollection();
+            var stocks = await productsCollection
+                .Find(p => p.VendorEmail == VendorEmail).Project(p => new { p.ProductId, p.Name, p.Stock }).ToListAsync();
+
+            return Ok(stocks);
+        }
     }
 }
