@@ -59,7 +59,7 @@ namespace SPSH_Ecommerce_Application.Controllers
         }
 
         // Updates the status of an existing order.
-        /*[HttpPut("{OrderId}")]
+        [HttpPut("{OrderId}")]
         public async Task<IActionResult> Update(string OrderId, [FromBody] Order updatedOrder)
         {
             var ordersCollection = _mongoDBService.GetOrdersCollection();
@@ -71,12 +71,14 @@ namespace SPSH_Ecommerce_Application.Controllers
                 return NotFound(new { message = "Order not found" });
             }
 
-            existingOrder.Status = updatedOrder.Status;
+            //existingOrder.Status = updatedOrder.Status;
+            updatedOrder.Id = existingOrder.Id;
+            updatedOrder.OrderId = existingOrder.OrderId;
 
-            var result = await ordersCollection.ReplaceOneAsync(o => o.OrderId == OrderId, existingOrder);
+            var result = await ordersCollection.ReplaceOneAsync(o => o.OrderId == OrderId, updatedOrder);
 
                 return Ok(new { message = $"Order {OrderId} has been updated successfully" });
-            }*/
+            }
 
         // Deletes an order from the database by its ID.
         [HttpDelete("{OrderId}")]
