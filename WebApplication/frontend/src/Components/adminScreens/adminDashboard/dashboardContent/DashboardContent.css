@@ -1,0 +1,26 @@
+.content--header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.header-title{
+    color: #526d82;
+}
+
+.header--activity{
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.notify{
+    background:#dde6ed ;
+    padding:12px;
+    border-radius: 10px;
+    color: #969393;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}

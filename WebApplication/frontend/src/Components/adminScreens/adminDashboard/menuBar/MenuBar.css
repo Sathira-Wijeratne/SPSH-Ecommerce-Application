@@ -3,11 +3,12 @@
     flex-direction: column;
     gap: 2.3rem;
     height: 94vh;
-    width: 250px;
+    width: 200px;
     position: fixed; 
     left: 0; 
     top: 0; 
     padding: 20px; 
+    flex-shrink: 0;
 
 }
 
