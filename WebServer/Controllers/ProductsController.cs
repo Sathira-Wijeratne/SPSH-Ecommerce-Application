@@ -52,6 +52,13 @@ namespace SPSH_Ecommerce_Application.Controllers
                 return BadRequest(new { message = "Product data is missing" });
 
             var productsCollection = _mongoDBService.GetProductsCollection();
+
+            var result = await productsCollection.Find(o => o.ProductId == product.ProductId).FirstOrDefaultAsync();
+            if (result != null)
+            {
+                return Conflict(new { message = "Product ID already exists" });
+            }
+
             await productsCollection.InsertOneAsync(product);
             return CreatedAtAction(nameof(Get), new { ProductId = product.Id }, product);
         }
@@ -74,7 +81,7 @@ namespace SPSH_Ecommerce_Application.Controllers
                 return NotFound(new { message = "Product not found" });
             }
 
-            return NoContent();
+            return Ok(new { message = $"Product {ProductId} has been updated successfully" });
         }
 
         // Deletes a product from the database by its ProductId
@@ -87,7 +94,18 @@ namespace SPSH_Ecommerce_Application.Controllers
             {
                 return NotFound(new { message = "Product not found" });
             }
-            return NoContent();
+            return Ok(new { message = $"Product {ProductId} has been deleted successfully" });
+        }
+
+        // route to fetch only the product stocks
+        [HttpGet("stocks")]
+        public async Task<ActionResult<List<object>>> GetStocks()
+        {
+            var productsCollection = _mongoDBService.GetProductsCollection();
+            var stocks = await productsCollection
+                .Find(p=> true).Project(p=>new { p.ProductId, p.Stock }).ToListAsync();
+
+            return Ok(stocks);
         }
 
         // Retrieves products match with the given name

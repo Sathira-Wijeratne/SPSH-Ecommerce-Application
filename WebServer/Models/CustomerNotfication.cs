@@ -16,5 +16,6 @@ namespace SPSH_Ecommerce_Application.Models
         public string OrderId { get; set; }
         public bool MarkAsRead { get; set; }
         public string NotificationMessage { get; set; }
+        public string CustomerEmail { get; set; }
     }
 }

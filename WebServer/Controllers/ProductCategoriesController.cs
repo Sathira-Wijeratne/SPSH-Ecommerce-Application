@@ -53,6 +53,13 @@ namespace SPSH_Ecommerce_Application.Controllers
                 return BadRequest(new { message = "ProductCategory data is missing" });
 
             var productCategoriesCollection = _mongoDBService.GetProductCategoriesCollection();
+
+            var result = await productCategoriesCollection.Find(o => o.CategoryName == productCategory.CategoryName).FirstOrDefaultAsync();
+            if (result != null)
+            {
+                return Conflict(new { message = "Category already exists" });
+            }
+
             await productCategoriesCollection.InsertOneAsync(productCategory);
             return CreatedAtAction(nameof(Get), new { CategoryName = productCategory.Id }, productCategory);
         }
@@ -75,7 +82,7 @@ namespace SPSH_Ecommerce_Application.Controllers
                 return NotFound(new { message = "Product Category not found" });
             }
 
-            return NoContent();
+            return Ok(new { message = $"Category has been updated successfully" });
         }
 
         // Deletes a product category from the database by its name
@@ -88,7 +95,7 @@ namespace SPSH_Ecommerce_Application.Controllers
             {
                 return NotFound(new { message = "Product Category not found" });
             }
-            return NoContent();
+            return Ok(new { message = $"{CategoryName} category has been deleted successfully" });
         }
 
         // Retrieves only the active product categories from the database
