@@ -32,12 +32,12 @@ namespace SPSH_Ecommerce_Application.Controllers
             return Ok(orders);
         }
 
-        // Retrieves a specific order by its ID from the database
+        // Retrieves all order records for specific orderID from the database
         [HttpGet("{OrderId}")]
         public async Task<ActionResult<Order>> Get(string OrderId)
         {
             var ordersCollection = _mongoDBService.GetOrdersCollection();
-            var order = await ordersCollection.Find(o => o.OrderId == OrderId).FirstOrDefaultAsync();
+            var order = await ordersCollection.Find(o => o.OrderId == OrderId).ToListAsync();
             if (order == null)
             {
                 return NotFound(new { message = "Order not found" });
@@ -58,7 +58,7 @@ namespace SPSH_Ecommerce_Application.Controllers
             return CreatedAtAction(nameof(Get), new { orderId = order.OrderId }, order);
         }
 
-        // Updates the status of an existing order.
+        /*// Updates the status of an existing order.
         [HttpPut("{OrderId}")]
         public async Task<IActionResult> Update(string OrderId, [FromBody] Order updatedOrder)
         {
@@ -71,14 +71,14 @@ namespace SPSH_Ecommerce_Application.Controllers
                 return NotFound(new { message = "Order not found" });
             }
 
-            //existingOrder.Status = updatedOrder.Status;
-            updatedOrder.Id = existingOrder.Id;
-            updatedOrder.OrderId = existingOrder.OrderId;
+            existingOrder.Status = updatedOrder.Status;
+            //updatedOrder.Id = existingOrder.Id;
+            //updatedOrder.OrderId = existingOrder.OrderId;
 
             var result = await ordersCollection.ReplaceOneAsync(o => o.OrderId == OrderId, updatedOrder);
 
             return Ok(new { message = $"Order {OrderId} has been updated successfully" });
-        }
+        }*/
 
         // Deletes an order from the database by its ID.
         [HttpDelete("{OrderId}")]
