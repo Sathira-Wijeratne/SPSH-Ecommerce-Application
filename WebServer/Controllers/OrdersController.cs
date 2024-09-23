@@ -122,10 +122,45 @@ namespace SPSH_Ecommerce_Application.Controllers
             }
 
             var update = Builders<Order>.Update.Set(o => o.Status, Status);
+            string insertedNotificationId = null;
+
+            if (Status == "Cancelled")
+            {
+                var notificationsCollection = _mongoDBService.GetCustomerNotificationsCollection();
+
+                try
+                {
+                    var notification = new CustomerNotfication
+                    {
+                        OrderId = existingOrder.OrderId,
+                        CustomerEmail = existingOrder.CustomerEmail,
+                        MarkAsRead = false,
+                        NotificationMessage = $"Your order with OrderId {OrderId} has been cancelled."
+                    };
+
+                    await notificationsCollection.InsertOneAsync(notification);
+
+                    // Store the inserted notification ID in case we need to roll it back later
+                    insertedNotificationId = notification.Id;
+                }
+                catch (Exception ex)
+                {
+                    return StatusCode(500, new { message = $"Failed to create notification: {ex.Message}" });
+                }
+            }
+
             var result = await ordersCollection.UpdateManyAsync(o => o.OrderId == OrderId, update);
 
             if (result.MatchedCount == 0)
             {
+                if (!string.IsNullOrEmpty(insertedNotificationId))
+                {
+                    var notificationsCollection = _mongoDBService.GetCustomerNotificationsCollection();
+
+                    // Rollback previously inserted notification to maintain consistency
+                    await notificationsCollection.DeleteOneAsync(n => n.Id == insertedNotificationId);
+                }
+
                 return NotFound(new { message = "Failed to update order status" });
             }
 
