@@ -114,7 +114,7 @@ namespace SPSH_Ecommerce_Application.Controllers
                 return NotFound(new { message = "Order not found" });
             }
 
-            var validStatuses = new List<string> { "Cancelled", "Delivered", "Completed", "Processing" };
+            var validStatuses = new List<string> { "Cancelled", "Requested to cancel", "Delivered", "Completed", "Processing" };
 
             if (!validStatuses.Contains(Status))
             {
@@ -155,7 +155,7 @@ namespace SPSH_Ecommerce_Application.Controllers
         }
 
         // Retrieves orders by status
-        [HttpGet("status/{status}")]
+        [HttpGet("get-by-status/{status}")]
         public async Task<ActionResult<Order>> GetByStatus(string status)
         {
             var ordersCollection = _mongoDBService.GetOrdersCollection();
