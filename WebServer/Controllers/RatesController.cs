@@ -63,5 +63,30 @@ namespace SPSH_Ecommerce_Application.Controllers
             return CreatedAtAction(nameof(Get), new { customerEmail = rate.CustomerEmail, venderEmail = rate.VendorEmail }, rate);
 
         }
+
+        [HttpPut]
+        public async Task<IActionResult> Update([FromBody] Rate updatedRate)
+        {
+            var rateCollection = _mongoDBService.GetRatesCollection();
+            var existingRate = await rateCollection.Find(r => r.VendorEmail == updatedRate.VendorEmail && r.CustomerEmail == updatedRate.CustomerEmail).FirstOrDefaultAsync();
+
+            if (existingRate == null)
+            {
+                return NotFound(new { message = "Rate not found" });
+            }
+
+            // Retain the original Id, vendor email and customer email
+            updatedRate.Id = existingRate.Id;
+          
+
+            var result = await rateCollection.ReplaceOneAsync(r => r.VendorEmail == updatedRate.VendorEmail && r.CustomerEmail == updatedRate.CustomerEmail, updatedRate);
+
+            if (result.MatchedCount == 0)
+            {
+                return NotFound(new { message = "Rate not found" });
+            }
+
+            return NoContent();
+        }
     }
 }

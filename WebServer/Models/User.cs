@@ -1,4 +1,9 @@
-﻿using MongoDB.Bson;
+﻿/*
+ * Description: This file defines the User model, representing user details such as role and activation status in the system.
+ */
+
+
+using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
 namespace SPSH_Ecommerce_Application.Models

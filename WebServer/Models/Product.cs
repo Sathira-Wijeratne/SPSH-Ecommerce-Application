@@ -1,4 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc.ModelBinding;
+﻿/*
+ * Description: This file defines the Product model, representing product details within the e-commerce application.
+ */
+
 using MongoDB.Bson.Serialization.Attributes;
 using MongoDB.Bson;
 
@@ -10,6 +13,7 @@ namespace SPSH_Ecommerce_Application.Models
         [BsonRepresentation(BsonType.ObjectId)]
         public string Id { get; set; }
         public string ProductId { get; set; }
+        public string ProductCategory {  get; set; }
         public string VendorEmail { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }

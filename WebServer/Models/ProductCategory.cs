@@ -1,6 +1,9 @@
-﻿using MongoDB.Bson;
+﻿/*
+ * Description: This file defines the ProductCategory model, representing different categories of products in the e-commerce system.
+ */
+
+using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
-using MongoDB.Bson.Serialization.IdGenerators;
 
 namespace SPSH_Ecommerce_Application.Models
 {
@@ -10,6 +13,7 @@ namespace SPSH_Ecommerce_Application.Models
         [BsonRepresentation(BsonType.ObjectId)]
         public string Id { get; set; }
         public string CategoryName { get; set; }
-        public string ProductId { get; set; }
+
+        public bool IsActive { get; set; }
     }
 }

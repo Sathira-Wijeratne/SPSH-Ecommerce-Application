@@ -38,6 +38,16 @@ namespace SPSH_Ecommerce_Application.Services
         {
             return _database.GetCollection<Rate>("Rates");
         }
+
+        public IMongoCollection<ProductCategory> GetProductCategoriesCollection()
+        {
+            return _database.GetCollection<ProductCategory>("ProductCategories");
+        }
+
+        public IMongoCollection<CustomerNotfication> GetCustomerNotificationsCollection()
+        {
+            return _database.GetCollection<CustomerNotfication>("CustomerNotifications");
+        }
     }
 
     public class MongoDBSettings

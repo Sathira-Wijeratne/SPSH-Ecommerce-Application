@@ -46,5 +46,23 @@ namespace SPSH_Ecommerce_Application.Controllers
 
         }
 
+        [HttpDelete("{customerEmail}")]
+        public async Task<ActionResult> DeleteByCustomerEmail(string customerEmail)
+        {
+            var cartCollection = _mongoDBService.GetCartsCollection();
+
+            // Define the filter to match documents with the specified CustomerEmail
+            var filter = Builders<Cart>.Filter.Eq(c => c.CustomerEmail, customerEmail);
+
+            // Delete the matching documents
+            var result = await cartCollection.DeleteManyAsync(filter);
+
+            if (result.DeletedCount == 0)
+                return NotFound(new { message = "No carts found for the specified customer email" });
+
+            return Ok(new { message = $"{result.DeletedCount} cart(s) deleted for customer email {customerEmail}" });
+        }
+
+
     }
 }
