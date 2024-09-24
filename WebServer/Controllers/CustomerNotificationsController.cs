@@ -40,6 +40,19 @@ namespace SPSH_Ecommerce_Application.Controllers
             return Ok(notification);
         }
 
+        // Retrieves notifications by OrderId
+        [HttpGet("get-by-email/{CustomerEmail}")]
+        public async Task<ActionResult<List<CustomerNotfication>>> GetByCustomerEmail(string CustomerEmail)
+        {
+            var notificationsCollection = _mongoDBService.GetCustomerNotificationsCollection();
+            var notification = await notificationsCollection.Find(n => n.CustomerEmail == CustomerEmail).ToListAsync();
+            if (notification == null || notification.Count == 0)
+            {
+                return NotFound(new { message = "No notifications found for this customer email" });
+            }
+            return Ok(notification);
+        }
+
         // Creates a new customer notification
         [HttpPost]
         public async Task<ActionResult> Create([FromBody] CustomerNotfication notification)
