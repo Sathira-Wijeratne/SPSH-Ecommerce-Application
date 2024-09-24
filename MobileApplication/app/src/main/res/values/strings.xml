@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">EAD_Mobile_App</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="already_have_an_account">Already have an account?</string>
+    <string name="log_in">Log In</string>
+    <string name="repeat_password">Confirm password</string>
+    <string name="password">Password</string>
+    <string name="email">Email</string>
+    <string name="loginEmail">Email</string>
+    <string name="loginPassword">Password</string>
+    <string name="loginButton">Log In</string>
+    <string name="log_in_text">Log In</string>
+</resources>
