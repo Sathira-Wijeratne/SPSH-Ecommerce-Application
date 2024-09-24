@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ModifyUserAccountActivity">
+
+    <LinearLayout
+        android:id="@+id/modify_account_main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:background="@drawable/background_wave">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/modify_account"
+            android:textSize="36sp"
+            android:textColor="@color/white"
+            android:gravity="center"
+            android:layout_marginTop="24dp"/>
+
+        <EditText
+            android:id="@+id/modifyEmailEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:autofillHints=""
+            android:hint="@string/new_email"
+            android:inputType="textEmailAddress"
+            android:layout_marginTop="32dp"
+            android:background="@drawable/edittext_background"
+            android:padding="16dp"/>
+
+        <EditText
+            android:id="@+id/modifyPasswordEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:autofillHints=""
+            android:hint="@string/new_password"
+            android:inputType="textPassword"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/edittext_background"
+            android:padding="16dp"/>
+
+        <Button
+            android:id="@+id/saveChangesButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/save_changes"
+            android:backgroundTint="@color/purple_500"
+            android:textColor="@color/white"
+            android:layout_marginTop="24dp"
+            android:padding="16dp"/>
+
+        <Button
+            android:id="@+id/deactivateButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/deactivate_account"
+            android:backgroundTint="@android:color/holo_red_light"
+            android:textColor="@color/white"
+            android:layout_marginTop="24dp"
+            android:padding="16dp"/>
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

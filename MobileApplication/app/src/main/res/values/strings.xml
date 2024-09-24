@@ -10,4 +10,9 @@
     <string name="loginPassword">Password</string>
     <string name="loginButton">Log In</string>
     <string name="log_in_text">Log In</string>
+    <string name="deactivate_account">Deactivate Account</string>
+    <string name="save_changes">Save Changes</string>
+    <string name="new_password">New Password</string>
+    <string name="new_email">New Email</string>
+    <string name="modify_account">Modify Account</string>
 </resources>
