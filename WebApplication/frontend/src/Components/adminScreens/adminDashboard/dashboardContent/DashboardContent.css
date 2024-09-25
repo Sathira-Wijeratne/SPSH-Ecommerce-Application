@@ -24,3 +24,55 @@
     justify-content: center;
 
 }
+
+/* Card container */
+.card-container {
+    display: flex;
+    gap: 20px;
+    align-items: stretch; 
+    justify-content: space-around; /* Ensure cards are evenly spaced */
+    margin-top: 2rem;
+    padding: 1rem;
+}
+
+/* Individual card */
+.card {
+    flex: 1;
+    background: #dde6ed;
+    padding: 20px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 20px;
+    transition: 0.5s ease-in-out;
+    max-width: 300px; /* Set a maximum width for the cards */
+}
+
+/* Card hover effect */
+.card:hover {
+    transform: scale(1.04);
+    cursor: pointer;
+}
+
+/* Icon container */
+.card-cover {
+    background: #fff;
+    font-size: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    border-radius: 20px;
+    color: #969393;
+    width: 100px;
+    height: 100px; /* Set fixed size for consistency */
+}
+
+/* Title container */
+.card-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-align: center;
+}
+
