@@ -1,12 +1,20 @@
 import React, { useState } from "react";
 import { HiShoppingCart } from "react-icons/hi2";
+import { useNavigate } from "react-router-dom";
 import './MenuBar.css';
 
 const MenuBar = () => {
     const [showSubMenu, setShowSubMenu] = useState(false);
+    const navigate = useNavigate(); // Initialize the useNavigate hook
 
     const toggleSubMenu = () => {
         setShowSubMenu(!showSubMenu);
+    };
+
+    // Function to navigate to the New User page
+    const onClickNewUser = (e) => {
+        e.preventDefault();
+        navigate("/Admin/UserManagement/NewUser");
     };
 
     return (
@@ -26,7 +34,9 @@ const MenuBar = () => {
                 
                 {showSubMenu && (
                     <div className="submenu">
-                        <a href="#" className="subitem">Create New Users</a>
+                        <a href="#" className="subitem" onClick={onClickNewUser}>
+                            Create New Users
+                        </a>
                         <a href="#" className="subitem">Edit User</a>
                     </div>
                 )}
