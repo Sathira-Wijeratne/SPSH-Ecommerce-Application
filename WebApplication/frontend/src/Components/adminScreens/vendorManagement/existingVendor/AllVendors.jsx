@@ -1,13 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { FaEye, FaEdit, FaTrash } from 'react-icons/fa'; // Icons for actions
 import { useNavigate } from 'react-router-dom';
-import './AllVendor.css.css';
+import './AllVendor.css';
 import MenuBar from '../../adminDashboard/menuBar/MenuBar';
-
-
-
-
-
 
 const users = [
     {
