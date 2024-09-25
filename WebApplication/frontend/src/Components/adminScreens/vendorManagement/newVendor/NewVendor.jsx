@@ -28,7 +28,7 @@ const NewVendor = () => {
 
     return (
         <div className="form-container">
-            <h2>Create New User</h2>
+            <h2>Create New Vendor</h2>
             <form onSubmit={handleSubmit}>
                 <div className="form-group">
                     <label>Name:</label>

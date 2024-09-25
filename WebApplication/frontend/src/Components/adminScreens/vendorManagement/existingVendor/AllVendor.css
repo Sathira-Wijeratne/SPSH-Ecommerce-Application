@@ -1,0 +1,59 @@
+/* Container styling */
+.user-list-container {
+    background: #dde6ed;
+    padding: 2rem;
+    border-radius: 10px;
+    max-width: 800px;
+    margin: 2rem auto;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Table styling */
+.user-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+}
+
+.user-table th,
+.user-table td {
+    text-align: left;
+    padding: 12px;
+    border-bottom: 1px solid #ccc;
+}
+
+.user-table th {
+    background-color: #27374d;
+    color: #dde6ed;
+    font-weight: bold;
+    text-align: center;
+}
+
+.user-table td {
+    text-align: center;
+}
+
+/* Icons for actions */
+.action-icons .icon {
+    margin: 0 8px;
+    cursor: pointer;
+    font-size: 1.2rem;
+}
+
+.view-icon {
+    color: #4CAF50;
+}
+
+.edit-icon {
+    color: #FFC107;
+}
+
+.delete-icon {
+    color: #F44336;
+}
+
+.icon:hover {
+    opacity: 0.7;
+    transform: scale(1.1);
+    transition: 0.2s ease-in-out;
+}
