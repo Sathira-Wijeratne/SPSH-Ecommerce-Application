@@ -5,11 +5,17 @@ import './MenuBar.css';
 
 const MenuBar = () => {
     const [showSubMenu, setShowSubMenu] = useState(false);
+    const [showSubForVendorMenu, setshowSubForVendorMenu] = useState(false);
     const navigate = useNavigate(); // Initialize the useNavigate hook
 
     const toggleSubMenu = () => {
         setShowSubMenu(!showSubMenu);
     };
+
+    const toggleSubMenuForVendor = () => {
+        setshowSubForVendorMenu(!showSubForVendorMenu);
+    };
+
 
     // Function to navigate to the New User page
     const onClickNewUser = (e) => {
@@ -27,6 +33,12 @@ const MenuBar = () => {
     const onClickLoadAllUSers = (e) => {
         e.preventDefault();
         navigate("/Admin/UserManagement/EditUser/Dashboard");
+    };
+
+    // Function to navigate to the vendor management 
+    const onClickVendorManagement = (e) => {
+        e.preventDefault();
+        navigate("/Admin/UserManagement/NewVendor");
     };
 
 
@@ -54,8 +66,23 @@ const MenuBar = () => {
                     </div>
                 )}
 
+                  {/* Vendor Management Menu with Sub-Menus */}
+                  <div className="item" onClick={toggleSubMenuForVendor}>
+                    Vendor Management
+                </div>
+                
+                {showSubForVendorMenu && (
+                    <div className="submenu">
+                        <a href="#" className="subitem" onClick={onClickVendorManagement}>
+                            Create New Vendor
+                        </a>
+                        <a href="#" className="subitem"onClick={onClickLoadAllUSers}>Existing Vendor</a>
+                    </div>
+                )}
 
-                <a href="#" className="item">Vendor Management</a>
+
+
+                {/* <a href="#" className="item">Vendor Management</a> */}
                 <a href="#" className="item">Product Management</a>
                 <a href="#" className="item">Order Management</a>
                 <a href="#" className="item">CSR Management</a>
