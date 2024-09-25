@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './NewUser.css';
+import MenuBar from '../adminDashboard/menuBar/MenuBar';
 
 const UserForm = () => {
     const [formData, setFormData] = useState({
@@ -84,6 +85,7 @@ const UserForm = () => {
 
                 <button type="submit" className="submit-btn">Submit</button>
             </form>
+            <MenuBar/>
         </div>
     );
 };
