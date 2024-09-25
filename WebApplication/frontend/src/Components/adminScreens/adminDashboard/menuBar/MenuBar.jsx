@@ -17,10 +17,16 @@ const MenuBar = () => {
         navigate("/Admin/UserManagement/NewUser");
     };
 
-     // Function to navigate to the New User page
+     // Function to navigate to the Dashboard
      const onClickDashboard = (e) => {
         e.preventDefault();
         navigate("/Admin/AdminDashboard");
+    };
+
+    // Function to navigate to the all users 
+    const onClickLoadAllUSers = (e) => {
+        e.preventDefault();
+        navigate("/Admin/UserManagement/EditUser/Dashboard");
     };
 
 
@@ -44,9 +50,10 @@ const MenuBar = () => {
                         <a href="#" className="subitem" onClick={onClickNewUser}>
                             Create New Users
                         </a>
-                        <a href="#" className="subitem">Edit User</a>
+                        <a href="#" className="subitem"onClick={onClickLoadAllUSers}>Edit User</a>
                     </div>
                 )}
+
 
                 <a href="#" className="item">Vendor Management</a>
                 <a href="#" className="item">Product Management</a>
