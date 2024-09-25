@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './NewVendor.css';
-import MenuBar from '..../adminDashboard/menuBar/MenuBar';
+import MenuBar from '../../adminDashboard/menuBar/MenuBar';
+
 
 const NewVendor = () => {
     const [formData, setFormData] = useState({
