@@ -38,7 +38,13 @@ const MenuBar = () => {
     // Function to navigate to the vendor management 
     const onClickVendorManagement = (e) => {
         e.preventDefault();
-        navigate("/Admin/UserManagement/NewVendor");
+        navigate("/Admin/VendorManagement/NewVendor");
+    };
+
+       // Function to navigate to the vendor management 
+       const onClickAllVendorManagement = (e) => {
+        e.preventDefault();
+        navigate("/Admin/VendorManagement/AllVendor");
     };
 
 
@@ -76,7 +82,7 @@ const MenuBar = () => {
                         <a href="#" className="subitem" onClick={onClickVendorManagement}>
                             Create New Vendor
                         </a>
-                        <a href="#" className="subitem"onClick={onClickLoadAllUSers}>Existing Vendor</a>
+                        <a href="#" className="subitem"onClick={onClickAllVendorManagement}>Existing Vendor</a>
                     </div>
                 )}
 
