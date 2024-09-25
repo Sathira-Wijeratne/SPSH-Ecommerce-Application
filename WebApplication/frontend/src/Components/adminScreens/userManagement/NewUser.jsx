@@ -41,17 +41,6 @@ const UserForm = () => {
                 </div>
 
                 <div className="form-group">
-                    <label>Role:</label>
-                    <input
-                        type="text"
-                        name="role"
-                        value={formData.role}
-                        onChange={handleChange}
-                        required
-                    />
-                </div>
-
-                <div className="form-group">
                     <label>Email:</label>
                     <input
                         type="email"

@@ -1,11 +1,24 @@
 /* Container styling similar to your theme */
 .form-container {
-    background: #dde6ed;
+    background: #fff;
+    flex-grow: 1;
+    /* Fill remaining space */
+    border-radius: 20px;
     padding: 2rem;
-    border-radius: 10px;
-    max-width: 500px;
-    margin: 2rem auto;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    /* Stack items vertically */
+    justify-content: flex-start;
+    /* Align content to the top */
+    box-sizing: border-box;
+    overflow: auto;
+    /* Enable scrolling if content is too long vertically */
+    margin-left: 0px;
+    /* Small space between the menu and content */
+    margin-right: 0;
+    /* Remove any extra margin on the right */
+    width: 800px;
+    /* Take full remaining width minus sidebar and gap */
 }
 
 h2 {
