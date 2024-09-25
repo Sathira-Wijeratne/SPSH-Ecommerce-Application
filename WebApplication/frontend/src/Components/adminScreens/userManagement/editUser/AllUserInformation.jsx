@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { FaEye, FaEdit, FaTrash } from 'react-icons/fa'; // Icons for actions
 import { useNavigate } from 'react-router-dom';
+import './AllUserInformation.css';
 
 
 
