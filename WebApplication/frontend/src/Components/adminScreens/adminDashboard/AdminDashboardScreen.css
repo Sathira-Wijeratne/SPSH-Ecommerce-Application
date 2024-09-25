@@ -1,66 +1,53 @@
+/* Wrapper around the entire dashboard */
+.content {
+    width: 100vw; /* Take full viewport width */
+    height: 100vh; /* Take full viewport height */
+    display: flex;
+    justify-content: center; /* Center content horizontally */
+    box-sizing: border-box;
+    overflow: hidden; /* Ensure no horizontal scroll */
+    padding: 0;
+    margin: 0;
+}
+
 /* Dashboard Layout */
 .dashboard {
     display: flex;
-    gap: 20px;
+    gap: 20px; /* Space between the sidebar and dashboard content */
+    width: calc(100% - 250px - 40px);/* Use full width of the page */
     padding: 20px;
-    height: 100vh; /* Ensure full height of the viewport */
-    width: 100%; /* Take full width of the viewport */
     box-sizing: border-box;
-    max-width: 1200px;
-    margin: 0 auto; /* Center the dashboard on large screens */
+    margin-left: 250px;
+    height: 100vh; /* Full height of the viewport */
+    align-items: stretch; /* Ensure both elements take the full height */
+    overflow: hidden; /* Prevent horizontal scrolling */
 }
 
 /* Menu Sidebar */
 .menu {
-    width: 250px; /* Adjust the sidebar width, can be a percentage or fixed */
-    flex-shrink: 0;
+    width: 250px; /* Fixed sidebar width */
+    flex-shrink: 0; /* Prevent shrinking of the sidebar */
     padding: 20px;
-    height: 100vh; /* Ensure sidebar takes full height of the viewport */
+    height: 100vh; /* Full height of the viewport */
     box-sizing: border-box;
+    background-color: #f1f1f1; /* Background for visual separation */
+    border-radius: 10px; /* Optional: adds some rounding for a cleaner look */
+    z-index: 1; /* Ensure the menu stays visible above the content */
+    overflow: auto; /* In case menu content overflows */
 }
 
 /* Content Area */
 .dashboard--content {
     background: #fff;
-    flex: 1; /* This will make the content area fill the remaining space */
+    flex-grow: 1; /* Fill remaining space */
     border-radius: 20px;
     padding: 2rem;
     display: flex;
-    gap: 1.5rem;
     flex-direction: column; /* Stack items vertically */
-    justify-content: space-between;
+    justify-content: flex-start; /* Align content to the top */
     box-sizing: border-box;
-    margin-left: 20px; /* Add margin between menu and content */
-    position: relative;
-}
-
-/* Content Area specific for title and search bar */
-.content-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem 0;
-}
-
-/* Profile and Search Area */
-.profile {
-    display: flex;
-    width: 1200px;
-    align-items: center;
-    gap: 1rem;
-}
-
-/* Search Input */
-.search-bar {
-    padding: 0.5rem;
-    border-radius: 10px;
-    border: 1px solid #ccc;
-    width: 200px;
-}
-
-/* Dashboard Content */
-.content {
-    justify-content: space-between;
-    width: auto;
-    flex: 1;
+    overflow: auto; /* Enable scrolling if content is too long vertically */
+    margin-left: 0px; /* Small space between the menu and content */
+    margin-right: 0; /* Remove any extra margin on the right */
+    width: 100% ; /* Take full remaining width minus sidebar and gap */
 }
