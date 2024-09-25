@@ -5,6 +5,7 @@ import "./index.css";
 import Login from "./Components/loginScreen/Login";
 import AdminDashbord from "./Components/adminScreens/adminDashboard/AdminDashboardScreen";
 import NewUser from "./Components/adminScreens/userManagement/NewUser";
+import EditUser from "./Components/adminScreens/userManagement/editUser/AllUserInformation"
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
         <Route path="/" element={<Login />} />
         <Route path="/Admin/AdminDashboard" element={<AdminDashbord />} />
         <Route path="/Admin/UserManagement/NewUser" element={<NewUser/>}/>
+        <Route path="/Admin/UserManagement/NewUser" element={<EditUser/>}/>
       </Routes>
     </Router>
   );
