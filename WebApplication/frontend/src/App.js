@@ -7,6 +7,7 @@ import AdminDashbord from "./Components/adminScreens/adminDashboard/AdminDashboa
 import NewUser from "./Components/adminScreens/userManagement/NewUser";
 import EditUser from "./Components/adminScreens/userManagement/editUser/AllUserInformation";
 import NewVendor from "./Components/adminScreens/vendorManagement/newVendor/NewVendor";
+import ExisitingVendor from "./Components/adminScreens/vendorManagement/existingVendor/AllVendors";
 
 function App() {
   return (
@@ -16,7 +17,8 @@ function App() {
         <Route path="/Admin/AdminDashboard" element={<AdminDashbord />} />
         <Route path="/Admin/UserManagement/NewUser" element={<NewUser/>}/>
         <Route path="/Admin/UserManagement/EditUser/Dashboard" element={<EditUser/>}/>
-        <Route path="/Admin/UserManagement/NewVendor" element={<NewVendor/>}/>
+        <Route path="/Admin/VendorManagement/NewVendor" element={<NewVendor/>}/>
+        <Route path="/Admin/VendorManagement/AllVendor" element={<ExisitingVendor/>}/>
       </Routes>
     </Router>
   );
