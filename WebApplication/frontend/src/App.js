@@ -5,7 +5,8 @@ import "./index.css";
 import Login from "./Components/loginScreen/Login";
 import AdminDashbord from "./Components/adminScreens/adminDashboard/AdminDashboardScreen";
 import NewUser from "./Components/adminScreens/userManagement/NewUser";
-import EditUser from "./Components/adminScreens/userManagement/editUser/AllUserInformation"
+import EditUser from "./Components/adminScreens/userManagement/editUser/AllUserInformation";
+import NewVendor from "./Components/adminScreens/vendorManagement/newVendor/NewVendor";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route path="/Admin/AdminDashboard" element={<AdminDashbord />} />
         <Route path="/Admin/UserManagement/NewUser" element={<NewUser/>}/>
         <Route path="/Admin/UserManagement/EditUser/Dashboard" element={<EditUser/>}/>
+        <Route path="/Admin/UserManagement/NewVendor" element={<NewVendor/>}/>
       </Routes>
     </Router>
   );
