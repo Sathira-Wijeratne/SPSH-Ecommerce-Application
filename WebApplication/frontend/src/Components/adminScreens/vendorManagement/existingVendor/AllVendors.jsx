@@ -40,7 +40,7 @@ const AllVendor = () => {
 
     return (
         <div className="user-list-container">
-            <h2>User Management</h2>
+            <h2>Vendor Management</h2>
             <table className="user-table">
                 <thead>
                     <tr>
