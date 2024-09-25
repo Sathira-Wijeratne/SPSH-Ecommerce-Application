@@ -17,6 +17,13 @@ const MenuBar = () => {
         navigate("/Admin/UserManagement/NewUser");
     };
 
+     // Function to navigate to the New User page
+     const onClickDashboard = (e) => {
+        e.preventDefault();
+        navigate("/Admin/AdminDashboard");
+    };
+
+
     return (
         <div className="menu">
             <div className="logo">
@@ -25,7 +32,7 @@ const MenuBar = () => {
             </div>
 
             <div className="menulist">
-                <a href="#" className="item">Dashboard</a>
+                <a href="#" className="item" onClick={onClickDashboard}>Dashboard</a>
 
                 {/* User Management Menu with Sub-Menus */}
                 <div className="item" onClick={toggleSubMenu}>
