@@ -11,6 +11,7 @@ import ExisitingVendor from "./Components/adminScreens/vendorManagement/existing
 
 // Vendor Management
 import VendorDashboard from "./Components/vendorScreens/vendorDashboard/VendorDashboard";
+import AddProducts from "./Components/vendorScreens/addProducts/addProductsDashboard/AddProducts";
 
 function App() {
   return (
@@ -25,6 +26,8 @@ function App() {
 
         {/* Vendor Management  */}
         <Route path="/Vendor/VendorDashboard" element={<VendorDashboard/>}/>
+        <Route path="/Vendor/AddNewProducts" element={<AddProducts/>}/>
+
 
       </Routes>
     </Router>
