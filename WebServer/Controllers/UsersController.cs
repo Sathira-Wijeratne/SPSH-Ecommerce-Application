@@ -49,6 +49,15 @@ namespace SPSH_Ecommerce_Application.Controllers
             return Ok(user);
         }
 
+        // Retrieves specific user category from the database
+        [HttpGet("get-by-category/{role}")]
+        public async Task<ActionResult<List<User>>> GetByCategory(string role)
+        {
+            var usersCollection = _mongoDBService.GetUsersCollection();
+            var users = await usersCollection.Find(u => u.Role == role).ToListAsync();
+            return Ok(users);
+        }
+
         // Creates a new user in the database
         [HttpPost]
         public async Task<ActionResult> Create([FromBody] User user)
