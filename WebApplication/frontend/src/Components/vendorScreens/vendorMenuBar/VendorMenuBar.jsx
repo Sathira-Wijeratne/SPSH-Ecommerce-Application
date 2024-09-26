@@ -41,7 +41,7 @@ const VendorMenuBar = () => {
 
             <div className="menulist">
                 <a href="#" className="item" onClick={onClickDashboard}>Dashboard</a>
-                <a href="#" className="item" onClick={onClickDashboard}>Orders</a>
+                <a href="#" className="item" onClick={onClickDashboard}>Add Products</a>
                 <a href="#" className="item" onClick={onClickDashboard}>Shipment Management</a>
                 
             </div>
