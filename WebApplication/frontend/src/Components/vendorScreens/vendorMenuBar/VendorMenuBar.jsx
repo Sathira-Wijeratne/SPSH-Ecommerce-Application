@@ -17,16 +17,18 @@ const VendorMenuBar = () => {
     };
 
 
-    // Function to navigate to the New User page
-    const onClickNewUser = (e) => {
-        e.preventDefault();
-        navigate("/Admin/UserManagement/NewUser");
-    };
+
 
      // Function to navigate to the Dashboard
      const onClickDashboard = (e) => {
         e.preventDefault();
         navigate("/Vendor/VendorDashboard");
+    };
+
+     // Function to navigate to add product page 
+     const onClickAddProduct = (e) => {
+        e.preventDefault();
+        navigate("/Vendor/AddNewProducts");
     };
 
 
@@ -41,7 +43,7 @@ const VendorMenuBar = () => {
 
             <div className="menulist">
                 <a href="#" className="item" onClick={onClickDashboard}>Dashboard</a>
-                <a href="#" className="item" onClick={onClickDashboard}>Add Products</a>
+                <a href="#" className="item" onClick={onClickAddProduct}>Add Products</a>
                 <a href="#" className="item" onClick={onClickDashboard}>Shipment Management</a>
                 
             </div>
