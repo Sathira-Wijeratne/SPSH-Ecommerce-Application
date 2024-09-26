@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import "./Login.css";
 
 import { FaUser, FaLock } from "react-icons/fa";
-import backgroundImage from "../Assets/loginimage.jpg";
+import backgroundImage from "../assets/loginimage.jpg";
 import axios from "axios";
 
 const Login = () => {
