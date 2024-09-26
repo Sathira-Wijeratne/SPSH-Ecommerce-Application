@@ -9,6 +9,9 @@ import EditUser from "./Components/adminScreens/userManagement/editUser/AllUserI
 import NewVendor from "./Components/adminScreens/vendorManagement/newVendor/NewVendor";
 import ExisitingVendor from "./Components/adminScreens/vendorManagement/existingVendor/AllVendors";
 
+// Vendor Management
+import VendorDashboard from "./Components/vendorScreens/vendorDashboard/VendorDashboard";
+
 function App() {
   return (
     <Router>
@@ -19,6 +22,10 @@ function App() {
         <Route path="/Admin/UserManagement/EditUser/Dashboard" element={<EditUser/>}/>
         <Route path="/Admin/VendorManagement/NewVendor" element={<NewVendor/>}/>
         <Route path="/Admin/VendorManagement/AllVendor" element={<ExisitingVendor/>}/>
+
+        {/* Vendor Management  */}
+        <Route path="/Vendor/VendorDashboard" element={<VendorDashboard/>}/>
+
       </Routes>
     </Router>
   );
