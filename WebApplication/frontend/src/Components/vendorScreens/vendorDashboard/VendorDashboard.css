@@ -1,0 +1,53 @@
+/* Wrapper around the entire dashboard */
+.content {
+    width: 100vw; /* Take full viewport width */
+    height: 100vh; /* Take full viewport height */
+    display: flex;
+    justify-content: center; /* Center content horizontally */
+    box-sizing: border-box;
+    overflow: hidden; /* Ensure no horizontal scroll */
+    padding: 0;
+    margin: 0;
+}
+
+/* Dashboard Layout */
+.dashboard {
+    display: flex;
+    gap: 20px; /* Space between the sidebar and dashboard content */
+    width: calc(100% - 250px - 40px);/* Use full width of the page */
+    padding: 20px;
+    box-sizing: border-box;
+    margin-left: 250px;
+    height: 100vh; /* Full height of the viewport */
+    align-items: stretch; /* Ensure both elements take the full height */
+    overflow: hidden; /* Prevent horizontal scrolling */
+}
+
+/* Menu Sidebar */
+.menu {
+    width: 250px; /* Fixed sidebar width */
+    flex-shrink: 0; /* Prevent shrinking of the sidebar */
+    padding: 20px;
+    height: 100vh; /* Full height of the viewport */
+    box-sizing: border-box;
+    background-color: #f1f1f1; /* Background for visual separation */
+    border-radius: 10px; /* Optional: adds some rounding for a cleaner look */
+    z-index: 1; /* Ensure the menu stays visible above the content */
+    overflow: auto; /* In case menu content overflows */
+}
+
+/* Content Area */
+.dashboard--content {
+    background: #fff;
+    flex-grow: 1; /* Fill remaining space */
+    border-radius: 20px;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column; /* Stack items vertically */
+    justify-content: flex-start; /* Align content to the top */
+    box-sizing: border-box;
+    overflow: auto; /* Enable scrolling if content is too long vertically */
+    margin-left: 0px; /* Small space between the menu and content */
+    margin-right: 0; /* Remove any extra margin on the right */
+    width: 100% ; /* Take full remaining width minus sidebar and gap */
+}
