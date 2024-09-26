@@ -26,7 +26,7 @@ const VendorMenuBar = () => {
      // Function to navigate to the Dashboard
      const onClickDashboard = (e) => {
         e.preventDefault();
-        navigate("/Admin/AdminDashboard");
+        navigate("/Vendor/VendorDashboard");
     };
 
 
@@ -41,14 +41,8 @@ const VendorMenuBar = () => {
 
             <div className="menulist">
                 <a href="#" className="item" onClick={onClickDashboard}>Dashboard</a>
-
-                <div className="item" onClick={toggleSubMenu}>
-                    Orders
-                </div>
-        
-                  <div className="item" onClick={toggleSubMenuForVendor}>
-                    Shipment Management
-                </div>
+                <a href="#" className="item" onClick={onClickDashboard}>Orders</a>
+                <a href="#" className="item" onClick={onClickDashboard}>Shipment Management</a>
                 
             </div>
         </div>
