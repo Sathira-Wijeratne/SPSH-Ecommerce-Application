@@ -28,7 +28,11 @@ namespace SPSH_Ecommerce_Application.Controllers
         public async Task<ActionResult<List<User>>> Get()
         {
             var usersCollection = _mongoDBService.GetUsersCollection();
+
+            var sortOrder = new List<string> { "Admin", "CSR", "Vendor", "Customer" };
+
             var users = await usersCollection.Find(u=> true).ToListAsync();
+            users = users.OrderBy(u => sortOrder.IndexOf(u.Role)).ToList();
             return Ok(users);
         }
 
