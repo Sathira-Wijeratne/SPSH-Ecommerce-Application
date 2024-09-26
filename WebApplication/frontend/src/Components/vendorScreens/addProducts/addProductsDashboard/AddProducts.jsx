@@ -36,30 +36,19 @@ const AddProducts = () => {
     };
 
     return (
-        <div className="add-product-container">
+        <div className="content">
             <MenuBar />
             <div className="add-product-content">
                 <h2>Add New Product</h2>
                 <form onSubmit={handleSubmit}>
                     <div className="form-group">
                         <label>Product Name</label>
-                        <input 
-                            type="text" 
-                            name="name" 
-                            value={product.name} 
-                            onChange={handleInputChange} 
-                            placeholder="Enter product name" 
-                        />
+                        <input type="text" name="name" value={product.name} onChange={handleInputChange} />
                     </div>
 
                     <div className="form-group">
                         <label>Description</label>
-                        <textarea
-                            name="description"
-                            value={product.description}
-                            onChange={handleInputChange}
-                            placeholder="Enter product description"
-                        />
+                        <textarea name="description" value={product.description} onChange={handleInputChange}></textarea>
                     </div>
 
                     <div className="form-group">
@@ -73,24 +62,12 @@ const AddProducts = () => {
 
                     <div className="form-group">
                         <label>Price</label>
-                        <input 
-                            type="number" 
-                            name="price" 
-                            value={product.price} 
-                            onChange={handleInputChange} 
-                            placeholder="Enter product price" 
-                        />
+                        <input type="number" name="price" value={product.price} onChange={handleInputChange} />
                     </div>
 
                     <div className="form-group">
                         <label>Stock</label>
-                        <input 
-                            type="number" 
-                            name="stock" 
-                            value={product.stock} 
-                            onChange={handleInputChange} 
-                            placeholder="Enter product stock" 
-                        />
+                        <input type="number" name="stock" value={product.stock} onChange={handleInputChange} />
                     </div>
 
                     <div className="form-group">
@@ -103,6 +80,7 @@ const AddProducts = () => {
                 </form>
             </div>
         </div>
+
     );
 };
 
