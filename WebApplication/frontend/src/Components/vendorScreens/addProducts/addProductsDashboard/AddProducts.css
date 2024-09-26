@@ -1,6 +1,6 @@
 /* Wrapper around the entire dashboard */
 .content {
-    width: 100vw;
+    width: 1000px;
     height: 100vh;
     display: flex;
     justify-content: center;
