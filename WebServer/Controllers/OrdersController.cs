@@ -217,5 +217,23 @@ namespace SPSH_Ecommerce_Application.Controllers
             return Ok(orders);
         }
 
+        // Retrieves 5 recent orders by of a particular vendor
+        [HttpGet("vendor-recent-orders/{vendorEmail}")]
+        public async Task<ActionResult<Order>> VendorRecentOrders(string vendorEmail)
+        {
+            var ordersCollection = _mongoDBService.GetOrdersCollection();
+
+            // Define sorting: OrderId descending, ProductId ascending
+            var sortDefinition = Builders<Order>.Sort.Descending(o => o.OrderId).Ascending(o => o.ProductId);
+            var orders = await ordersCollection.Find(o => o.VendorEmail == vendorEmail).Sort(sortDefinition).Limit(5).ToListAsync();
+
+            if (orders == null)
+            {
+                return NotFound(new { message = "Orders not found" });
+            }
+
+            return Ok(orders);
+        }
+
     }
 }
