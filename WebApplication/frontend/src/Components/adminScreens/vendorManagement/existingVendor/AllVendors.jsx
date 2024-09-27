@@ -20,17 +20,17 @@ const AllVendor = () => {
       });
   }, []);
 
-  const handleView = (id) => {
-    navigate(`/Admin/UserManagement/ViewUser/${id}`);
+  const handleView = (email) => {
+    navigate(`/Admin/UserManagement/ViewUser/${email}`);
   };
 
-  const handleEdit = (id) => {
-    navigate(`/Admin/UserManagement/EditUser/${id}`);
+  const handleEdit = (email) => {
+    navigate(`/Admin/UserManagement/EditUser/${email}`);
   };
 
-  const handleDelete = (id) => {
+  const handleDelete = (email) => {
     // Logic to delete user (API call or local state update)
-    console.log("Delete user with id: ", id);
+    console.log("Delete user with id: ", email);
   };
 
   return (
@@ -57,17 +57,17 @@ const AllVendor = () => {
                 <FaEye
                   className="icon view-icon"
                   title="View"
-                  onClick={() => handleView(vendor.id)}
+                  onClick={() => handleView(vendor.email)}
                 />
                 <FaEdit
                   className="icon edit-icon"
                   title="Edit"
-                  onClick={() => handleEdit(vendor.id)}
+                  onClick={() => handleEdit(vendor.email)}
                 />
                 <FaTrash
                   className="icon delete-icon"
                   title="Delete"
-                  onClick={() => handleDelete(vendor.id)}
+                  onClick={() => handleDelete(vendor.email)}
                 />
               </td>
             </tr>
