@@ -18,7 +18,8 @@
   border-collapse: collapse;
 }
 
-.orders-table th, .orders-table td {
+.orders-table th,
+.orders-table td {
   text-align: left;
   padding: 10px;
   font-size: 16px;
@@ -48,6 +49,14 @@
 .delivered {
   background-color: #c8e6c9;
   color: #388e3c;
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.cancelled {
+  background-color: #e6c8c8;
+  color: #8e3838;
   padding: 4px 10px;
   border-radius: 4px;
   font-size: 14px;
