@@ -1,4 +1,12 @@
-﻿using MongoDB.Bson.Serialization.Attributes;
+﻿/*******************************************************
+ * File:           Cart.cs
+ * Author:         Senadheera P.V.P.P
+ * Created:        20.09.2024
+ * Description:    This file contains the definition of 
+ *                 Cart schema in MongoDB.
+ * ****************************************************/
+
+using MongoDB.Bson.Serialization.Attributes;
 using MongoDB.Bson;
 
 namespace SPSH_Ecommerce_Application.Models
