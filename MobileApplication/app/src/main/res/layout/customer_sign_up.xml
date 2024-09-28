@@ -33,11 +33,35 @@
                 android:textStyle="bold"/>
         </LinearLayout>
 
+
+        <EditText
+            android:id="@+id/nameEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:autofillHints=""
+            android:hint="@string/name"
+            android:inputType="textPersonName"
+            android:layout_marginTop="24dp"
+            android:background="@drawable/edittext_background"
+            android:padding="16dp"/>
+
+        <EditText
+            android:id="@+id/roleEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:autofillHints=""
+            android:hint="@string/role"
+            android:text="@string/customer"
+            android:enabled="false"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/edittext_background"
+            android:padding="16dp"/>
         <!-- Email Input -->
         <EditText
             android:id="@+id/emailEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:autofillHints=""
             android:hint="@string/email"
             android:inputType="textEmailAddress"
             android:layout_marginTop="24dp"

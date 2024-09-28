@@ -13,6 +13,9 @@
         android:theme="@style/Theme.EAD_Mobile_App"
         tools:targetApi="31">
         <activity
+            android:name=".MainProductsPageActivity"
+            android:exported="false" />
+        <activity
             android:name=".ModifyUserAccountActivity"
             android:exported="false" />
         <activity

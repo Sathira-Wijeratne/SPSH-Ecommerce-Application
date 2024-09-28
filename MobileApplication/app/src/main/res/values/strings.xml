@@ -15,4 +15,10 @@
     <string name="new_password">New Password</string>
     <string name="new_email">New Email</string>
     <string name="modify_account">Modify Account</string>
+    <string name="search_for_products">Search for products...</string>
+    <string name="shirts">Shirts</string>
+    <string name="pants">Pants</string>
+    <string name="role">Role</string>
+    <string name="customer">Customer</string>
+    <string name="name">Name</string>
 </resources>
