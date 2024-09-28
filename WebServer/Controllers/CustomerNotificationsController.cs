@@ -1,4 +1,15 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿/*******************************************************
+ * File:           CustomerNotificationsController.cs
+ * Author:         Wijeratne D.M.S.D
+ * Created:        24.09.2024
+ * Description:    This file contains the implementation 
+ *                 of the customer notofication
+ *                 controller, which handles the backend
+ *                 operations of customer notification 
+ *                 management.
+ * ****************************************************/
+
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Driver;
 using SPSH_Ecommerce_Application.Models;
