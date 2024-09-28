@@ -1,4 +1,14 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿/*******************************************************
+ * File:           RatesController.cs
+ * Author:         Senadheera P.V.P.P
+ * Created:        20.09.2024
+ * Description:    This file contains the implementation 
+ *                 of the rate controller, 
+ *                 which handles the backend operations 
+ *                 of rating management for vendors.
+ * ****************************************************/
+
+using Microsoft.AspNetCore.Mvc;
 using MongoDB.Driver;
 using SPSH_Ecommerce_Application.Models;
 using SPSH_Ecommerce_Application.Services;
