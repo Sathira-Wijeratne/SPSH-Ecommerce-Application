@@ -1,6 +1,10 @@
-﻿/*
- * Description: This file defines the Order model, representing a customer's order
- */
+﻿/*******************************************************
+ * File:           Order.cs
+ * Author:         Wijeratne D.M.S.D
+ * Created:        19.09.2024
+ * Description:    This file defines the Order model, 
+ *                 representing a customer's order.
+ * ****************************************************/
 
 using MongoDB.Bson.Serialization.Attributes;
 using MongoDB.Bson;
