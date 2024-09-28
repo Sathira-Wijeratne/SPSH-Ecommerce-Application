@@ -1,3 +1,15 @@
+/*******************************************************
+ * File:           Program.cs
+ * Author:         Wijeratne D.M.S.D
+ * Created:        19.09.2024
+ * Description:    This file sets up an ASP.NET Core web 
+ *                 application, configuring MongoDB services 
+ *                 with custom decimal serialization, 
+ *                 registering MongoDBService for database 
+ *                 access, and enabling API controllers, 
+ *                 HTTPS redirection, authorization, and 
+ *                 Swagger for API documentation.
+ * ****************************************************/
 
 using MongoDB.Bson.Serialization.Serializers;
 using MongoDB.Bson.Serialization;
