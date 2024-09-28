@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainProductsPageActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@color/white"
+        android:padding="16dp">
+
+        <!-- Search Bar -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="8dp"
+            android:gravity="center_vertical"
+            android:background="@drawable/search_background">
+
+            <EditText
+                android:id="@+id/searchBar"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:hint="@string/search_for_products"
+                android:background="@null"
+                android:padding="8dp"
+                android:inputType="text"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@android:drawable/ic_menu_search"
+                android:padding="8dp"/>
+        </LinearLayout>
+
+        <!-- Slideshow for promotions -->
+        <ViewFlipper
+            android:id="@+id/promotionSlideshow"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_marginTop="16dp">
+            <!-- Slideshow content (add multiple ImageViews for each slide) -->
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+<!--                android:src="@drawable/slide1"-->
+<!--                android:scaleType="centerCrop"-->
+<!--            />-->
+            <!-- Add more images here for the slideshow -->
+        </ViewFlipper>
+
+        <!-- Main Categories Grid -->
+        <GridLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:columnCount="2"
+            android:layout_marginTop="16dp"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/category1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/shirts"
+                android:layout_margin="8dp"/>
+<!--                android:background="@drawable/category_background"/>-->
+
+            <Button
+                android:id="@+id/category2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/pants"
+                android:layout_margin="8dp"/>
+<!--                android:background="@drawable/category_background"/>-->
+
+            <!-- Repeat for the other categories -->
+        </GridLayout>
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
