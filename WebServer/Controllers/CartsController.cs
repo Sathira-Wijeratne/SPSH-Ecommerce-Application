@@ -1,4 +1,14 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿/*******************************************************
+ * File:           CartsController.cs
+ * Author:         Senadheera P.V.P.P
+ * Created:        20.09.2024
+ * Description:    This file contains the implementation 
+ *                 of the shopping cart controller, 
+ *                 which handles the backend operations 
+ *                 of shopping cart management.
+ * ****************************************************/
+
+using Microsoft.AspNetCore.Mvc;
 using MongoDB.Driver;
 using SPSH_Ecommerce_Application.Models;
 using SPSH_Ecommerce_Application.Services;
