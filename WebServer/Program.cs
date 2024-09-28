@@ -1,17 +1,3 @@
-/*******************************************************
- * File:           MyClass.cs
- * Author:         [Your Name]
- * Created:        [Date Created]
- * Description:    This file contains the implementation of the 
- *                 MyClass class, which handles [Brief Description 
- *                 of the Class Functionality].
- * 
- * Updates:
- * Date            Author          Changes
- * -------------------------------------------------------
- * [Date]          [Author]        [Description of Change]
- *
- * ****************************************************/
 
 using MongoDB.Bson.Serialization.Serializers;
 using MongoDB.Bson.Serialization;

@@ -1,11 +1,7 @@
-﻿/*******************************************************
- * File:           User.cs
- * Author:         Wijeratne D.M.S.D
- * Created:        19.09.2024
- * Description:    This file defines the User model, 
- *                 representing user details such as role 
- *                 and activation status in the system.
- * ****************************************************/
+﻿/*
+ * Description: This file defines the User model, representing user details such as role and activation status in the system.
+ */
+
 
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
