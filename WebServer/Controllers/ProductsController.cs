@@ -1,7 +1,13 @@
-﻿/*
- * Description: This file contains the ProductsController, responsible for handling
- * CRUD operations for products, including retrieving, creating, updating, and deleting products.
- */
+﻿/*******************************************************
+ * File:           ProductsController.cs
+ * Author:         Wijeratne D.M.S.D
+ * Created:        19.09.2024
+ * Description:    This file contains the 
+ *                 ProductsController, responsible for 
+ *                 handling CRUD operations for products, 
+ *                 including retrieving, creating, 
+ *                 updating, and deleting products.
+ * ****************************************************/
 
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Driver;
