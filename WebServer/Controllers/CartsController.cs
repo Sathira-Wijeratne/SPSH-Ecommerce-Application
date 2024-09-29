@@ -21,11 +21,13 @@ namespace SPSH_Ecommerce_Application.Controllers
     {
         private readonly MongoDBService _mongoDBService;
 
+        //Constructor - Initialize MongoDBService
         public CartsController(MongoDBService mongoDBService)
         {
             _mongoDBService = mongoDBService;
         }
 
+        //Retrieves all the shopping cart items for a given customer
         [HttpGet("{customerEmail}")]
         public async Task<ActionResult<List<Cart>>> Get(string customerEmail)
         {
@@ -35,6 +37,7 @@ namespace SPSH_Ecommerce_Application.Controllers
             return Ok(orders);
         }
 
+        //Retrieves a shopping cart item for a given customer and product id
         [HttpGet("{customerEmail}/{productId}")]
         public async Task<ActionResult<List<Cart>>> Get(string customerEmail, string productId)
         {
@@ -44,6 +47,7 @@ namespace SPSH_Ecommerce_Application.Controllers
             return Ok(orders);
         }
 
+        //Creates a new shopping cart item
         [HttpPost]
         public async Task<ActionResult> Create([FromBody] Cart cart)
         {
@@ -56,6 +60,7 @@ namespace SPSH_Ecommerce_Application.Controllers
 
         }
 
+        //Delete the entire cart for a given customer
         [HttpDelete("{customerEmail}")]
         public async Task<ActionResult> DeleteByCustomerEmail(string customerEmail)
         {
