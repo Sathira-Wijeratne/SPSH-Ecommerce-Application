@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import VendorMenuBar from '../vendorMenuBar/VendorMenuBar'; // Import the VendorMenuBar
-import './ShipmentDashboard.css'; // Import CSS for this screen
+import './OrderManagement.css'; // Import CSS for this screen
 
 const OrderManagement = () => {
     // Sample data for orders, you can replace this with your fetched data.

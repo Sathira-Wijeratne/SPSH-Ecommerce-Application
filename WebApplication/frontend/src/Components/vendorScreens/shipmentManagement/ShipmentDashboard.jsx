@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import VendorMenuBar from '../vendorMenuBar/VendorMenuBar'; // Import the VendorMenuBar
 import './ShipmentDashboard.css'; // Import CSS for this screen
 
-const OrderManagement = () => {
+const ShipmentDashboard = () => {
     // Sample data for orders, you can replace this with your fetched data.
     const [orders, setOrders] = useState([
         {
@@ -78,4 +78,4 @@ const OrderManagement = () => {
     );
 };
 
-export default OrderManagement;
+export default ShipmentDashboard;
