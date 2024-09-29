@@ -1,6 +1,6 @@
 /*******************************************************
  * File:           Program.cs
- * Author:         Wijeratne D.M.S.D
+ * Author:         Wijeratne D.M.S.D & Senadheera P.V.P.P
  * Created:        19.09.2024
  * Description:    This file sets up an ASP.NET Core web 
  *                 application, configuring MongoDB services 
