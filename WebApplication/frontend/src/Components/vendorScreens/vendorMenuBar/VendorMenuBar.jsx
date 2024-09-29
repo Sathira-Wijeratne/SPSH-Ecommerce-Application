@@ -31,6 +31,12 @@ const VendorMenuBar = () => {
         navigate("/Vendor/AddNewProducts");
     };
 
+     // Function to navigate to order management
+     const onClickshipmentManagement = (e) => {
+        e.preventDefault();
+        navigate("/Vendor/OrderManagement");
+    };
+
 
 
 
@@ -44,7 +50,7 @@ const VendorMenuBar = () => {
             <div className="menulist">
                 <a href="#" className="item" onClick={onClickDashboard}>Dashboard</a>
                 <a href="#" className="item" onClick={onClickAddProduct}>Add Products</a>
-                <a href="#" className="item" onClick={onClickDashboard}>Shipment Management</a>
+                <a href="#" className="item" onClick={onClickshipmentManagement}>Shipment Management</a>
                 
             </div>
         </div>

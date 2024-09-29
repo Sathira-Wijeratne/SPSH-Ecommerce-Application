@@ -1,0 +1,62 @@
+/* Wrapper for the entire page */
+.order-management {
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    box-sizing: border-box;
+}
+
+/* Content section */
+.order-management--content {
+    flex-grow: 1;
+    padding: 20px;
+    background-color: #f5f7fa;
+    border-radius: 20px;
+    margin: 20px;
+    overflow-y: auto;
+}
+
+/* Title styling */
+.order-management--content h1 {
+    font-size: 2rem;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* Table Styling */
+.order-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.order-table th, .order-table td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.order-table th {
+    background-color: #f0f0f0;
+    font-weight: bold;
+}
+
+.order-table td {
+    color: #333;
+}
+
+/* Button to mark an order as delivered */
+.deliver-btn {
+    padding: 10px 15px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.deliver-btn:hover {
+    background-color: #218838;
+}
