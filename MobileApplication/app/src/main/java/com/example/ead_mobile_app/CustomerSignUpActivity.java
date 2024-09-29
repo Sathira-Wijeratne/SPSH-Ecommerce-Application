@@ -1,62 +1,9 @@
-//package com.example.ead_mobile_app;
-//
-//import android.os.Bundle;
-//import android.widget.Button;
-//import android.widget.EditText;
-//import android.widget.Toast;
-//
-//import androidx.activity.EdgeToEdge;
-//import androidx.appcompat.app.AppCompatActivity;
-//import androidx.core.graphics.Insets;
-//import androidx.core.view.ViewCompat;
-//import androidx.core.view.WindowInsetsCompat;
-//
-//public class CustomerSignUpActivity extends AppCompatActivity {
-//
-//    @Override
-//    protected void onCreate(Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-////        EdgeToEdge.enable(this);
-//        setContentView(R.layout.customer_sign_up);
-////        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-////            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-////            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-////            return insets;
-////        });
-//        EditText emailEditText = findViewById(R.id.emailEditText);
-//        EditText passwordEditText = findViewById(R.id.passwordEditText);
-//        EditText confirmPasswordEditText = findViewById(R.id.confirmPasswordEditText);
-//        Button signUpButton = findViewById(R.id.signupButton);
-//        Button loginButton = findViewById(R.id.loginButton);
-//
-//        signUpButton.setOnClickListener(v -> {
-//            String email = emailEditText.getText().toString().trim();
-//            String password = passwordEditText.getText().toString().trim();
-//            String confirmPassword = confirmPasswordEditText.getText().toString().trim();
-//
-//            if(email.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()){
-//                Toast.makeText(CustomerSignUpActivity.this, "All fields are required", Toast.LENGTH_SHORT).show();
-//                return;
-//            }
-//            if(!password.equals(confirmPassword)){
-//                Toast.makeText(CustomerSignUpActivity.this,"Passwords do not match",Toast.LENGTH_SHORT).show();
-//                return;
-//            }
-//            Toast.makeText(CustomerSignUpActivity.this,"Sign-Up Successful",Toast.LENGTH_SHORT).show();
-//        });
-//
-//        loginButton.setOnClickListener(v->{
-//            Toast.makeText(CustomerSignUpActivity.this, "Redirecting to Login",Toast.LENGTH_SHORT).show();
-//        });
-//    }
-//
-//}
-
 
 package com.example.ead_mobile_app;
 
-import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -68,34 +15,35 @@ import org.json.JSONObject;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class CustomerSignUpActivity extends AppCompatActivity {
 
     private EditText emailEditText, passwordEditText, confirmPasswordEditText;
     private Button signUpButton, loginButton;
+    private ExecutorService executorService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.customer_sign_up);
 
-        // Initialize EditTexts and Buttons
+        // Initialize UI elements
         emailEditText = findViewById(R.id.emailEditText);
         passwordEditText = findViewById(R.id.passwordEditText);
         confirmPasswordEditText = findViewById(R.id.confirmPasswordEditText);
         signUpButton = findViewById(R.id.signupButton);
         loginButton = findViewById(R.id.loginButton);
 
+        // Initialize ExecutorService
+        executorService = Executors.newSingleThreadExecutor();
+
         // Set OnClickListener for Sign-Up button
         signUpButton.setOnClickListener(v -> {
-            String email = emailEditText.getText().toString().trim();
-            String password = passwordEditText.getText().toString().trim();
-            String confirmPassword = confirmPasswordEditText.getText().toString().trim();
-
-            // Validate fields and passwords
-            if (validateSignUpForm(email, password, confirmPassword)) {
-                // Call the method to handle sign-up
-                signUp(email, password);
+            if (validateSignUpForm()) {
+                // If validation succeeds, call the method to collect inputs and sign up
+                collectAndSignUp();
             }
         });
 
@@ -106,7 +54,11 @@ public class CustomerSignUpActivity extends AppCompatActivity {
     }
 
     // Method to validate the form inputs
-    private boolean validateSignUpForm(String email, String password, String confirmPassword) {
+    private boolean validateSignUpForm() {
+        String email = emailEditText.getText().toString().trim();
+        String password = passwordEditText.getText().toString().trim();
+        String confirmPassword = confirmPasswordEditText.getText().toString().trim();
+
         if (email.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()) {
             Toast.makeText(CustomerSignUpActivity.this, "All fields are required", Toast.LENGTH_SHORT).show();
             return false;
@@ -120,19 +72,18 @@ public class CustomerSignUpActivity extends AppCompatActivity {
         return true;
     }
 
-    // Separate method to handle the sign-up logic
-    private void signUp(String email, String password) {
-        new SignUpTask().execute(email, password);
+    // New method to collect user inputs, create the payload, and perform the API call
+    private void collectAndSignUp() {
+        String email = emailEditText.getText().toString().trim();
+        String password = passwordEditText.getText().toString().trim();
+
+        // Pass the user inputs to the method that sends the API request
+        sendSignUpRequest(email, password);
     }
 
-    // AsyncTask to handle the sign-up request
-    private class SignUpTask extends AsyncTask<String, Void, Boolean> {
-
-        @Override
-        protected Boolean doInBackground(String... params) {
-            String email = params[0];
-            String password = params[1];
-
+    // Method to handle the sign-up request using ExecutorService
+    private void sendSignUpRequest(String email, String password) {
+        executorService.execute(() -> {
             try {
                 // Set up the URL connection
                 URL url = new URL("http://192.168.137.1:2030/api/Users"); // API URL
@@ -143,8 +94,8 @@ public class CustomerSignUpActivity extends AppCompatActivity {
 
                 // Build the JSON payload
                 JSONObject jsonParam = new JSONObject();
-                jsonParam.put("Id", ""); // Leave Id empty
-                jsonParam.put("Name", "Customer"); // Default name or pass user's name if available
+                jsonParam.put("Id", "");
+                jsonParam.put("Name", "Tree"); // Default name or pass user's name if available
                 jsonParam.put("Role", "Customer"); // Default role as 'Customer'
                 jsonParam.put("Email", email);
                 jsonParam.put("Password", password);
@@ -157,22 +108,26 @@ public class CustomerSignUpActivity extends AppCompatActivity {
 
                 // Get response from the server
                 int responseCode = urlConnection.getResponseCode();
-                return responseCode == HttpURLConnection.HTTP_OK; // Check if the response is 200 OK
+
+                // Update UI on the main thread based on response
+                Handler mainHandler = new Handler(Looper.getMainLooper());
+                mainHandler.post(() -> {
+                    if (responseCode == 201) {
+                        Toast.makeText(CustomerSignUpActivity.this, "Sign Up Successful", Toast.LENGTH_SHORT).show();
+                        // Optionally, navigate to another activity upon success
+                    } else {
+                        Toast.makeText(CustomerSignUpActivity.this, "Sign Up Failed", Toast.LENGTH_SHORT).show();
+                    }
+                });
 
             } catch (Exception e) {
                 e.printStackTrace();
-                return false;
+                // Update UI on the main thread for failure
+                Handler mainHandler = new Handler(Looper.getMainLooper());
+                mainHandler.post(() -> {
+                    Toast.makeText(CustomerSignUpActivity.this, "Sign Up Failed", Toast.LENGTH_SHORT).show();
+                });
             }
-        }
-
-        @Override
-        protected void onPostExecute(Boolean result) {
-            if (result) {
-                Toast.makeText(CustomerSignUpActivity.this, "Sign Up Successful", Toast.LENGTH_SHORT).show();
-                // Optionally, you can navigate to another activity upon success
-            } else {
-                Toast.makeText(CustomerSignUpActivity.this, "Sign Up Failed", Toast.LENGTH_SHORT).show();
-            }
-        }
+        });
     }
 }
