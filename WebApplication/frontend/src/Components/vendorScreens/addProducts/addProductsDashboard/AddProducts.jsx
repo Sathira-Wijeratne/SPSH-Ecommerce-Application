@@ -85,7 +85,7 @@ const AddProducts = () => {
     <div className="content">
       <MenuBar />
       <div className="add-product-content">
-        <h2>Add New Product</h2>
+        <h2 className="title">Add New Product</h2>
         <form onSubmit={handleSubmit}>
           <div className="form-group">
             <label>Product ID</label>

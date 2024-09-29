@@ -7,6 +7,10 @@
     overflow: hidden; /* Prevent any overflow */
 }
 
+.header-title{
+    color: #526d82;
+}
+
 /* Sidebar Menu */
 .menu {
     flex-shrink: 0;
