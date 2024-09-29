@@ -34,10 +34,10 @@ const OrderManagement = () => {
 
     return (
         <div className="order-management">
-            <VendorMenuBar /> {/* Sidebar menu */}
+            <VendorMenuBar /> 
 
             <div className="order-management--content">
-                <h1>Manage Orders</h1> {/* Page Title */}
+                <h1>Manage Orders</h1> 
                 <table className="order-table">
                     <thead>
                         <tr>
