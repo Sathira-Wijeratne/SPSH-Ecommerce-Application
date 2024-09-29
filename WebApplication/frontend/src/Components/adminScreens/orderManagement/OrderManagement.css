@@ -1,0 +1,98 @@
+/* Wrapper for the entire page */
+.order-management {
+    display: flex;
+    width: 70vw; /* Full viewport width */
+    height: 100vh; /* Full viewport height */
+    box-sizing: border-box;
+    overflow: hidden; /* Prevent any overflow */
+}
+
+.header-title{
+    color: #526d82;
+}
+
+/* Sidebar Menu */
+.menu {
+    flex-shrink: 0;
+    width: 250px; /* Fixed width for the sidebar */
+    height: 100vh; /* Full height of the viewport */
+    background-color: #f1f1f1;
+    padding: 20px;
+    box-sizing: border-box;
+    overflow-y: auto; /* Allow scrolling in the sidebar if content exceeds */
+}
+
+/* Content section */
+.order-management--content {
+    flex-grow: 1; /* Take up the remaining space */
+    padding: 20px;
+    background-color: #f5f7fa;
+    margin-left: 10px; /* Small gap between the sidebar and content */
+    box-sizing: border-box;
+    overflow-y: auto;
+    height: 100vh; /* Full height of the viewport */
+    overflow-x: hidden; /* Prevent horizontal overflow */
+}
+
+/* Title styling */
+.order-management--content h1 {
+    font-size: 2rem;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* Table Styling */
+.order-table {
+    width: 100%; /* Full width of the content section */
+    border-collapse: collapse;
+    background-color: #fff;
+    border-radius: 10px;
+    table-layout: fixed; /* Fix the layout to prevent content from overflowing */
+}
+
+.order-table th, .order-table td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    word-wrap: break-word; /* Ensure text wraps within the cell */
+}
+
+.order-table th {
+    background-color: #f0f0f0;
+    font-weight: bold;
+}
+
+.order-table td {
+    color: #333;
+}
+
+/* Button to mark an order as delivered */
+.deliver-btn {
+    padding: 10px 15px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.deliver-btn:hover {
+    background-color: #218838;
+}
+
+/* Mobile responsive adjustments */
+@media (max-width: 768px) {
+    .order-management {
+        flex-direction: column;
+    }
+
+    .menu {
+        width: 100%;
+        height: auto;
+    }
+
+    .order-management--content {
+        margin-left: 0;
+        width: 100%;
+    }
+}
