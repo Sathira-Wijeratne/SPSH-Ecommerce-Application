@@ -15,6 +15,7 @@ import OrderManagement from "./Components/adminScreens/orderManagement/OrderMana
 import VendorDashboard from "./Components/vendorScreens/vendorDashboard/VendorDashboard";
 import AddProducts from "./Components/vendorScreens/addProducts/addProductsDashboard/AddProducts";
 import ShipmentManagement from "./Components/vendorScreens/shipmentManagement/ShipmentDashboard";
+import StockManagement from "./Components/vendorScreens/vendorStockManagement/StockManagement";
 
 function App() {
   return (
@@ -32,6 +33,8 @@ function App() {
         <Route path="/Vendor/VendorDashboard" element={<VendorDashboard/>}/>
         <Route path="/Vendor/AddNewProducts" element={<AddProducts/>}/>
         <Route path="/Vendor/OrderManagement" element={<ShipmentManagement/>}/>
+        <Route path="/Vendor/StockManagement" element={<StockManagement/>}/>
+      
 
 
       </Routes>
