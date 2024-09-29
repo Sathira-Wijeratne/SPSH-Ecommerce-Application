@@ -40,7 +40,7 @@ const VendorMenuBar = () => {
      // Function to navigate to Stock management
      const onClickstockManagement = (e) => {
         e.preventDefault();
-        navigate("/Vendor/stockManagement");
+        navigate("/Vendor/StockManagement");
     };
 
 
