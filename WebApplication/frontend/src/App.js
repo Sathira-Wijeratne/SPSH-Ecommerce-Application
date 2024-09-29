@@ -8,6 +8,8 @@ import NewUser from "./Components/adminScreens/userManagement/NewUser";
 import EditUser from "./Components/adminScreens/userManagement/editUser/AllUserInformation";
 import NewVendor from "./Components/adminScreens/vendorManagement/newVendor/NewVendor";
 import ExisitingVendor from "./Components/adminScreens/vendorManagement/existingVendor/AllVendors";
+import OrderManagement from "./Components/adminScreens/orderManagement/OrderManagement";
+
 
 // Vendor Management
 import VendorDashboard from "./Components/vendorScreens/vendorDashboard/VendorDashboard";
@@ -24,6 +26,7 @@ function App() {
         <Route path="/Admin/UserManagement/EditUser/Dashboard" element={<EditUser/>}/>
         <Route path="/Admin/VendorManagement/NewVendor" element={<NewVendor/>}/>
         <Route path="/Admin/VendorManagement/AllVendor" element={<ExisitingVendor/>}/>
+        <Route path="/Admin/OrderManagement" element={<OrderManagement/>}/>
 
         {/* Vendor Management  */}
         <Route path="/Vendor/VendorDashboard" element={<VendorDashboard/>}/>

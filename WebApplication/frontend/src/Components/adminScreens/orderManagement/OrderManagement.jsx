@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import VendorMenuBar from '../vendorMenuBar/VendorMenuBar'; // Import the VendorMenuBar
+import AdminMenuBar from "../adminDashboard/menuBar/MenuBar";
 import './OrderManagement.css'; // Import CSS for this screen
 
 const OrderManagement = () => {
@@ -34,7 +34,7 @@ const OrderManagement = () => {
 
     return (
         <div className="order-management">
-            <VendorMenuBar /> 
+            <AdminMenuBar /> 
 
             <div className="order-management--content">
                 <h1 className="header-title">Manage Orders</h1> 

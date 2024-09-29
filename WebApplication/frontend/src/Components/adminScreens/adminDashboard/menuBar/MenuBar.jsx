@@ -47,6 +47,12 @@ const MenuBar = () => {
         navigate("/Admin/VendorManagement/AllVendor");
     };
 
+    //function to navigate to ordermanagement
+    const onClickAllOrderManagement = (e) => {
+        e.preventDefault();
+        navigate("/Admin/OrderManagement");
+    };
+
 
     return (
         <div className="menu">
@@ -89,8 +95,8 @@ const MenuBar = () => {
 
 
                 {/* <a href="#" className="item">Vendor Management</a> */}
-                <a href="#" className="item">Product Management</a>
-                <a href="#" className="item">Order Management</a>
+                <a href="#" className="item" >Product Management</a>
+                <a href="#" className="item"onClick={onClickAllOrderManagement}>Order Management</a>
                 <a href="#" className="item">CSR Management</a>
             </div>
         </div>
