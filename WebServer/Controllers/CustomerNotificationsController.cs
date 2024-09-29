@@ -51,7 +51,7 @@ namespace SPSH_Ecommerce_Application.Controllers
             return Ok(notification);
         }
 
-        // Retrieves notifications by OrderId
+        // Retrieves notifications by Customer Email
         [HttpGet("get-by-email/{CustomerEmail}")]
         public async Task<ActionResult<List<CustomerNotfication>>> GetByCustomerEmail(string CustomerEmail)
         {
