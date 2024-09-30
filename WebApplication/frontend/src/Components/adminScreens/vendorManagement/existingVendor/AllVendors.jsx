@@ -29,8 +29,22 @@ const AllVendor = () => {
   };
 
   const handleDelete = (email) => {
-    // Logic to delete user (API call or local state update)
-    console.log("Delete user with id: ", email);
+    var userRes = window.confirm(
+      `Are you sure you want to delete this vendor?\n\nVendor Email: ${email}`
+    );
+    if (userRes === true) {
+      axios
+        .delete(`http://192.168.137.1:2030/api/Users/${email}`)
+        .then((res) => {
+          if (res.status === 200) {
+            alert("Vendor account deleted!");
+            window.location.reload();
+          }
+        })
+        .catch((err) => {
+          alert(err);
+        });
+    }
   };
 
   return (
