@@ -218,7 +218,7 @@ namespace SPSH_Ecommerce_Application.Controllers
             return Ok(orders);
         }
 
-        // Retrieves 5 recent orders by of a particular vendor
+        // Retrieves 5 recent orders by of a particular vendor - Developer Senadheera P.V.P.P
         [HttpGet("vendor-recent-orders/{vendorEmail}")]
         public async Task<ActionResult<Order>> VendorRecentOrders(string vendorEmail)
         {
@@ -233,6 +233,17 @@ namespace SPSH_Ecommerce_Application.Controllers
                 return NotFound(new { message = "Orders not found" });
             }
 
+            return Ok(orders);
+        }
+
+        // Retrieves all orders for a specific vendor - Developer Senadheera P.V.P.P
+        [HttpGet("vendor/{vendorEmail}")]
+        public async Task<ActionResult<List<Order>>> GetVendorOrders(string vendorEmail)
+        {
+            var ordersCollection = _mongoDBService.GetOrdersCollection();
+            var sortOrder = new List<string> { "Requested to cancel", "Processing", "Delivered", "Completed", "Cancelled" };
+            var orders = await ordersCollection.Find(o => o.VendorEmail == vendorEmail).ToListAsync();
+            orders = orders.OrderBy(o => sortOrder.IndexOf(o.Status)).ToList();
             return Ok(orders);
         }
 
