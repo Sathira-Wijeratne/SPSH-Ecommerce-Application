@@ -64,19 +64,10 @@ const MenuBar = () => {
             <div className="menulist">
                 <a href="#" className="item" onClick={onClickDashboard}>Dashboard</a>
 
-                {/* User Management Menu with Sub-Menus */}
-                <div className="item" onClick={toggleSubMenu}>
-                    User Management
-                </div>
+             
+                <a href="#" className="item" onClick={onClickLoadAllUSers}>User Management</a>
                 
-                {showSubMenu && (
-                    <div className="submenu">
-                        <a href="#" className="subitem" onClick={onClickNewUser}>
-                            Create New Users
-                        </a>
-                        <a href="#" className="subitem"onClick={onClickLoadAllUSers}>Edit User</a>
-                    </div>
-                )}
+             
 
                   {/* Vendor Management Menu with Sub-Menus */}
                   <div className="item" onClick={toggleSubMenuForVendor}>
@@ -97,7 +88,7 @@ const MenuBar = () => {
                 {/* <a href="#" className="item">Vendor Management</a> */}
                 <a href="#" className="item" >Product Management</a>
                 <a href="#" className="item"onClick={onClickAllOrderManagement}>Order Management</a>
-                <a href="#" className="item">CSR Management</a>
+             
             </div>
         </div>
     );
