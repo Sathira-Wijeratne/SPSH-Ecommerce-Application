@@ -27,8 +27,9 @@ namespace SPSH_Ecommerce_Application.Controllers
         public async Task<ActionResult<List<Order>>> Get()
         {
             var ordersCollection = _mongoDBService.GetOrdersCollection();
+            var sortOrder = new List<string> { "Requested to cancel", "Processing", "Delivered", "Completed", "Cancelled" };
             var orders = await ordersCollection.Find(o => true).ToListAsync();
-
+            orders = orders.OrderBy(o => sortOrder.IndexOf(o.Status)).ToList();
             return Ok(orders);
         }
 
