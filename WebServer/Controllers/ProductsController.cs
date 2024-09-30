@@ -146,7 +146,7 @@ namespace SPSH_Ecommerce_Application.Controllers
         {
             var productsCollection = _mongoDBService.GetProductsCollection();
             var stocks = await productsCollection
-                .Find(p => p.VendorEmail == VendorEmail).Project(p => new { p.ProductId, p.Name, p.Stock }).ToListAsync();
+                .Find(p => p.VendorEmail == VendorEmail).Project(p => new { p.ProductId, p.Name, p.Stock }).SortBy(p => p.Stock).ToListAsync();
 
             return Ok(stocks);
         }
