@@ -30,7 +30,7 @@ const UserList = () => {
 
   const handleDelete = (email) => {
     var userRes = window.confirm(
-      `Are you sure you want to delete this user?\n\nUser Email: ${email}`
+      `Are you sure you want to delete this customer?\n\nCustomer Email: ${email}`
     );
     if (userRes === true) {
       axios
