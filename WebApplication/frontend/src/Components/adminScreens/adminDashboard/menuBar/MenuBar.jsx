@@ -4,23 +4,11 @@ import { useNavigate } from "react-router-dom";
 import './MenuBar.css';
 
 const MenuBar = () => {
-    const [showSubMenu, setShowSubMenu] = useState(false);
     const [showSubForVendorMenu, setshowSubForVendorMenu] = useState(false);
     const navigate = useNavigate(); // Initialize the useNavigate hook
 
-    const toggleSubMenu = () => {
-        setShowSubMenu(!showSubMenu);
-    };
-
     const toggleSubMenuForVendor = () => {
         setshowSubForVendorMenu(!showSubForVendorMenu);
-    };
-
-
-    // Function to navigate to the New User page
-    const onClickNewUser = (e) => {
-        e.preventDefault();
-        navigate("/Admin/UserManagement/NewUser");
     };
 
      // Function to navigate to the Dashboard
