@@ -1,27 +1,21 @@
 import React, { useEffect, useState } from "react";
 import MenuBar from "../vendorMenuBar/VendorMenuBar";
 import "./StockManagement.css"; // Import the CSS
+import axios from "axios";
 
 const StockManagement = () => {
   const [stock, setStock] = useState([]);
+  const vendorEmail = sessionStorage.getItem("email");
 
   useEffect(() => {
-    // Simulate fetching stock data from backend (replace with actual API call)
-    const fetchedStock = [
-      {
-        ProductId: "P001",
-        Name: "Galaxy Z Fold 6",
-        Price: 578900,
-        Stock: 15,
-      },
-      {
-        ProductId: "P002",
-        Name: "Asus Zenbook 14x OLED",
-        Price: 678900,
-        Stock: 8,
-      },
-    ];
-    setStock(fetchedStock);
+    axios
+      .get(
+        `http://192.168.137.1:2030/api/Products/stocks-vendor/${vendorEmail}`
+      )
+      .then((res) => {
+        console.log(res.data);
+        setStock(res.data);
+      });
   }, []);
 
   // Handle removing a product from stock (example)
@@ -40,28 +34,29 @@ const StockManagement = () => {
         <table className="stock-table">
           <thead>
             <tr>
+              <th>Product ID</th>
               <th>Product Name</th>
               <th>Stock</th>
-              <th>Price</th>
               <th>Actions</th>
             </tr>
           </thead>
           <tbody>
             {stock.map((product) => (
               <tr key={product.ProductId}>
-                <td>{product.Name}</td>
+                <td>{product.productId}</td>
+                <td>{product.name}</td>
                 <td>
-                  {product.Stock < 10 ? (
-                    <span className="low-stock">{product.Stock}</span>
+                  {product.stock < 10 ? (
+                    <span className="low-stock">{product.stock}</span>
                   ) : (
-                    <span>{product.Stock}</span>
+                    <span>{product.stock}</span>
                   )}
                 </td>
-                <td>Rs. {product.Price.toLocaleString()}</td>
+
                 <td>
                   <button
                     className="remove-btn"
-                    onClick={() => handleRemoveStock(product.ProductId)}
+                    onClick={() => handleRemoveStock(product.productId)}
                   >
                     Remove Stock
                   </button>
