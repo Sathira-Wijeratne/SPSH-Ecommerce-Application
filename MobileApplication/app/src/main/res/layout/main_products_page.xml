@@ -14,53 +14,16 @@
         android:orientation="vertical"
         android:padding="16dp">
 
-        <!-- Search Bar -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="8dp"
-            android:gravity="center_vertical"
-            android:background="@drawable/search_background">
-
-            <EditText
-                android:id="@+id/searchBar"
-                android:layout_width="314dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:autofillHints=""
-                android:background="@null"
-                android:hint="@string/search_for_products"
-                android:inputType="text"
-                android:padding="8dp" />
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@android:drawable/ic_menu_search"
-                android:padding="8dp"/>
-        </LinearLayout>
-
-        <!-- Slideshow for promotions -->
-        <ViewFlipper
-            android:id="@+id/promotionSlideshow"
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:layout_marginTop="16dp">
-            <!-- Slideshow content (add multiple ImageViews for each slide) -->
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
-        </ViewFlipper>
-
-        <!-- RecyclerView for Categories -->
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/categoryRecyclerView"
+        <!-- GridLayout for dynamically added category cards -->
+        <GridLayout
+            android:id="@+id/categoryGridLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-            app:spanCount="3" />
+            android:columnCount="2"
+            android:orientation="horizontal" />
 
     </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
+
