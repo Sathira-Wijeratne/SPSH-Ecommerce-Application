@@ -150,5 +150,18 @@ namespace SPSH_Ecommerce_Application.Controllers
 
             return Ok(stocks);
         }
+
+        // Retrieves a specific product by its ProductId and the vendor email from the database - Developer Senadheera P.V.P.P
+        [HttpGet("vendor-prodid/{VendorEmail}/{ProductId}")]
+        public async Task<ActionResult<Product>> GetVendorProdID(string VendorEmail, string ProductId)
+        {
+            var productsCollection = _mongoDBService.GetProductsCollection();
+            var product = await productsCollection.Find(p => p.VendorEmail == VendorEmail && p.ProductId == ProductId).FirstOrDefaultAsync();
+            if (product == null)
+            {
+                return NotFound(new { message = "Product not found" });
+            }
+            return Ok(product);
+        }
     }
 }
