@@ -10,7 +10,6 @@ import NewVendor from "./Components/adminScreens/vendorManagement/newVendor/NewV
 import ExisitingVendor from "./Components/adminScreens/vendorManagement/existingVendor/AllVendors";
 import OrderManagement from "./Components/adminScreens/orderManagement/OrderManagement";
 
-
 // Vendor Management
 import VendorDashboard from "./Components/vendorScreens/vendorDashboard/VendorDashboard";
 import AddProducts from "./Components/vendorScreens/addProducts/addProductsDashboard/AddProducts";
@@ -22,21 +21,35 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" element={<Login />} />
+
+        {/* Admin Management  */}
         <Route path="/Admin/AdminDashboard" element={<AdminDashbord />} />
-        <Route path="/Admin/UserManagement/NewUser" element={<NewUser/>}/>
-        <Route path="/Admin/UserManagement/EditUser/Dashboard" element={<EditUser/>}/>
-        <Route path="/Admin/VendorManagement/NewVendor" element={<NewVendor/>}/>
-        <Route path="/Admin/VendorManagement/AllVendor" element={<ExisitingVendor/>}/>
-        <Route path="/Admin/OrderManagement" element={<OrderManagement/>}/>
+        <Route path="/Admin/UserManagement/NewUser" element={<NewUser />} />
+        <Route
+          path="/Admin/UserManagement/EditUser/Dashboard"
+          element={<EditUser />}
+        />
+        <Route
+          path="/Admin/VendorManagement/NewVendor"
+          element={<NewVendor />}
+        />
+        <Route
+          path="/Admin/VendorManagement/AllVendor"
+          element={<ExisitingVendor />}
+        />
+        <Route path="/Admin/OrderManagement" element={<OrderManagement />} />
 
         {/* Vendor Management  */}
-        <Route path="/Vendor/VendorDashboard" element={<VendorDashboard/>}/>
-        <Route path="/Vendor/AddNewProducts" element={<AddProducts/>}/>
-        <Route path="/Vendor/OrderManagement" element={<ShipmentManagement/>}/>
-        <Route path="/Vendor/StockManagement" element={<StockManagement/>}/>
-      
+        <Route path="/Vendor/VendorDashboard" element={<VendorDashboard />} />
+        <Route path="/Vendor/AddNewProducts" element={<AddProducts />} />
+        <Route
+          path="/Vendor/OrderManagement"
+          element={<ShipmentManagement />}
+        />
+        <Route path="/Vendor/StockManagement" element={<StockManagement />} />
 
-
+        {/* CSR Management  */}
+        <Route path="/CSR/CSRDashboard" element={<OrderManagement />} />
       </Routes>
     </Router>
   );

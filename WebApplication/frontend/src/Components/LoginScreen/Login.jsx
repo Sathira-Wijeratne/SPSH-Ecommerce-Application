@@ -37,12 +37,15 @@ const Login = () => {
         if (res.data.password === password) {
           if (res.data.role === "Admin") {
             sessionStorage.setItem("email", res.data.email);
+            sessionStorage.setItem("role", res.data.role);
             navigate("/Admin/AdminDashboard");
           } else if (res.data.role === "CSR") {
             sessionStorage.setItem("email", res.data.email);
+            sessionStorage.setItem("role", res.data.role);
             navigate("/CSR/CSRDashboard");
           } else if (res.data.role === "Vendor") {
             sessionStorage.setItem("email", res.data.email);
+            sessionStorage.setItem("role", res.data.role);
             navigate("/Vendor/VendorDashboard");
           } else {
             alert("Unauthorized User!");
