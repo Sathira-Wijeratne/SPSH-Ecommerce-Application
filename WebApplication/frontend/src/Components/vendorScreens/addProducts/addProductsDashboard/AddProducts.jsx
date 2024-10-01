@@ -14,8 +14,10 @@ const AddProducts = () => {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
-  const [stock, setStock] = useState("");
+  const [stock, setStock] = useState(0);
   const [imageBase64, setImageBase64] = useState("");
+
+  const [newStock, setNewStock] = useState(0);
 
   const [categories, setCategories] = useState([]);
   const [firstActiveCategory, setFirstActiveCategory] = useState("");
@@ -46,7 +48,7 @@ const AddProducts = () => {
       name,
       description,
       price,
-      stock,
+      stock: Number(stock) + Number(newStock),
       vendorEmail,
       imageBase64,
     };
@@ -102,7 +104,7 @@ const AddProducts = () => {
         setName("");
         setDescription("");
         setPrice("");
-        setStock("");
+        setStock(0);
         setImageBase64("");
       });
   }
@@ -184,9 +186,9 @@ const AddProducts = () => {
               type="number"
               min={1}
               name="stock"
-              value={stock}
+              value={newStock}
               onChange={(e) => {
-                setStock(Number(e.target.value));
+                setNewStock(Number(e.target.value));
               }}
             />
           </div>
