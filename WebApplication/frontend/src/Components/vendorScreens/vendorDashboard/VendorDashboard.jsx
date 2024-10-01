@@ -23,7 +23,7 @@ const VendorDashboard = () => {
 
   return (
     <div className="content">
-      <div className="dashboard">
+      {/* <div className="dashboard"> */}
         <MenuBar />
         <div className="dashboard--content">
           <Content />
@@ -73,7 +73,7 @@ const VendorDashboard = () => {
           </div>
         </div>
       </div>
-    </div>
+    // </div>
   );
 };
 
