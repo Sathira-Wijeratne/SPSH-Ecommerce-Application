@@ -6,29 +6,29 @@ import { useNavigate } from "react-router-dom";
 
 const AddProducts = () => {
   const navigate = useNavigate();
-  const [product, setProduct] = useState({
-    id: "",
-    productId: "",
-    productCategory: "",
-    vendorEmail: sessionStorage.getItem("email"),
-    name: "",
-    description: "",
-    price: "",
-    stock: "",
-    imageBase64: "",
-  });
+
+  const vendorEmail = sessionStorage.getItem("email");
+
+  const [productId, setProductId] = useState("");
+  const [productCategory, setProductCategory] = useState("");
+  const [name, setName] = useState("");
+  const [description, setDescription] = useState("");
+  const [price, setPrice] = useState("");
+  const [stock, setStock] = useState("");
+  const [imageBase64, setImageBase64] = useState("");
 
   const [categories, setCategories] = useState([]);
+  const [firstActiveCategory, setFirstActiveCategory] = useState("");
+  const [isProductExisting, setIsProductExisting] = useState(false);
 
   useEffect(() => {
     axios
       .get("http://192.168.137.1:2030/api/ProductCategories/active")
       .then((res) => {
         // default category
-        setProduct({
-          ...product,
-          productCategory: res.data[0].categoryName,
-        });
+        setFirstActiveCategory(res.data[0].categoryName);
+        setProductCategory(res.data[0].categoryName);
+
         var cat = [];
         for (var i = 0; i < res.data.length; i++) {
           cat.push(res.data[i].categoryName);
@@ -37,33 +37,19 @@ const AddProducts = () => {
       });
   }, []);
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setProduct({
-      ...product,
-      [name]: value,
-    });
-  };
-
-  const handleNumberInputChange = (e) => {
-    const { name, value } = e.target;
-    setProduct({
-      ...product,
-      [name]: Number(value),
-    });
-  };
-
-  const handleImageUpload = (e) => {
-    const file = e.target.files[0];
-    const reader = new FileReader();
-    reader.onloadend = () => {
-      setProduct({ ...product, imageBase64: reader.result });
-    };
-    reader.readAsDataURL(file);
-  };
-
   const handleSubmit = (e) => {
     e.preventDefault();
+    const product = {
+      id: "",
+      productId,
+      productCategory,
+      name,
+      description,
+      price,
+      stock,
+      vendorEmail,
+      imageBase64,
+    };
     axios
       .post("http://192.168.137.1:2030/api/Products", product)
       .then((res) => {
@@ -81,6 +67,32 @@ const AddProducts = () => {
       });
   };
 
+  function searchExistingItem(prodID) {
+    axios
+      .get(
+        `http://192.168.137.1:2030/api/Products/vendor-prodid/${vendorEmail}/${prodID}`
+      )
+      .then((res) => {
+        setIsProductExisting(true);
+        setProductCategory(res.data.productCategory);
+        setName(res.data.name);
+        setDescription(res.data.description);
+        setPrice(res.data.price);
+        setStock(res.data.stock);
+        setImageBase64(res.data.imageBase64);
+      })
+      .catch((err) => {
+        // 404
+        setIsProductExisting(false);
+        setProductCategory(firstActiveCategory);
+        setName("");
+        setDescription("");
+        setPrice("");
+        setStock("");
+        setImageBase64("");
+      });
+  }
+
   return (
     <div className="content">
       <MenuBar />
@@ -89,7 +101,14 @@ const AddProducts = () => {
         <form onSubmit={handleSubmit}>
           <div className="form-group">
             <label>Product ID</label>
-            <input type="text" name="productId" onChange={handleInputChange} />
+            <input
+              type="text"
+              name="productId"
+              onChange={(e) => {
+                setProductId(e.target.value);
+                searchExistingItem(e.target.value);
+              }}
+            />
           </div>
 
           <div className="form-group">
@@ -97,8 +116,10 @@ const AddProducts = () => {
             <input
               type="text"
               name="name"
-              value={product.name}
-              onChange={handleInputChange}
+              value={name}
+              onChange={(e) => {
+                setName(e.target.value);
+              }}
             />
           </div>
 
@@ -106,8 +127,10 @@ const AddProducts = () => {
             <label>Description</label>
             <textarea
               name="description"
-              value={product.description}
-              onChange={handleInputChange}
+              value={description}
+              onChange={(e) => {
+                setDescription(e.target.value);
+              }}
             ></textarea>
           </div>
 
@@ -115,8 +138,10 @@ const AddProducts = () => {
             <label>Category</label>
             <select
               name="productCategory"
-              value={product.productCategory}
-              onChange={handleInputChange}
+              value={productCategory}
+              onChange={(e) => {
+                setProductCategory(e.target.value);
+              }}
             >
               {categories.map((category, index) => (
                 <option key={index} value={category}>
@@ -132,8 +157,10 @@ const AddProducts = () => {
               type="number"
               step={"0.01"}
               name="price"
-              value={product.price}
-              onChange={handleNumberInputChange}
+              value={price}
+              onChange={(e) => {
+                setPrice(Number(e.target.value));
+              }}
             />
           </div>
 
@@ -143,17 +170,29 @@ const AddProducts = () => {
               type="number"
               min={1}
               name="stock"
-              value={product.stock}
-              onChange={handleNumberInputChange}
+              value={stock}
+              onChange={(e) => {
+                setStock(Number(e.target.value));
+              }}
             />
           </div>
 
           <div className="form-group">
             <label>Product Image</label>
-            <input type="file" onChange={handleImageUpload} />
-            {product.imageBase64 && (
+            <input
+              type="file"
+              onChange={(e) => {
+                const file = e.target.files[0];
+                const reader = new FileReader();
+                reader.onloadend = () => {
+                  setImageBase64(reader.result);
+                };
+                reader.readAsDataURL(file);
+              }}
+            />
+            {imageBase64 && (
               <img
-                src={product.imageBase64}
+                src={imageBase64}
                 alt="Product Preview"
                 className="image-preview"
               />
