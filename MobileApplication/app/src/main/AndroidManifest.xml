@@ -16,6 +16,9 @@
         android:theme="@style/Theme.EAD_Mobile_App"
         tools:targetApi="31">
         <activity
+            android:name=".SingleItemViewActivity"
+            android:exported="false" />
+        <activity
             android:name=".ItemListPageActivity"
             android:exported="false" />
         <activity
