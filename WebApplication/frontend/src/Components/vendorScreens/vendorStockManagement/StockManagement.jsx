@@ -18,11 +18,36 @@ const StockManagement = () => {
       });
   }, []);
 
-  // Handle removing a product from stock (example)
   const handleRemoveStock = (productId) => {
-    // Remove stock logic
-    const updatedStock = stock.filter((item) => item.ProductId !== productId);
-    setStock(updatedStock);
+    var userRes = window.confirm(
+      `Are you sure you want to remove all the stocks of product ${productId}?`
+    );
+    if (userRes === true) {
+      axios
+        .get(
+          `http://192.168.137.1:2030/api/Orders/get-by-status-prodid/Processing/${productId}`
+        )
+        .then((res) => {
+          if (res.data.length > 0) {
+            alert("Cannot remove stocks due to some processing orders!");
+          } else {
+            axios
+              .delete(`http://192.168.137.1:2030/api/Products/${productId}`)
+              .then((res) => {
+                if (res.status === 200) {
+                  alert("Stocks Removed!");
+                  window.location.reload();
+                }
+              })
+              .catch((err) => {
+                alert(err);
+              });
+          }
+        })
+        .catch((err) => {
+          alert(err);
+        });
+    }
   };
 
   return (
