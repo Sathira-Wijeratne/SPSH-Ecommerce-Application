@@ -50,21 +50,35 @@ const AddProducts = () => {
       vendorEmail,
       imageBase64,
     };
-    axios
-      .post("http://192.168.137.1:2030/api/Products", product)
-      .then((res) => {
-        if (res.status === 201) {
-          alert("Product Added Successfully!");
-          navigate("/Vendor/VendorDashboard");
-        }
-      })
-      .catch((err) => {
-        if (err.status === 409) {
-          alert("Product ID exists. Please enter another Product ID!");
-        } else {
+    if (isProductExisting === false) {
+      axios
+        .post("http://192.168.137.1:2030/api/Products", product)
+        .then((res) => {
+          if (res.status === 201) {
+            alert("Product Added Successfully!");
+            navigate("/Vendor/VendorDashboard");
+          }
+        })
+        .catch((err) => {
+          if (err.status === 409) {
+            alert("Product ID exists. Please enter another Product ID!");
+          } else {
+            alert(err);
+          }
+        });
+    } else {
+      axios
+        .put(`http://192.168.137.1:2030/api/Products/${productId}`, product)
+        .then((res) => {
+          if (res.status === 200) {
+            alert("Product Updated Successfully!");
+            navigate("/Vendor/VendorDashboard");
+          }
+        })
+        .catch((err) => {
           alert(err);
-        }
-      });
+        });
+    }
   };
 
   function searchExistingItem(prodID) {
