@@ -247,5 +247,19 @@ namespace SPSH_Ecommerce_Application.Controllers
             return Ok(orders);
         }
 
+        // Retrieves orders by status and product id
+        [HttpGet("get-by-status-prodid/{status}/{ProductId}")]
+        public async Task<ActionResult<Order>> GetByStatusProdID(string status, string ProductId)
+        {
+            var ordersCollection = _mongoDBService.GetOrdersCollection();
+            var orders = await ordersCollection.Find(o => o.Status == status && o.ProductId == ProductId).ToListAsync();
+            if (orders == null)
+            {
+                return NotFound(new { message = "Orders not found" });
+            }
+
+            return Ok(orders);
+        }
+
     }
 }
