@@ -4,7 +4,6 @@ import "./App.css";
 import "./index.css";
 import Login from "./Components/loginScreen/Login";
 import AdminDashbord from "./Components/adminScreens/adminDashboard/AdminDashboardScreen";
-import NewUser from "./Components/adminScreens/userManagement/NewUser";
 import EditUser from "./Components/adminScreens/userManagement/editUser/AllUserInformation";
 import NewVendor from "./Components/adminScreens/vendorManagement/newVendor/NewVendor";
 import ExisitingVendor from "./Components/adminScreens/vendorManagement/existingVendor/AllVendors";
@@ -24,7 +23,6 @@ function App() {
 
         {/* Admin Management  */}
         <Route path="/Admin/AdminDashboard" element={<AdminDashbord />} />
-        <Route path="/Admin/UserManagement/NewUser" element={<NewUser />} />
         <Route
           path="/Admin/UserManagement/EditUser/Dashboard"
           element={<EditUser />}
