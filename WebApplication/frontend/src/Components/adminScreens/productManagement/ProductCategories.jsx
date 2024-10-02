@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { FaToggleOn, FaToggleOff } from "react-icons/fa";
-import "./ProductCategory.css"; // CSS file following the same design
+import "./ProductCategories.css"; // CSS file following the same design
 
 const ProductCategory = () => {
   const [categories, setCategories] = useState([]);
