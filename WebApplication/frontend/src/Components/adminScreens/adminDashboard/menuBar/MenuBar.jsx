@@ -42,6 +42,12 @@ const MenuBar = () => {
     navigate("/Admin/OrderManagement");
   };
 
+    //function to navigate to Product Management
+    const onClickProductManagement = (e) => {
+      e.preventDefault();
+      navigate("/Admin/ProductManagement");
+    };
+
   return (
     <div className="menu">
       <div className="logo">
@@ -99,7 +105,7 @@ const MenuBar = () => {
         {role !== "CSR" ? (
           <>
             {/* <a href="#" className="item">Vendor Management</a> */}
-            <a href="#" className="item">
+            <a href="#" className="item" onClick={onClickProductManagement}>
               Product Management
             </a>
           </>
