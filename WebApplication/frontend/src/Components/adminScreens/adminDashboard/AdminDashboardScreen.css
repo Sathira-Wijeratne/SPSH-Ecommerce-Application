@@ -1,7 +1,24 @@
-/* Content Area */
-.dashboard--content {
-    width: 100%; /* Increase from 50% to 70% or adjust as needed */
-    flex-grow: 1; /* Continue to take up remaining space */
+/* Wrapper for the whole content including the sidebar and main content */
+.content {
+    display: flex;
+    height: 100vh; /* Full height */
+    box-sizing: border-box;
+  }
+  
+  /* Sidebar MenuBar styling */
+  .sidebar {
+    width: 250px; /* Fixed width for the sidebar */
+    flex-shrink: 0;
+    background-color: #27374d; /* Darker background for the sidebar */
+    color: #dde6ed;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  
+  /* Main content area */
+  .dashboard--content {
+    flex-grow: 1; /* Take up the remaining space */
     background: #fff;
     border-radius: 20px;
     padding: 2rem;
@@ -10,5 +27,52 @@
     justify-content: flex-start;
     box-sizing: border-box;
     overflow: auto;
-}
-
+    margin-left: 250px; /* Add margin to avoid overlap with sidebar */
+  }
+  
+  /* Table and Title Styling */
+  h2 {
+    font-size: 24px;
+    font-weight: bold;
+    color: #27374d;
+    margin-bottom: 20px;
+  }
+  
+  .dashboard-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+  }
+  
+  .dashboard-table th,
+  .dashboard-table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    font-size: 16px;
+    color: #555;
+  }
+  
+  .dashboard-table th {
+    background-color: #27374d;
+    color: white;
+    text-align: center;
+  }
+  
+  .dashboard-table td {
+    text-align: center;
+  }
+  
+  .dashboard-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+  
+  .dashboard-table tr:hover {
+    background-color: #f1f1f1;
+  }
+  
+  .dashboard-table td[colspan] {
+    text-align: center;
+    font-weight: bold;
+  }
+  
