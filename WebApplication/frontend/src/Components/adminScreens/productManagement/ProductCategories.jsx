@@ -1,55 +1,40 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import { FaToggleOn, FaToggleOff } from "react-icons/fa";
 import "./ProductCategories.css"; // CSS file following the same design
+import MenuBar from "../adminDashboard/menuBar/MenuBar";
 
 const ProductCategory = () => {
-  const [categories, setCategories] = useState([]);
+  const [categories, setCategories] = useState([
+    // Sample categories for demonstration purposes
+    { id: "1", name: "Laptops", status: "Active" },
+    { id: "2", name: "Phones", status: "Inactive" },
+    { id: "3", name: "Tablets", status: "Active" },
+  ]);
   const [newCategory, setNewCategory] = useState("");
-
-  useEffect(() => {
-    // Fetch existing categories from the API
-    axios
-      .get("http://your-api-url.com/api/product-categories")
-      .then((res) => {
-        setCategories(res.data);
-      })
-      .catch((err) => {
-        console.error("Failed to fetch categories", err);
-      });
-  }, []);
 
   // Function to handle adding a new category
   const handleAddCategory = (e) => {
     e.preventDefault();
-    axios
-      .post("http://your-api-url.com/api/product-categories", { name: newCategory, status: "Active" })
-      .then((res) => {
-        setCategories([...categories, res.data]);
-        setNewCategory(""); // Reset input field
-      })
-      .catch((err) => {
-        console.error("Failed to add category", err);
-      });
+    const newCat = {
+      id: (categories.length + 1).toString(), // Generate an ID for the new category
+      name: newCategory,
+      status: "Active",
+    };
+    setCategories([...categories, newCat]);
+    setNewCategory(""); // Reset input field
   };
 
   // Function to toggle active/inactive status
   const toggleCategoryStatus = (id, currentStatus) => {
     const updatedStatus = currentStatus === "Active" ? "Inactive" : "Active";
-    axios
-      .put(`http://your-api-url.com/api/product-categories/${id}`, { status: updatedStatus })
-      .then(() => {
-        setCategories(categories.map((category) =>
-          category.id === id ? { ...category, status: updatedStatus } : category
-        ));
-      })
-      .catch((err) => {
-        console.error("Failed to update category status", err);
-      });
+    setCategories(categories.map((category) =>
+      category.id === id ? { ...category, status: updatedStatus } : category
+    ));
   };
 
   return (
     <div className="category-container">
+      <MenuBar/>
       <h1 className="category-title">Product Categories</h1>
       <table className="category-table">
         <thead>
