@@ -36,3 +36,25 @@
     margin-right: 0;
     width: auto; /* Remove width constraints */
 }
+
+.notify {
+    position: relative;
+  }
+  
+  .notification-icon {
+    font-size: 1.5rem;
+    color: #555;
+    cursor: pointer;
+  }
+  
+  .notification-badge {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    height: 10px;
+    width: 10px;
+    background-color: red;
+    border-radius: 50%;
+    content: "";
+  }
+  
