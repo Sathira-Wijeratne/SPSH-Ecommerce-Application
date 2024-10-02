@@ -163,5 +163,15 @@ namespace SPSH_Ecommerce_Application.Controllers
             }
             return Ok(product);
         }
+
+        // Retrieves only the last product from the database - Developer Senadheera P.V.P.P
+        [HttpGet("last-product")]
+        public async Task<ActionResult<List<Product>>> GetLastProduct()
+        {
+            var productsCollection = _mongoDBService.GetProductsCollection();
+            var sortDefinition = Builders<Product>.Sort.Descending(p => p.ProductId);
+            var products = await productsCollection.Find(p => true).Sort(sortDefinition).Limit(1).ToListAsync();
+            return Ok(products);
+        }
     }
 }
