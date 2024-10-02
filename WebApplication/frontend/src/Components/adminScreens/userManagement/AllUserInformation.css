@@ -59,3 +59,103 @@
     transform: scale(1.1);
     transition: 0.2s ease-in-out;
 }
+/* Container styling */
+.user-details-container {
+    background: #fff;
+    height: 800px;
+    padding: 2rem;
+    border-radius: 10px;
+    width: 800px;
+    max-width: 1000px;
+    margin: 2rem auto;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Heading styling */
+.user-details-container h1 {
+    text-align: center;
+    color: #27374d;
+}
+
+/* Form styling */
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    font-weight: bold;
+    font-size: 1rem;
+    margin-bottom: 8px;
+    color: #27374d;
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 12px;
+    font-size: 1rem;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
+
+button {
+    padding: 10px 15px;
+    border: none;
+    background-color: #4CAF50;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 6px;
+    display: block;
+    width: 100%;
+    margin-top: 20px;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+/* Readonly field styling */
+.readonly-field {
+    background-color: #f2f2f2;
+    border: none;
+    color: #555;
+}
+
+/* Back button styling */
+.user-details-container button {
+    margin-top: 15px;
+    background-color: #27374d;
+}
+
+/* Flexbox to align buttons in one line */
+.button-group {
+    display: flex;
+    justify-content: space-between;  /* Add space between buttons */
+    margin-top: 20px;
+  }
+  
+  .button-group button {
+    width: 48%;  /* Make buttons take equal space */
+    padding: 10px;
+    font-size: 16px;
+    background-color: #27374d;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+  
+  .button-group button:hover {
+    background-color: #27374d;
+  }
+  
+  .button-group button:first-child {
+    background-color: #27374d;  /* Different color for back button */
+  }
+  
+  .button-group button:first-child:hover {
+    background-color: #1e2d43;
+  }
+  

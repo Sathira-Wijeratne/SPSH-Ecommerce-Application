@@ -23,10 +23,11 @@ const UserList = () => {
   const handleView = (email) => {
     navigate(`/Admin/UserManagement/ViewUser/${email}`);
   };
-
+  
   const handleEdit = (email) => {
-    navigate(`/Admin/UserManagement/EditUser/${email}`);
+    navigate(`/Admin/UserManagement/ViewUser/${email}`);
   };
+  
 
   const handleDelete = (email) => {
     var userRes = window.confirm(
