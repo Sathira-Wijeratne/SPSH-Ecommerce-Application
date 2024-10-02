@@ -1,9 +1,9 @@
 /* Container styling */
 .user-list-container {
-    background: #240404;
+    background: #fff;
     padding: 2rem;
     border-radius: 10px;
-    width: 200px;
+    width: 1200px;
     height: 850px;
     max-width: 1500px;
     margin: 2rem auto;
