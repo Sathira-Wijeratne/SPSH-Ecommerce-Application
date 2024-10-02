@@ -1,36 +1,6 @@
-/* Wrapper around the entire dashboard */
-.content {
-    width: 100vw; /* Full viewport width */
-    height: 100vh; /* Full viewport height */
-    display: flex;
-    justify-content: center; /* Center horizontally */
-    padding: 0;
-    margin: 0;
-}
-
-/* Dashboard layout - positions MenuBar next to the content */
-.dashboard {
-    display: flex; /* Flexbox to place MenuBar and Content side by side */
-    gap: 20px; /* Space between sidebar and dashboard content */
-    width: 100%; /* Full width */
-    height: 100vh; /* Full height */
-    box-sizing: border-box;
-}
-
-/* Menu Sidebar */
-.menu {
-    width: 250px; /* Fixed width for sidebar */
-    flex-shrink: 0; /* Prevent shrinking */
-    height: 100vh; /* Full height of viewport */
-    padding: 20px;
-    background-color: #f1f1f1; /* Sidebar background color */
-    box-sizing: border-box;
-    z-index: 1;
-}
-
 /* Content Area */
 .dashboard--content {
-    width: 70%; /* Increase from 50% to 70% or adjust as needed */
+    width: 100%; /* Increase from 50% to 70% or adjust as needed */
     flex-grow: 1; /* Continue to take up remaining space */
     background: #fff;
     border-radius: 20px;

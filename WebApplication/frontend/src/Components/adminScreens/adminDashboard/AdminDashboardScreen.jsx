@@ -9,15 +9,12 @@ const AdminDashboard = () => {
 
     return (
         <div className="content">
-            <div className="dashboard">
                 <MenuBar />
                 <div className="dashboard--content">
                     <Content/>
                     <Cards/>
 
                    
-                </div>
-                
             </div>
         </div>
 
