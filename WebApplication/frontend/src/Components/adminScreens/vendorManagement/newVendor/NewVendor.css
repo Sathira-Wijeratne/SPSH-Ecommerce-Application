@@ -54,7 +54,7 @@ input[type="text"],
 input[type="email"],
 input[type="password"] {
     padding: 10px;
-    border: 1px solid #ccc;
+    border: 1px solid #fff;
     border-radius: 5px;
     font-size: 1rem;
     outline: none;
@@ -76,7 +76,7 @@ input[type="checkbox"] {
 
 /* Submit button styling */
 .submit-btn {
-    background-color: #020b17;
+    background-color: #27374d;
     color: #dde6ed;
     padding: 12px 20px;
     border: none;
@@ -89,7 +89,7 @@ input[type="checkbox"] {
 }
 
 .submit-btn:hover {
-    background-color: #1f2b3d;
+    background-color: #27374d;
 }
 
 .submit-btn:focus {
