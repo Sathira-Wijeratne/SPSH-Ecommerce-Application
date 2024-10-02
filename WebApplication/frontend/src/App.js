@@ -9,6 +9,7 @@ import NewVendor from "./Components/adminScreens/vendorManagement/newVendor/NewV
 import ExisitingVendor from "./Components/adminScreens/vendorManagement/existingVendor/AllVendors";
 import OrderManagement from "./Components/adminScreens/orderManagement/OrderManagement";
 import ProductCategory from "./Components/adminScreens/productManagement/ProductCategories";
+import UserDetails from "./Components/adminScreens/userManagement/EditViewuser"
 
 // Vendor Management
 import VendorDashboard from "./Components/vendorScreens/vendorDashboard/VendorDashboard";
@@ -39,6 +40,7 @@ function App() {
         />
         <Route path="/Admin/OrderManagement" element={<OrderManagement />} />
         <Route path="/Admin/ProductManagement" element={<ProductCategory />} />
+        <Route path="/Admin/UserManagement/ViewUser/:email" element={<UserDetails />}/>
         
 
 
