@@ -23,6 +23,7 @@
     padding: 2rem;
     display: flex;
     flex-direction: column;
+    width: 1500px;
     justify-content: flex-start;
     box-sizing: border-box;
     overflow: auto;
@@ -75,7 +76,7 @@ input[type="checkbox"] {
 
 /* Submit button styling */
 .submit-btn {
-    background-color: #27374d;
+    background-color: #020b17;
     color: #dde6ed;
     padding: 12px 20px;
     border: none;
