@@ -8,6 +8,8 @@ import axios from "axios";
 const UserList = () => {
   const navigate = useNavigate();
   const [users, setUsers] = useState([]);
+  const [showDialog, setShowDialog] = useState(false);  // To toggle the dialog
+  const [selectedUserEmail, setSelectedUserEmail] = useState("");  // Store the email of the selected user
 
   useEffect(() => {
     axios
@@ -27,25 +29,26 @@ const UserList = () => {
   const handleEdit = (email) => {
     navigate(`/Admin/UserManagement/ViewUser/${email}`);
   };
-  
 
-  const handleDelete = (email) => {
-    var userRes = window.confirm(
-      `Are you sure you want to delete this customer?\n\nCustomer Email: ${email}`
-    );
-    if (userRes === true) {
-      axios
-        .delete(`http://192.168.137.1:2030/api/Users/${email}`)
-        .then((res) => {
-          if (res.status === 200) {
-            alert("Customer account deleted!");
-            window.location.reload();
-          }
-        })
-        .catch((err) => {
-          alert(err);
-        });
-    }
+  const confirmDelete = (email) => {
+    setSelectedUserEmail(email);
+    setShowDialog(true);  // Show the dialog box
+  };
+
+  const handleDelete = () => {
+    axios
+      .delete(`http://192.168.137.1:2030/api/Users/${selectedUserEmail}`)
+      .then((res) => {
+        if (res.status === 200) {
+          alert("Customer account deleted!");
+          setShowDialog(false);  // Close the dialog box
+          window.location.reload();
+        }
+      })
+      .catch((err) => {
+        alert(err);
+        setShowDialog(false);  // Close the dialog box on error
+      });
   };
 
   return (
@@ -82,7 +85,7 @@ const UserList = () => {
                 <FaTrash
                   className="icon delete-icon"
                   title="Delete"
-                  onClick={() => handleDelete(user.email)}
+                  onClick={() => confirmDelete(user.email)}
                 />
               </td>
             </tr>
@@ -90,6 +93,20 @@ const UserList = () => {
         </tbody>
       </table>
       <MenuBar />
+
+      {/* Confirmation Dialog Box */}
+      {showDialog && (
+        <div className="dialog-overlay">
+          <div className="dialog-box">
+            <h3>Confirm Deletion</h3>
+            <p>Are you sure you want to delete the user with email <strong>{selectedUserEmail}</strong>?</p>
+            <div className="dialog-buttons">
+              <button onClick={handleDelete}>Yes, Delete</button>
+              <button onClick={() => setShowDialog(false)}>Cancel</button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
