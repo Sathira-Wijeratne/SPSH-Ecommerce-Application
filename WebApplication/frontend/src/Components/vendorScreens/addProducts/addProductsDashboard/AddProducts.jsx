@@ -25,17 +25,29 @@ const AddProducts = () => {
 
   useEffect(() => {
     axios
-      .get("http://192.168.137.1:2030/api/ProductCategories/active")
-      .then((res) => {
-        // default category
-        setFirstActiveCategory(res.data[0].categoryName);
-        setProductCategory(res.data[0].categoryName);
+      .get("http://192.168.137.1:2030/api/Products/last-product")
+      .then((res1) => {
+        // Set next product ID
+        setProductId(
+          "P" +
+            (Number(res1.data[0].productId.substring(1)) + 1)
+              .toString()
+              .padStart(3, "0")
+        );
 
-        var cat = [];
-        for (var i = 0; i < res.data.length; i++) {
-          cat.push(res.data[i].categoryName);
-          setCategories(cat);
-        }
+        axios
+          .get("http://192.168.137.1:2030/api/ProductCategories/active")
+          .then((res) => {
+            // default category
+            setFirstActiveCategory(res.data[0].categoryName);
+            setProductCategory(res.data[0].categoryName);
+
+            var cat = [];
+            for (var i = 0; i < res.data.length; i++) {
+              cat.push(res.data[i].categoryName);
+              setCategories(cat);
+            }
+          });
       });
   }, []);
 
@@ -120,6 +132,7 @@ const AddProducts = () => {
             <input
               type="text"
               name="productId"
+              value={productId}
               onChange={(e) => {
                 setProductId(e.target.value);
                 searchExistingItem(e.target.value);
