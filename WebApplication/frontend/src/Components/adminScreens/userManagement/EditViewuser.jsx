@@ -5,14 +5,15 @@ import "./AllUserInformation.css"; // Using the same CSS
 import MenuBar from "../adminDashboard/menuBar/MenuBar";
 
 const EditViewuser = () => {
-  const { email } = useParams();  // Get the user's email from the route parameters
+  const { email } = useParams(); // Get the user's email from the route parameters
   const navigate = useNavigate();
-  
+
   // State to toggle between view and edit mode
   const [isEditing, setIsEditing] = useState(false);
 
   // User state to hold the user data
   const [user, setUser] = useState({
+    id: "",
     name: "",
     email: "",
     role: "",
@@ -23,7 +24,7 @@ const EditViewuser = () => {
   useEffect(() => {
     // Fetch user data by email
     axios
-      .get(`http://your-api-url.com/api/Users/${email}`)
+      .get(`http://192.168.137.1:2030/api/Users/${email}`)
       .then((res) => setUser(res.data))
       .catch((err) => console.error("Failed to fetch user data", err));
   }, [email]);
@@ -34,18 +35,31 @@ const EditViewuser = () => {
     setUser({ ...user, [name]: value });
   };
 
+  // Handle input change for select options
+  const handleBoolInputChange = (e) => {
+    const { name, value } = e.target;
+    if (value === "true") {
+      setUser({ ...user, [name]: Boolean(true) });
+    } else {
+      setUser({ ...user, [name]: Boolean(false) });
+    }
+  };
+
   // Submit the updated user data
   const handleSubmit = (e) => {
     e.preventDefault();
     // Only submit if we're in edit mode
-    if (isEditing) {
+    console.log(user);
+    if (isEditing === true) {
       axios
-        .put(`http://your-api-url.com/api/Users/${email}`, user)
+        .put(`http://192.168.137.1:2030/api/Users/${email}`, user)
         .then(() => {
           alert("User updated successfully");
-          setIsEditing(false);  // Switch back to view mode after saving
+          setIsEditing(false); // Switch back to view mode after saving
         })
         .catch((err) => console.error("Failed to update user", err));
+    } else {
+      setIsEditing(true);
     }
   };
 
@@ -73,7 +87,7 @@ const EditViewuser = () => {
             value={user.email}
             onChange={handleInputChange}
             readOnly
-            className="readonly-field"  // Email is always readonly
+            className="readonly-field" // Email is always readonly
           />
         </div>
         <div className="form-group">
@@ -83,8 +97,8 @@ const EditViewuser = () => {
             name="role"
             value={user.role}
             onChange={handleInputChange}
-            readOnly={!isEditing}
-            className={!isEditing ? "readonly-field" : ""}
+            readOnly={true}
+            className="readonly-field"
           />
         </div>
         <div className="form-group">
@@ -103,7 +117,7 @@ const EditViewuser = () => {
           <select
             name="activated"
             value={user.activated}
-            onChange={handleInputChange}
+            onChange={handleBoolInputChange}
             disabled={!isEditing}
             className={!isEditing ? "readonly-field" : ""}
           >
@@ -114,16 +128,17 @@ const EditViewuser = () => {
 
         {/* Wrapper div to align buttons */}
         <div className="button-group">
-          <button onClick={() => navigate("/Admin/UserManagement/EditUser/Dashboard")} type="button">
+          <button
+            onClick={() => navigate("/Admin/UserManagement/EditUser/Dashboard")}
+            type="button"
+          >
             Back
           </button>
-          
-          {isEditing ? (
+
+          {isEditing === true ? (
             <button type="submit">Save Changes</button>
           ) : (
-            <button type="button" onClick={() => setIsEditing(true)}>
-              Edit User
-            </button>
+            <button type="submit">Edit User</button>
           )}
         </div>
       </form>
