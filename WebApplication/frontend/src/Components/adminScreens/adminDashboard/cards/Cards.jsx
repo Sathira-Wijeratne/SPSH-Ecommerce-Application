@@ -67,7 +67,7 @@ const Cards = () => {
         </div>
         <div className="card-title">
           <h2>Total Sales</h2>
-          <p>${totalSales}</p>
+          <p>Rs. {totalSales}</p>
         </div>
       </div>
     </div>
