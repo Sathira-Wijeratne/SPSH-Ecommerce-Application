@@ -139,6 +139,7 @@
 
 package com.example.ead_mobile_app;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -194,6 +195,14 @@ public class SingleItemViewActivity extends AppCompatActivity {
 
         // Fetch and display the product details
         fetchProductDetails(productId);
+
+        Button viewCartButton = findViewById(R.id.viewCartButton);
+        viewCartButton.setOnClickListener(v -> {
+            // Navigate to CartDetailsActivity
+            Intent intent = new Intent(SingleItemViewActivity.this, CartDetailsActivity.class);
+            intent.putExtra("customerEmail", customerEmail);  // Pass customer email to CartDetailsActivity
+            startActivity(intent);
+        });
     }
 
     private void fetchProductDetails(String productId) {
