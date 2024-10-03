@@ -1,6 +1,11 @@
-﻿/*
- * Description: This file defines the Product model, representing product details within the e-commerce application.
- */
+﻿/*******************************************************
+ * File:           Product.cs
+ * Author:         Wijeratne D.M.S.D
+ * Created:        19.09.2024
+ * Description:    This file defines the Product model, 
+ *                 representing product details within 
+ *                 the e-commerce application.
+ * ****************************************************/
 
 using MongoDB.Bson.Serialization.Attributes;
 using MongoDB.Bson;

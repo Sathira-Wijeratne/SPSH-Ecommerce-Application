@@ -1,4 +1,15 @@
-﻿using Microsoft.Extensions.Options;
+﻿/*******************************************************
+ * File:           MongoDBService.cs
+ * Author:         Wijeratne D.M.S.D & Senadheera P.V.P.P
+ * Created:        19.09.2024
+ * Description:    This file implements the MongoDBService 
+ *                 class, which manages the connection to a 
+ *                 MongoDB database and provides access to 
+ *                 various collections like Products, Orders, 
+ *                 Users, and more, using configurable settings.
+ * ****************************************************/
+
+using Microsoft.Extensions.Options;
 using MongoDB.Driver;
 using SPSH_Ecommerce_Application.Models;
 

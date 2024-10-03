@@ -77,3 +77,10 @@
 .register-Link p a:hover{
     text-decoration: underline;
 }
+
+.loading-spinner {
+    text-align: center;
+    font-size: 18px;
+    color: white;
+  }
+  

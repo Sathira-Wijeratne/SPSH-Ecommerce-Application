@@ -1,3 +1,15 @@
+/*******************************************************
+ * File:           Program.cs
+ * Author:         Wijeratne D.M.S.D & Senadheera P.V.P.P
+ * Created:        19.09.2024
+ * Description:    This file sets up an ASP.NET Core web 
+ *                 application, configuring MongoDB services 
+ *                 with custom decimal serialization, 
+ *                 registering MongoDBService for database 
+ *                 access, and enabling API controllers, 
+ *                 HTTPS redirection, authorization, and 
+ *                 Swagger for API documentation.
+ * ****************************************************/
 
 using MongoDB.Bson.Serialization.Serializers;
 using MongoDB.Bson.Serialization;
@@ -26,7 +38,10 @@ namespace SPSH_Ecommerce_Application
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
-
+            builder.Services.AddCors(policy =>
+            {
+                policy.AddPolicy("CorsPolicy", opt => opt.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+            });
 
             var app = builder.Build();
 
@@ -38,6 +53,8 @@ namespace SPSH_Ecommerce_Application
             }
 
             app.UseHttpsRedirection();
+
+            app.UseCors("CorsPolicy");
 
             app.UseAuthorization();
 

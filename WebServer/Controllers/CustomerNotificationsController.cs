@@ -1,4 +1,15 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿/*******************************************************
+ * File:           CustomerNotificationsController.cs
+ * Author:         Wijeratne D.M.S.D & Senadheera P.V.P.P
+ * Created:        24.09.2024
+ * Description:    This file contains the implementation 
+ *                 of the customer notofication
+ *                 controller, which handles the backend
+ *                 operations of customer notification 
+ *                 management.
+ * ****************************************************/
+
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Driver;
 using SPSH_Ecommerce_Application.Models;
@@ -12,13 +23,13 @@ namespace SPSH_Ecommerce_Application.Controllers
     {
         private readonly MongoDBService _mongoDBService;
 
-        // Constructor to initialize the MongoDB service dependency
+        // Constructor to initialize the MongoDB service dependency - Developer Wijeratne D.M.S.D
         public CustomerNotificationsController(MongoDBService mongoDBService)
         {
             _mongoDBService = mongoDBService;
         }
 
-        // Retrieves all notifications
+        // Retrieves all notifications - Developer Wijeratne D.M.S.D
         [HttpGet]
         public async Task<ActionResult<List<CustomerNotfication>>> Get()
         {
@@ -27,7 +38,7 @@ namespace SPSH_Ecommerce_Application.Controllers
             return Ok(notifications);
         }
 
-        // Retrieves notifications by OrderId
+        // Retrieves notifications by OrderId - Developer Wijeratne D.M.S.D
         [HttpGet("{OrderId}")]
         public async Task<ActionResult<List<CustomerNotfication>>> GetByOrderId(string OrderId)
         {
@@ -40,7 +51,7 @@ namespace SPSH_Ecommerce_Application.Controllers
             return Ok(notification);
         }
 
-        // Retrieves notifications by OrderId
+        // Retrieves notifications by Customer Email - Developer Senadheera P.V.P.P
         [HttpGet("get-by-email/{CustomerEmail}")]
         public async Task<ActionResult<List<CustomerNotfication>>> GetByCustomerEmail(string CustomerEmail)
         {
@@ -53,7 +64,7 @@ namespace SPSH_Ecommerce_Application.Controllers
             return Ok(notification);
         }
 
-        // Creates a new customer notification
+        // Creates a new customer notification - Developer Wijeratne D.M.S.D
         [HttpPost]
         public async Task<ActionResult> Create([FromBody] CustomerNotfication notification)
         {
@@ -65,7 +76,7 @@ namespace SPSH_Ecommerce_Application.Controllers
             return CreatedAtAction(nameof(GetByOrderId), new { orderId = notification.OrderId }, notification);
         }
 
-        // Updates the MarkAsRead of Notification by OrderId
+        // Updates the MarkAsRead of Notification by OrderId - Developer Wijeratne D.M.S.D
         [HttpPatch("mark-as-read/{OrderId}")]
         public async Task<IActionResult> UpdateMarkAsRead(string OrderId, [FromQuery] bool markAsRead)
         {
@@ -98,7 +109,7 @@ namespace SPSH_Ecommerce_Application.Controllers
         }
 
 
-        // Deletes a notification by OrderId
+        // Deletes a notification by OrderId - Developer Wijeratne D.M.S.D
         [HttpDelete("{OrderId}")]
         public async Task<IActionResult> Delete(string OrderId)
         {

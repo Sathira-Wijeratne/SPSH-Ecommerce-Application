@@ -1,66 +1,78 @@
-/* Dashboard Layout */
-.dashboard {
+/* Wrapper for the whole content including the sidebar and main content */
+.content {
     display: flex;
-    gap: 20px;
-    padding: 20px;
-    height: 100vh; /* Ensure full height of the viewport */
-    width: 100%; /* Take full width of the viewport */
+    height: 100vh; /* Full height */
     box-sizing: border-box;
-    max-width: 1200px;
-    margin: 0 auto; /* Center the dashboard on large screens */
-}
-
-/* Menu Sidebar */
-.menu {
-    width: 250px; /* Adjust the sidebar width, can be a percentage or fixed */
+  }
+  
+  /* Sidebar MenuBar styling */
+  .sidebar {
+    width: 250px; /* Fixed width for the sidebar */
     flex-shrink: 0;
-    padding: 20px;
-    height: 100vh; /* Ensure sidebar takes full height of the viewport */
-    box-sizing: border-box;
-}
-
-/* Content Area */
-.dashboard--content {
+    background-color: #27374d; /* Darker background for the sidebar */
+    color: #dde6ed;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  
+  /* Main content area */
+  .dashboard--content {
+    flex-grow: 1; /* Take up the remaining space */
     background: #fff;
-    flex: 1; /* This will make the content area fill the remaining space */
     border-radius: 20px;
     padding: 2rem;
     display: flex;
-    gap: 1.5rem;
-    flex-direction: column; /* Stack items vertically */
-    justify-content: space-between;
+    flex-direction: column;
+    justify-content: flex-start;
     box-sizing: border-box;
-    margin-left: 20px; /* Add margin between menu and content */
-    position: relative;
-}
-
-/* Content Area specific for title and search bar */
-.content-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem 0;
-}
-
-/* Profile and Search Area */
-.profile {
-    display: flex;
-    width: 1200px;
-    align-items: center;
-    gap: 1rem;
-}
-
-/* Search Input */
-.search-bar {
-    padding: 0.5rem;
-    border-radius: 10px;
-    border: 1px solid #ccc;
-    width: 200px;
-}
-
-/* Dashboard Content */
-.content {
-    justify-content: space-between;
-    width: auto;
-    flex: 1;
-}
+    overflow: auto;
+    margin-left: 250px; /* Add margin to avoid overlap with sidebar */
+  }
+  
+  /* Table and Title Styling */
+  h2 {
+    font-size: 24px;
+    font-weight: bold;
+    color: #27374d;
+    margin-bottom: 20px;
+  }
+  
+  .dashboard-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+  }
+  
+  .dashboard-table th,
+  .dashboard-table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    font-size: 16px;
+    color: #555;
+  }
+  
+  .dashboard-table th {
+    background-color: #27374d;
+    color: white;
+    text-align: center;
+  }
+  
+  .dashboard-table td {
+    text-align: center;
+  }
+  
+  .dashboard-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+  
+  .dashboard-table tr:hover {
+    background-color: #f1f1f1;
+  }
+  
+  .dashboard-table td[colspan] {
+    text-align: center;
+    font-weight: bold;
+  }
+  

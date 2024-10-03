@@ -1,26 +1,60 @@
-.content--header{
+/* Wrapper around the entire dashboard */
+.content {
+    width: 100vw; /* Take full viewport width */
+    height: 100vh; /* Take full viewport height */
     display: flex;
-    align-items: center;
-    justify-content: space-between;
+    box-sizing: border-box;
+    overflow: hidden; /* Ensure no horizontal scroll */
+    padding: 0;
+    margin: 0;
 }
 
-.header-title{
-    color: #526d82;
+/* Menu Sidebar */
+.menu {
+    width: 250px; /* Fixed sidebar width */
+    flex-shrink: 0; /* Prevent shrinking of the sidebar */
+    padding: 20px;
+    height: 100vh; /* Full height of the viewport */
+    box-sizing: border-box;
+    background-color: #f1f1f1; /* Background for visual separation */
+    border-radius: 10px; /* Optional: adds some rounding for a cleaner look */
+    z-index: 1; /* Ensure the menu stays visible above the content */
+    overflow: auto; /* In case menu content overflows */
 }
-
-.header--activity{
+/* Content Area */
+.dashboard--content {
+    background: #fff;
+    
+    border-radius: 20px;
+    padding: 2rem;
     display: flex;
-    align-items: center;
-    gap: 20px;
+    flex-direction: column;
+    justify-content: flex-start;
+    box-sizing: border-box;
+    overflow: auto;
+    margin-left: 0px;
+    margin-right: 0;
+    width: auto; /* Remove width constraints */
 }
 
-.notify{
-    background:#dde6ed ;
-    padding:12px;
-    border-radius: 10px;
-    color: #969393;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-}
+.notify {
+    position: relative;
+  }
+  
+  .notification-icon {
+    font-size: 1.5rem;
+    color: #555;
+    cursor: pointer;
+  }
+  
+  .notification-badge {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    height: 10px;
+    width: 10px;
+    background-color: red;
+    border-radius: 50%;
+    content: "";
+  }
+  

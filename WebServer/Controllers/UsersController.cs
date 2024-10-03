@@ -1,7 +1,12 @@
-﻿/*
- * Description: This file contains the UsersController, responsible for handling
- * CRUD operations for users, including retrieving, creating, updating, and deleting users.
- */
+﻿/*******************************************************
+ * File:           UsersController.cs
+ * Author:         Wijeratne D.M.S.D
+ * Created:        19.09.2024
+ * Description:    This file contains the UsersController,
+ *                 responsible for handling CRUD operations 
+ *                 for users, including retrieving, creating, 
+ *                 updating, and deleting users.
+ * ****************************************************/
 
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -28,7 +33,11 @@ namespace SPSH_Ecommerce_Application.Controllers
         public async Task<ActionResult<List<User>>> Get()
         {
             var usersCollection = _mongoDBService.GetUsersCollection();
+
+            var sortOrder = new List<string> { "Admin", "CSR", "Vendor", "Customer" };
+
             var users = await usersCollection.Find(u=> true).ToListAsync();
+            users = users.OrderBy(u => sortOrder.IndexOf(u.Role)).ToList();
             return Ok(users);
         }
 
@@ -43,6 +52,15 @@ namespace SPSH_Ecommerce_Application.Controllers
                 return NotFound(new { message = "User not found" });
             }
             return Ok(user);
+        }
+
+        // Retrieves specific user category from the database
+        [HttpGet("get-by-category/{role}")]
+        public async Task<ActionResult<List<User>>> GetByCategory(string role)
+        {
+            var usersCollection = _mongoDBService.GetUsersCollection();
+            var users = await usersCollection.Find(u => u.Role == role).ToListAsync();
+            return Ok(users);
         }
 
         // Creates a new user in the database
