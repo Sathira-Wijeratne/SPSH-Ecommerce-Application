@@ -24,7 +24,6 @@
 /* Content Area */
 .dashboard--content {
     background: #fff;
-    
     border-radius: 20px;
     padding: 2rem;
     display: flex;
@@ -34,7 +33,6 @@
     overflow: auto;
     margin-left: 0px;
     margin-right: 0;
-    width: auto; /* Remove width constraints */
 }
 
 .notify {

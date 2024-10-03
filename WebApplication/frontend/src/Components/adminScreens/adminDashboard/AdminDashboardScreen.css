@@ -21,13 +21,13 @@
     flex-grow: 1; /* Take up the remaining space */
     background: #fff;
     border-radius: 20px;
-    padding: 2rem;
+    padding: 1rem;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     box-sizing: border-box;
     overflow: auto;
-    margin-left: 250px; /* Add margin to avoid overlap with sidebar */
+    margin-left: 0; /* Add margin to avoid overlap with sidebar */
   }
   
   /* Table and Title Styling */
