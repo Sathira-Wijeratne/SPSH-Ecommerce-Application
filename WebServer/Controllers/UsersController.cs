@@ -1,7 +1,12 @@
-﻿/*
- * Description: This file contains the UsersController, responsible for handling
- * CRUD operations for users, including retrieving, creating, updating, and deleting users.
- */
+﻿/*******************************************************
+ * File:           UsersController.cs
+ * Author:         Wijeratne D.M.S.D
+ * Created:        19.09.2024
+ * Description:    This file contains the UsersController,
+ *                 responsible for handling CRUD operations 
+ *                 for users, including retrieving, creating, 
+ *                 updating, and deleting users.
+ * ****************************************************/
 
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;

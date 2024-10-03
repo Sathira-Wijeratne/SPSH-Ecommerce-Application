@@ -1,7 +1,13 @@
-﻿/*
- * Description: This file contains the ProductsController, responsible for handling
- * CRUD operations for products, including retrieving, creating, updating, and deleting products.
- */
+﻿/*******************************************************
+ * File:           ProductsController.cs
+ * Author:         Wijeratne D.M.S.D & Senadheera P.V.P.P
+ * Created:        19.09.2024
+ * Description:    This file contains the 
+ *                 ProductsController, responsible for 
+ *                 handling CRUD operations for products, 
+ *                 including retrieving, creating, 
+ *                 updating, and deleting products.
+ * ****************************************************/
 
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Driver;
@@ -16,13 +22,13 @@ namespace SPSH_Ecommerce_Application.Controllers
     {
         private readonly MongoDBService _mongoDBService;
 
-        // Constructor to initialize the MongoDB service dependency
+        // Constructor to initialize the MongoDB service dependency - Developer Wijeratne D.M.S.D
         public ProductsController(MongoDBService mongoDBService)
         {
             _mongoDBService = mongoDBService;
         }
 
-        // Retrieves all products from the database
+        // Retrieves all products from the database - Developer Wijeratne D.M.S.D
         [HttpGet]
         public async Task<ActionResult<List<Product>>> Get()
         {
@@ -31,7 +37,7 @@ namespace SPSH_Ecommerce_Application.Controllers
             return Ok(products);
         }
 
-        // Retrieves a specific product by its ProductId from the database
+        // Retrieves a specific product by its ProductId from the database - Developer Wijeratne D.M.S.D
         [HttpGet("{ProductId}")]
         public async Task<ActionResult<Product>> Get(string ProductId)
         {
@@ -44,7 +50,7 @@ namespace SPSH_Ecommerce_Application.Controllers
             return Ok(product);
         }
 
-        // Creates a new product in the database
+        // Creates a new product in the database - Developer Wijeratne D.M.S.D
         [HttpPost]
         public async Task<ActionResult> Create([FromBody] Product product)
         {
@@ -63,7 +69,7 @@ namespace SPSH_Ecommerce_Application.Controllers
             return CreatedAtAction(nameof(Get), new { ProductId = product.Id }, product);
         }
 
-        // Updates an existing product by its ProductId
+        // Updates an existing product by its ProductId - Developer Wijeratne D.M.S.D
         [HttpPut("{ProductId}")]
         public async Task<IActionResult> Update(string ProductId, [FromBody] Product updatedProduct)
         {
@@ -84,7 +90,7 @@ namespace SPSH_Ecommerce_Application.Controllers
             return Ok(new { message = $"Product {ProductId} has been updated successfully" });
         }
 
-        // Deletes a product from the database by its ProductId
+        // Deletes a product from the database by its ProductId - Developer Wijeratne D.M.S.D
         [HttpDelete("{ProductId}")]
         public async Task<IActionResult> Delete(string ProductId)
         {
@@ -97,7 +103,7 @@ namespace SPSH_Ecommerce_Application.Controllers
             return Ok(new { message = $"Product {ProductId} has been deleted successfully" });
         }
 
-        // route to fetch only the product stocks
+        // route to fetch only the product stocks - Developer Wijeratne D.M.S.D
         [HttpGet("stocks")]
         public async Task<ActionResult<List<object>>> GetStocks()
         {
@@ -108,7 +114,7 @@ namespace SPSH_Ecommerce_Application.Controllers
             return Ok(stocks);
         }
 
-        // Retrieves products match with the given name
+        // Retrieves products match with the given name - Developer Senadheera P.V.P.P
         [HttpGet("search-name/{Name}")]
         public async Task<ActionResult<Product>> SearchByName(string Name)
         {
@@ -124,7 +130,7 @@ namespace SPSH_Ecommerce_Application.Controllers
             return Ok(products);
         }
 
-        // Retrieves products match with the given product category
+        // Retrieves products match with the given product category - Developer Senadheera P.V.P.P
         [HttpGet("search-category/{ProductCategory}")]
         public async Task<ActionResult<Product>> SearchByCategory(string ProductCategory)
         {
@@ -140,7 +146,7 @@ namespace SPSH_Ecommerce_Application.Controllers
             return Ok(products);
         }
 
-        // route to fetch only the product id, name and stocks for a given vendor
+        // route to fetch only the product id, name and stocks for a given vendor - Developer Senadheera P.V.P.P
         [HttpGet("stocks-vendor/{VendorEmail}")]
         public async Task<ActionResult<List<object>>> GetStocksByVendor(string VendorEmail)
         {

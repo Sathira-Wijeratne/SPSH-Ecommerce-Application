@@ -1,7 +1,11 @@
-﻿/*
- * Description: This file defines the CustomerNotification model, which represents notifications 
- * sent to customers regarding their orders
- */
+﻿/*******************************************************
+ * File:           CustomerNotfication.cs
+ * Author:         Wijeratne D.M.S.D
+ * Created:        20.09.2024
+ * Description:    This file defines the CustomerNotification 
+ *                 model, which represents notifications sent 
+ *                 to customers regarding their orders.
+ * ****************************************************/
 
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;

@@ -1,8 +1,16 @@
-﻿/*
- * Description: This file contains the ProductCategoriesController, which is responsible for handling
- * CRUD operations for product categories, including retrieving, creating, updating, deleting,
- * and managing the active/inactive status of product categories.
- */
+﻿/*******************************************************
+ * File:           ProductCategoriesController.cs
+ * Author:         Wijeratne D.M.S.D
+ * Created:        20.09.2024
+ * Description:    This file contains the 
+ *                 ProductCategoriesController, which is 
+ *                 responsible for handling CRUD 
+ *                 operations for product categories, 
+ *                 including retrieving, creating, 
+ *                 updating, deleting, and managing the 
+ *                 active/inactive status of product 
+ *                 categories.
+ * ****************************************************/
 
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Driver;

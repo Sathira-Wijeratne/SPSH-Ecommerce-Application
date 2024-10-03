@@ -1,7 +1,13 @@
-﻿/*
- * Description: This file is responsible for handling API requests related to Order management,
- * including CRUD operations (Create, Read, Update, Delete) for orders in the e-commerce system
- */
+﻿/*******************************************************
+ * File:           OrdersController.cs
+ * Author:         Wijeratne D.M.S.D & Senadheera P.V.P.P
+ * Created:        19.09.2024
+ * Description:    This file is responsible for handling 
+ *                 API requests related to Order
+ *                 management,including CRUD operations 
+ *                 (Create, Read, Update, Delete) for 
+ *                 orders in the e-commerce system.
+ * ****************************************************/
 
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Driver;
@@ -16,13 +22,13 @@ namespace SPSH_Ecommerce_Application.Controllers
     {
         private readonly MongoDBService _mongoDBService;
 
-        // Constructor for initializing the MongoDB service dependency
+        // Constructor for initializing the MongoDB service dependency - Developer Wijeratne D.M.S.D
         public OrdersController(MongoDBService mongoDBService)
         {
             _mongoDBService = mongoDBService;
         }
 
-        // Retrieves all orders from the database
+        // Retrieves all orders from the database - Developer Wijeratne D.M.S.D
         [HttpGet]
         public async Task<ActionResult<List<Order>>> Get()
         {
@@ -33,7 +39,7 @@ namespace SPSH_Ecommerce_Application.Controllers
             return Ok(orders);
         }
 
-        // Retrieves all order records for specific orderID from the database
+        // Retrieves all order records for specific orderID from the database - Developer Wijeratne D.M.S.D
         [HttpGet("{OrderId}")]
         public async Task<ActionResult<Order>> Get(string OrderId)
         {
@@ -47,7 +53,7 @@ namespace SPSH_Ecommerce_Application.Controllers
             return Ok(order);
         }
 
-        // Creates a new order in the database
+        // Creates a new order in the database - Developer Wijeratne D.M.S.D
         [HttpPost]
         public async Task<ActionResult> Create([FromBody] Order order)
         {
@@ -81,7 +87,7 @@ namespace SPSH_Ecommerce_Application.Controllers
             return Ok(new { message = $"Order {OrderId} has been updated successfully" });
         }*/
 
-        // Deletes an order from the database by its ID.
+        // Deletes an order from the database by its ID - Developer Wijeratne D.M.S.D
         [HttpDelete("{OrderId}")]
         public async Task<IActionResult> Delete(string OrderId)
         {
@@ -94,7 +100,7 @@ namespace SPSH_Ecommerce_Application.Controllers
             return Ok(new { message = $"Order {OrderId} has been deleted successfully" });
         }
 
-        // Gets order status from orderId
+        // Gets order status from orderId - Developer Wijeratne D.M.S.D
         [HttpGet("status/{OrderId}")]
         public async Task<ActionResult<List<object>>> GetStatus(string OrderId)
         {
@@ -103,7 +109,7 @@ namespace SPSH_Ecommerce_Application.Controllers
             return Ok(result);
         }
 
-        // Manage order status from orderId
+        // Manage order status from orderId - Developer Wijeratne D.M.S.D
         [HttpPatch("manage/{OrderId}")]
         public async Task<IActionResult> ManageOrder(string OrderId, [FromQuery] string Status)
         {
@@ -168,6 +174,7 @@ namespace SPSH_Ecommerce_Application.Controllers
             return Ok(new { message = $"Order {OrderId} has been updated to status: {Status}" });
         }
 
+        //Add cancelation note when cancelling the order - Developer Senadheera P.V.P.P
         [HttpPut("update-note/{orderId}")]
         public async Task<IActionResult> UpdateNoteForOrder(string orderId, [FromBody] string newNote)
         {
@@ -190,7 +197,7 @@ namespace SPSH_Ecommerce_Application.Controllers
             return Ok(new { message = $"{result.ModifiedCount} order(s) updated with new note" });
         }
 
-        // Retrieves orders by status
+        // Retrieves orders by status - Developer Senadheera P.V.P.P
         [HttpGet("get-by-status/{status}")]
         public async Task<ActionResult<Order>> GetByStatus(string status)
         {
@@ -204,7 +211,7 @@ namespace SPSH_Ecommerce_Application.Controllers
             return Ok(orders);
         }
 
-        // Retrieves orders by status and customer email
+        // Retrieves orders by status and customer email - Developer Senadheera P.V.P.P
         [HttpGet("status-customer/{status}/{customerEmail}")]
         public async Task<ActionResult<Order>> GetByStatusCustomer(string status, string customerEmail)
         {

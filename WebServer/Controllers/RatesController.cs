@@ -1,4 +1,14 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿/*******************************************************
+ * File:           RatesController.cs
+ * Author:         Senadheera P.V.P.P
+ * Created:        20.09.2024
+ * Description:    This file contains the implementation 
+ *                 of the rate controller, 
+ *                 which handles the backend operations 
+ *                 of rating management for vendors.
+ * ****************************************************/
+
+using Microsoft.AspNetCore.Mvc;
 using MongoDB.Driver;
 using SPSH_Ecommerce_Application.Models;
 using SPSH_Ecommerce_Application.Services;
@@ -11,11 +21,13 @@ namespace SPSH_Ecommerce_Application.Controllers
     {
         private readonly MongoDBService _mongoDBService;
 
+        // Constructor to initialize the MongoDB service dependency
         public RatesController(MongoDBService mongoDBService)
         {
             _mongoDBService = mongoDBService;
         }
 
+        // Retrieve all the rates from the database
         [HttpGet]
         public async Task<ActionResult<List<Rate>>> Get()
         {
@@ -25,6 +37,7 @@ namespace SPSH_Ecommerce_Application.Controllers
             return Ok(rates);
         }
 
+        // Retrieve all the ratings given by a specific customer
         [HttpGet("cust/{customerEmail}")]
         public async Task<ActionResult<List<Rate>>> GetSingleCustAllRatings(string customerEmail)
         {
@@ -34,6 +47,7 @@ namespace SPSH_Ecommerce_Application.Controllers
             return Ok(rates);
         }
 
+        // Retrieve all the ratings given to a specific vendor
         [HttpGet("vendor/{venderEmail}")]
         public async Task<ActionResult<List<Rate>>> GetSingleVendorAllRatings(string venderEmail)
         {
@@ -43,6 +57,7 @@ namespace SPSH_Ecommerce_Application.Controllers
             return Ok(rates);
         }
 
+        // Retrieve specific rate given to a specific vendor by a specific customer
         [HttpGet("{customerEmail}/{venderEmail}")]
         public async Task<ActionResult<List<Rate>>> GetSingleCustSingleVendorRatings(string customerEmail, string venderEmail)
         {
@@ -52,6 +67,7 @@ namespace SPSH_Ecommerce_Application.Controllers
             return Ok(rates);
         }
 
+        // Create a rate
         [HttpPost]
         public async Task<ActionResult> Create([FromBody] Rate rate)
         {
@@ -64,6 +80,7 @@ namespace SPSH_Ecommerce_Application.Controllers
 
         }
 
+        // Edit an existiing rate
         [HttpPut]
         public async Task<IActionResult> Update([FromBody] Rate updatedRate)
         {
