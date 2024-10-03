@@ -1,9 +1,17 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FaToggleOn, FaToggleOff } from "react-icons/fa";
 import "./ProductCategories.css"; // Import the updated CSS
 import MenuBar from "../adminDashboard/menuBar/MenuBar";
+import axios from "axios";
 
 const ProductCategory = () => {
+  useEffect(() => {
+    axios.get("http://192.168.137.1:2030/api/ProductCategories").then((res) => {
+      console.log(res.data);
+      setCategories(res.data);
+    });
+  }, []);
+
   const [categories, setCategories] = useState([
     { id: "1", name: "Laptops", status: "Active" },
     { id: "2", name: "Phones", status: "Inactive" },
@@ -23,13 +31,18 @@ const ProductCategory = () => {
     setNewCategory("");
   };
 
-  const toggleCategoryStatus = (id, currentStatus) => {
-    const updatedStatus = currentStatus === "Active" ? "Inactive" : "Active";
-    setCategories(
-      categories.map((category) =>
-        category.id === id ? { ...category, status: updatedStatus } : category
-      )
-    );
+  const toggleCategoryStatus = (id, categoryName, newStatus) => {
+    axios
+      .put(`http://192.168.137.1:2030/api/ProductCategories/${categoryName}`, {
+        id,
+        categoryName,
+        isActive: newStatus,
+      })
+      .then((res) => {
+        if (res.status === 200) {
+          window.location.reload();
+        }
+      });
   };
 
   return (
@@ -62,21 +75,29 @@ const ProductCategory = () => {
         <tbody>
           {categories.map((category) => (
             <tr key={category.id}>
-              <td>{category.name}</td>
-              <td>{category.status}</td>
+              <td>{category.categoryName}</td>
+              {category.isActive === true ? <td>Active</td> : <td>Inactive</td>}
               <td>
-                {category.status === "Active" ? (
+                {category.isActive === true ? (
                   <FaToggleOn
                     className="toggle-icon"
                     onClick={() =>
-                      toggleCategoryStatus(category.id, category.status)
+                      toggleCategoryStatus(
+                        category.id,
+                        category.categoryName,
+                        false
+                      )
                     }
                   />
                 ) : (
                   <FaToggleOff
                     className="toggle-icon"
                     onClick={() =>
-                      toggleCategoryStatus(category.id, category.status)
+                      toggleCategoryStatus(
+                        category.id,
+                        category.categoryName,
+                        true
+                      )
                     }
                   />
                 )}
