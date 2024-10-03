@@ -128,10 +128,7 @@ const EditViewuser = () => {
 
         {/* Wrapper div to align buttons */}
         <div className="button-group">
-          <button
-            onClick={() => navigate("/Admin/UserManagement/EditUser/Dashboard")}
-            type="button"
-          >
+          <button onClick={() => navigate(-1)} type="button">
             Back
           </button>
 
