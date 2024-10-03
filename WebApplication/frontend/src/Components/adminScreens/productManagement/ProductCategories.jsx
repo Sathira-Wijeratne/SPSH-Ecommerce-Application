@@ -5,6 +5,9 @@ import MenuBar from "../adminDashboard/menuBar/MenuBar";
 import axios from "axios";
 
 const ProductCategory = () => {
+  const [categories, setCategories] = useState([]);
+  const [newCategory, setNewCategory] = useState("");
+
   useEffect(() => {
     axios.get("http://192.168.137.1:2030/api/ProductCategories").then((res) => {
       console.log(res.data);
@@ -12,23 +15,23 @@ const ProductCategory = () => {
     });
   }, []);
 
-  const [categories, setCategories] = useState([
-    { id: "1", name: "Laptops", status: "Active" },
-    { id: "2", name: "Phones", status: "Inactive" },
-    { id: "3", name: "Tablets", status: "Active" },
-  ]);
-
-  const [newCategory, setNewCategory] = useState("");
-
   const handleAddCategory = (e) => {
     e.preventDefault();
-    const newCat = {
-      id: (categories.length + 1).toString(),
-      name: newCategory,
-      status: "Active",
-    };
-    setCategories([...categories, newCat]);
-    setNewCategory("");
+    axios
+      .post("http://192.168.137.1:2030/api/ProductCategories", {
+        id: "",
+        categoryName: newCategory,
+        isActive: true,
+      })
+      .then((res) => {
+        if (res.status === 201) {
+          alert("Product Category Added!");
+          window.location.reload();
+        }
+      })
+      .catch((err) => {
+        alert(err);
+      });
   };
 
   const toggleCategoryStatus = (id, categoryName, newStatus) => {
