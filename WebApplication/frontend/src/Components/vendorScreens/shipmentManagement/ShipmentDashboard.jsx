@@ -17,24 +17,52 @@ const ShipmentDashboard = () => {
   }, []);
 
   // Function to mark an order as "Delivered"
-  const markAsDelivered = (orderId) => {
+  const markAsDelivered = (order) => {
     var userRes = window.confirm(
-      `Are you sure you want to mark ${orderId} order as delivered?`
+      `Are you sure you want to mark ${order.orderId} order as delivered?`
     );
     if (userRes === true) {
       axios
-        .patch(
-          `http://192.168.137.1:2030/api/Orders/manage/${orderId}?status=Delivered`
-        )
-        .then((res) => {
-          if (res.status === 200) {
-            window.location.reload();
+        .get(`http://192.168.137.1:2030/api/Products/${order.productId}`)
+        .then((res1) => {
+          if (order.productQuantity <= res1.data.stock) {
+            const updatedProduct = {
+              id: res1.data.id,
+              productId: res1.data.productId,
+              productCategory: res1.data.productCategory,
+              vendorEmail: res1.data.vendorEmail,
+              name: res1.data.name,
+              description: res1.data.description,
+              price: res1.data.price,
+              stock: res1.data.stock - order.productQuantity,
+              imageBase64: res1.data.imageBase64,
+            };
+            axios
+              .put(
+                `http://192.168.137.1:2030/api/Products/${res1.data.productId}`,
+                updatedProduct
+              )
+              .then((res2) => {
+                if (res2.status === 200) {
+                  axios
+                    .patch(
+                      `http://192.168.137.1:2030/api/Orders/manage/${order.orderId}?status=Delivered`
+                    )
+                    .then((res) => {
+                      if (res.status === 200) {
+                        window.location.reload();
+                      } else {
+                        alert("Network error!");
+                      }
+                    })
+                    .catch((err) => {
+                      alert(err);
+                    });
+                }
+              });
           } else {
-            alert("Network error!");
+            alert("Insufficient Stocks!");
           }
-        })
-        .catch((err) => {
-          alert(err);
         });
     }
   };
@@ -68,7 +96,7 @@ const ShipmentDashboard = () => {
                   {order.status === "Processing" ? (
                     <button
                       className="deliver-btn"
-                      onClick={() => markAsDelivered(order.orderId)}
+                      onClick={() => markAsDelivered(order)}
                     >
                       Mark as Delivered
                     </button>
