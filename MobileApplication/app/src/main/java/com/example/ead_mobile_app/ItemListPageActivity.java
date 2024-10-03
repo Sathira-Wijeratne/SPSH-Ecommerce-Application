@@ -191,12 +191,12 @@ public class ItemListPageActivity extends AppCompatActivity {
     private LinearLayout itemContainer;
     private ExecutorService executorService;
     private String selectedCategory;
-
+    private String customerEmail;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.item_list_page);
-
+        customerEmail = getIntent().getStringExtra("customerEmail");
         // Get the selected category from the Intent
         selectedCategory = getIntent().getStringExtra("category");
 
@@ -307,6 +307,7 @@ public class ItemListPageActivity extends AppCompatActivity {
             viewButton.setOnClickListener(v -> {
                 Intent intent = new Intent(ItemListPageActivity.this, SingleItemViewActivity.class);
                 intent.putExtra("productId", productId);  // Pass the productId to SingleItemViewActivity
+                intent.putExtra("customerEmail", customerEmail);
                 startActivity(intent);
             });
         });

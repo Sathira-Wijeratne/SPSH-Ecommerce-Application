@@ -418,12 +418,12 @@ public class MainProductsPageActivity extends AppCompatActivity {
     private GridLayout categoryGridLayout;
     private final String API_URL = "http://192.168.137.1:2030/api/ProductCategories/active"; // Updated API URL
     private ExecutorService executorService;
-
+    private String customerEmail;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_products_page);
-
+        customerEmail = getIntent().getStringExtra("customerEmail");
         // Set up GridLayout
         categoryGridLayout = findViewById(R.id.categoryGridLayout);
         executorService = Executors.newSingleThreadExecutor();
@@ -510,6 +510,7 @@ public class MainProductsPageActivity extends AppCompatActivity {
                 // Intent to navigate to ItemListPageActivity
                 Intent intent = new Intent(MainProductsPageActivity.this, ItemListPageActivity.class);
                 intent.putExtra("category", categoryName); // Pass the selected category
+                intent.putExtra("customerEmail", customerEmail);
                 startActivity(intent); // Start ItemListPageActivity
             });
 
