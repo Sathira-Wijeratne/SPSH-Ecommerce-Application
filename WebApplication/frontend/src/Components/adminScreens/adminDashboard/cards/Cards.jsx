@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios'; // Assuming you're fetching data from an API
+import React, { useState, useEffect } from "react";
+import axios from "axios"; // Assuming you're fetching data from an API
 import { FaClipboardList, FaCheckCircle, FaDollarSign } from "react-icons/fa";
-import './Cards.css'; // Assuming there's a CSS file to style the dashboard
+import "./Cards.css"; // Assuming there's a CSS file to style the dashboard
 
 const Cards = () => {
   // States to hold order and sales data
@@ -11,14 +11,23 @@ const Cards = () => {
 
   useEffect(() => {
     // Fetch data from an API endpoint for orders and sales
-    axios.get('http://your-api-url.com/orders')
+    axios
+      .get("http://192.168.137.1:2030/api/Orders")
       .then((response) => {
         const orders = response.data;
 
         // Calculate pending, completed orders and total sales
-        const pending = orders.filter(order => order.status === 'Pending').length;
-        const completed = orders.filter(order => order.status === 'Completed');
-        const sales = completed.reduce((total, order) => total + order.amount, 0);
+        const pending = orders.filter(
+          (order) => order.status === "Processing"
+        ).length;
+        const completed = orders.filter(
+          (order) => order.status === "Completed"
+        );
+        const sales = completed.reduce(
+          (total, order) =>
+            total + order.productUnitPrice * order.productQuantity,
+          0
+        );
 
         // Update state with fetched data
         setPendingOrders(pending);
@@ -26,7 +35,7 @@ const Cards = () => {
         setTotalSales(sales);
       })
       .catch((error) => {
-        console.error('Error fetching orders data', error);
+        console.error("Error fetching orders data", error);
       });
   }, []);
 
@@ -63,6 +72,6 @@ const Cards = () => {
       </div>
     </div>
   );
-}
+};
 
 export default Cards;
