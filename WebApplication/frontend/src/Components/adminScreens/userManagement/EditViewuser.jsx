@@ -118,7 +118,7 @@ const EditViewuser = () => {
             name="activated"
             value={user.activated}
             onChange={handleBoolInputChange}
-            disabled={!isEditing}
+            disabled={!isEditing || user.role === "Vendor"}
             className={!isEditing ? "readonly-field" : ""}
           >
             <option value={true}>Yes</option>
