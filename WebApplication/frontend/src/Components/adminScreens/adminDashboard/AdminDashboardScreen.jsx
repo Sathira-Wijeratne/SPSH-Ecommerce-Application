@@ -16,7 +16,10 @@ const AdminDashboard = () => {
       .get("http://192.168.137.1:2030/api/Orders")
       .then((response) => {
         const orders = response.data;
-        const pending = orders.filter((order) => order.status === "Processing");
+        const pending = orders.filter(
+          (order) =>
+            order.status === "Processing" || order.status === "Delivered"
+        );
         setPendingOrders(pending);
       })
       .catch((error) => {
