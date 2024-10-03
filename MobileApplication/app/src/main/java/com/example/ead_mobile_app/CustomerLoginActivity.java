@@ -100,10 +100,6 @@ public class CustomerLoginActivity extends AppCompatActivity {
                         mainHandler.post(() -> {
                             Toast.makeText(CustomerLoginActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
                             // Redirect to MainProductsPageActivity
-//                            Intent intent = new Intent(CustomerLoginActivity.this, MainProductsPageActivity.class);
-//                            startActivity(intent);
-//                            finish(); // Optional: finish the login activity so the user cannot go back to it
-
                             Intent intent = new Intent(CustomerLoginActivity.this, MainProductsPageActivity.class);
                             intent.putExtra("customerEmail", email);  // Pass the logged-in email
                             startActivity(intent);
