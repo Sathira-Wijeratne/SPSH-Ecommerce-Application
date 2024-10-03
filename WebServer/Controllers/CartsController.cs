@@ -78,6 +78,21 @@ namespace SPSH_Ecommerce_Application.Controllers
             return Ok(new { message = $"{result.DeletedCount} cart(s) deleted for customer email {customerEmail}" });
         }
 
+        // Delete one item from shopping cart
+        [HttpDelete("{customerEmail}/{ProductId}")]
+        public async Task<ActionResult> DeleteByCustomerEmailProductID(string customerEmail, string ProductId)
+        {
+            var cartCollection = _mongoDBService.GetCartsCollection();
+
+            // Delete the matching documents
+            var result = await cartCollection.DeleteOneAsync(c => c.CustomerEmail == customerEmail && c.ProductId == ProductId);
+
+            if (result.DeletedCount == 0)
+                return NotFound(new { message = "No carts found for the specified customer email" });
+
+            return Ok(new { message = $"{result.DeletedCount} cart(s) deleted for customer email {customerEmail}" });
+        }
+
 
     }
 }
