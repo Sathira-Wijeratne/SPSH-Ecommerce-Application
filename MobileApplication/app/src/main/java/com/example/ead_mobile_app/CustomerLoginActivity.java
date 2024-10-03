@@ -92,10 +92,12 @@ public class CustomerLoginActivity extends AppCompatActivity {
                     // Parse the response JSON
                     JSONObject jsonResponse = new JSONObject(response.toString());
                     String retrievedPassword = jsonResponse.getString("password"); // Get the password from the response
+                    String role = jsonResponse.getString("role"); // Get the role from the response
+                    boolean isActivated = jsonResponse.getBoolean("activated"); // Get the 'activated' status from the response
 
-                    // Check if the password entered matches the password from the server
+                    // Check if the password matches, the user is activated, and the role is "Customer"
                     Handler mainHandler = new Handler(Looper.getMainLooper());
-                    if (retrievedPassword.equals(password)) {
+                    if (retrievedPassword.equals(password) && isActivated && role.equals("Customer")) {
                         // Login successful
                         mainHandler.post(() -> {
                             Toast.makeText(CustomerLoginActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
@@ -105,6 +107,12 @@ public class CustomerLoginActivity extends AppCompatActivity {
                             startActivity(intent);
                             finish();
                         });
+                    } else if (!isActivated) {
+                        // User is not activated
+                        mainHandler.post(() -> Toast.makeText(CustomerLoginActivity.this, "Account not activated", Toast.LENGTH_SHORT).show());
+                    } else if (!role.equals("Customer")) {
+                        // User is not a customer
+                        mainHandler.post(() -> Toast.makeText(CustomerLoginActivity.this, "Access denied: Not a customer", Toast.LENGTH_SHORT).show());
                     } else {
                         // Password mismatch
                         mainHandler.post(() -> Toast.makeText(CustomerLoginActivity.this, "Incorrect Password", Toast.LENGTH_SHORT).show());
@@ -123,6 +131,7 @@ public class CustomerLoginActivity extends AppCompatActivity {
             }
         });
     }
+
 
     private void setupUiForImmersiveEdgeToEdge(View view) {
         ViewCompat.setOnApplyWindowInsetsListener(view, (v, insets) -> {
