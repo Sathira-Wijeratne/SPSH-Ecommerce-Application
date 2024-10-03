@@ -19,6 +19,8 @@ namespace SPSH_Ecommerce_Application.Services
     {
         private readonly IMongoDatabase _database;
 
+        //Methods to initiate connections with collections referenced from - https://www.thecodebuzz.com/mongodb-c-driver-net-core-examples-getting-started/
+
         public MongoDBService(IOptions<MongoDBSettings> mongoDBSettings)
         {
             var client = new MongoClient(mongoDBSettings.Value.ConnectionString);

@@ -12,6 +12,7 @@ using MongoDB.Bson.Serialization.Attributes;
 
 namespace SPSH_Ecommerce_Application.Models
 {
+    //General idea for Model Structure and attributes used are referenced from - https://code-maze.com/getting-started-aspnetcore-mongodb/
     public class User
     {
         [BsonId] // Maps this property to the MongoDB _id field
