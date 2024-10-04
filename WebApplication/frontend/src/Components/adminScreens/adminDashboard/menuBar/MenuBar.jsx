@@ -48,6 +48,12 @@ const MenuBar = () => {
       navigate("/Admin/ProductManagement");
     };
 
+    // Function to handle logout
+  const onClickLogout = () => {
+    sessionStorage.clear();
+    navigate("/"); // Redirect to the login page after logout
+  };
+
   return (
     <div className="menu">
       <div className="logo">
@@ -74,7 +80,6 @@ const MenuBar = () => {
 
         {role !== "CSR" ? (
           <>
-            {/* Vendor Management Menu with Sub-Menus */}
             <div className="item" onClick={toggleSubMenuForVendor}>
               Vendor Management
             </div>
@@ -103,12 +108,9 @@ const MenuBar = () => {
         )}
 
         {role !== "CSR" ? (
-          <>
-            {/* <a href="#" className="item">Vendor Management</a> */}
-            <a href="#" className="item" onClick={onClickProductManagement}>
-              Product Management
-            </a>
-          </>
+          <a href="#" className="item" onClick={onClickProductManagement}>
+            Product Management
+          </a>
         ) : (
           <></>
         )}
@@ -116,6 +118,11 @@ const MenuBar = () => {
         <a href="#" className="item" onClick={onClickAllOrderManagement}>
           Order Management
         </a>
+      </div>
+
+      {/* Logout option */}
+      <div className="logout" onClick={onClickLogout}>
+        Logout
       </div>
     </div>
   );
