@@ -27,7 +27,10 @@
     justify-content: flex-start;
     box-sizing: border-box;
     overflow: auto;
-    margin-left: 0; /* Add margin to avoid overlap with sidebar */
+    position: absolute;
+    width: 80%;
+    top: 0px; /* Positions the container 30px below the top of its nearest positioned ancestor */
+    left: 280px; /* You can adjust this based on the layout */
   }
   
   /* Table and Title Styling */
