@@ -8,6 +8,7 @@ import android.os.Looper;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -29,6 +30,7 @@ public class CustomerLoginActivity extends AppCompatActivity {
     private EditText emailEditText, passwordEditText;
     private Button loginButton;
     private ExecutorService executorService;
+    private TextView createAccountText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +45,14 @@ public class CustomerLoginActivity extends AppCompatActivity {
 
         // Initialize ExecutorService for background tasks
         executorService = Executors.newSingleThreadExecutor();
+        createAccountText = findViewById(R.id.createAccountText);
 
+        // Set an OnClickListener on the "Create Account" text
+        createAccountText.setOnClickListener(v -> {
+            // Redirect to the Sign-Up page (CustomerSignUpActivity)
+            Intent intent = new Intent(CustomerLoginActivity.this, CustomerSignUpActivity.class);
+            startActivity(intent);
+        });
         // Set OnClickListener for Login button
         loginButton.setOnClickListener(v -> {
             String email = emailEditText.getText().toString().trim();
