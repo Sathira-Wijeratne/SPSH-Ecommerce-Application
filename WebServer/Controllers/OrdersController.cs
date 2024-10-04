@@ -268,5 +268,19 @@ namespace SPSH_Ecommerce_Application.Controllers
             return Ok(orders);
         }
 
+        // Retrieves orders by vendor and status
+        [HttpGet("get-by-vendor-status/{vendorEmail}/{status}")]
+        public async Task<ActionResult<Order>> GetByVendorStatus(string vendorEmail, string status)
+        {
+            var ordersCollection = _mongoDBService.GetOrdersCollection();
+            var orders = await ordersCollection.Find(o => o.VendorEmail == vendorEmail && o.Status == status).ToListAsync();
+            if (orders == null)
+            {
+                return NotFound(new { message = "Orders not found" });
+            }
+
+            return Ok(orders);
+        }
+
     }
 }
