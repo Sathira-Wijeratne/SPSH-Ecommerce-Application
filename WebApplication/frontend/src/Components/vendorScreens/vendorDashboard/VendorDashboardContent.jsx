@@ -1,5 +1,5 @@
 import React from "react";
-// import { BiNotification } from 'react-icons/bi';
+import { BiNotification } from 'react-icons/bi';
 import './VendorDashboardContent.css'
 
 const VendorDashboardContent = () => {
@@ -11,9 +11,9 @@ const VendorDashboardContent = () => {
             <div className="header--activity">
                 <div className="profile">
                 </div>
-                {/* <div className="notify">
+                <div className="notify">
                     <BiNotification />
-                </div> */}
+                </div>
             </div>
             </div>
 
