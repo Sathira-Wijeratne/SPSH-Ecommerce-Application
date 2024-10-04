@@ -109,7 +109,7 @@ const OrderManagement = () => {
       <AdminMenuBar />
 
       <div className="order-management--content">
-        <h1 className="header-title">Manage Orders</h1>
+        <h1 className="header">Manage Orders</h1>
         <table className="order-table">
           <thead>
             <tr>
@@ -136,14 +136,14 @@ const OrderManagement = () => {
                       className="deliver-btn"
                       onClick={() => markAsCompleted(order)}
                     >
-                      Mark as Completed
+                      Completed
                     </button>
                   ) : order.status === "Requested to cancel" ? (
                     <button
                       className="cancel-btn"
                       onClick={() => markAsCancelled(order.orderId)}
                     >
-                      Cancel Order
+                      Cancel
                     </button>
                   ) : (
                     <span>-</span>

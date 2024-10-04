@@ -7,9 +7,10 @@
   overflow: hidden; /* Prevent any overflow */
 }
 
-.header-title {
-  color: #526d82;
+.order-management--content .header {
+  color: #223958;
 }
+
 
 /* Sidebar Menu */
 .menu {
@@ -32,6 +33,9 @@
   overflow-y: auto;
   height: 100vh; /* Full height of the viewport */
   overflow-x: hidden; /* Prevent horizontal overflow */
+  position: absolute;
+  top: 0px; /* Positions the container 30px below the top of its nearest positioned ancestor */
+  left: 250px; /* You can adjust this based on the layout */
 }
 
 /* Title styling */
