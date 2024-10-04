@@ -13,15 +13,15 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.OutputStream;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.concurrent.ExecutorService;
@@ -100,6 +100,10 @@ public class CartDetailsActivity extends AppCompatActivity {
                 // Add the cart item card to the layout
                 addCartItemCard(productId, productName, productPrice, productQty, productImage);
             }
+
+            // After all the cart items are added, add the "Pay Now" button
+            addPayNowButton();
+
         } catch (JSONException e) {
             e.printStackTrace();
             showToast("Failed to parse cart items");
@@ -157,6 +161,23 @@ public class CartDetailsActivity extends AppCompatActivity {
 
             // Add the card to the main container (cartContainer)
             cartContainer.addView(cardLayout);
+        });
+    }
+
+    // Method to dynamically add the "Pay Now" button
+    private void addPayNowButton() {
+        new Handler(Looper.getMainLooper()).post(() -> {
+            Button payNowButton = new Button(this);
+            payNowButton.setText("Pay Now");
+            payNowButton.setLayoutParams(new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT
+            ));
+            payNowButton.setOnClickListener(v -> {
+                showToast("Proceeding to payment...");
+                // Handle payment logic here or redirect to the payment page
+            });
+            cartContainer.addView(payNowButton);
         });
     }
 
