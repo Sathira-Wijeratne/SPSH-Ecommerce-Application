@@ -49,66 +49,67 @@ const ProductCategory = () => {
   };
 
   return (
-    <div className="category-container">
+    <div>
       <MenuBar />
+      <div className="category-container">
+        <div className="add-category-form">
+          <h1>Add New Category</h1>
+          <form onSubmit={handleAddCategory}>
+            <input
+              type="text"
+              value={newCategory}
+              onChange={(e) => setNewCategory(e.target.value)}
+              placeholder="Enter category name"
+              required
+            />
+            <button type="submit">Add Category</button>
+          </form>
+        </div>
 
-      <div className="add-category-form">
-        <h1>Add New Category</h1>
-        <form onSubmit={handleAddCategory}>
-          <input
-            type="text"
-            value={newCategory}
-            onChange={(e) => setNewCategory(e.target.value)}
-            placeholder="Enter category name"
-            required
-          />
-          <button type="submit">Add Category</button>
-        </form>
-      </div>
-
-      <h1 className="category-title">Product Categories</h1>
-      <table className="category-table">
-        <thead>
-          <tr>
-            <th>Category Name</th>
-            <th>Status</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {categories.map((category) => (
-            <tr key={category.id}>
-              <td>{category.categoryName}</td>
-              {category.isActive === true ? <td>Active</td> : <td>Inactive</td>}
-              <td>
-                {category.isActive === true ? (
-                  <FaToggleOn
-                    className="toggle-icon"
-                    onClick={() =>
-                      toggleCategoryStatus(
-                        category.id,
-                        category.categoryName,
-                        false
-                      )
-                    }
-                  />
-                ) : (
-                  <FaToggleOff
-                    className="toggle-icon"
-                    onClick={() =>
-                      toggleCategoryStatus(
-                        category.id,
-                        category.categoryName,
-                        true
-                      )
-                    }
-                  />
-                )}
-              </td>
+        <h1 className="category-title">Product Categories</h1>
+        <table className="category-table">
+          <thead>
+            <tr>
+              <th>Category Name</th>
+              <th>Status</th>
+              <th>Actions</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {categories.map((category) => (
+              <tr key={category.id}>
+                <td>{category.categoryName}</td>
+                {category.isActive === true ? <td>Active</td> : <td>Inactive</td>}
+                <td>
+                  {category.isActive === true ? (
+                    <FaToggleOn
+                      className="toggle-icon"
+                      onClick={() =>
+                        toggleCategoryStatus(
+                          category.id,
+                          category.categoryName,
+                          false
+                        )
+                      }
+                    />
+                  ) : (
+                    <FaToggleOff
+                      className="toggle-icon"
+                      onClick={() =>
+                        toggleCategoryStatus(
+                          category.id,
+                          category.categoryName,
+                          true
+                        )
+                      }
+                    />
+                  )}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 };
