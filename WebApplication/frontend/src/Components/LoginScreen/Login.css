@@ -48,7 +48,7 @@
     font-size: 16px;
 }
 
-.Wrapper button{
+.Wrapper button {
     width: 100%;
     height: 45px;
     background: #fff;
@@ -60,7 +60,15 @@
     font-size: 16px;
     color: #333;
     font-weight: 700;
+    transition: background-color 0.3s ease; /* Smooth transition effect */
 }
+
+/* Hover state to change background color to light navy blue */
+.Wrapper button:hover {
+    background-color: #5a74a6; /* Light navy blue */
+    color: #fff; /* Changes text color to white on hover */
+}
+
 
 .Wrapper .register-Link{
     font-size: 14.5px ;
