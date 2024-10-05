@@ -16,6 +16,15 @@
         android:theme="@style/Theme.EAD_Mobile_App"
         tools:targetApi="31">
         <activity
+            android:name=".AllActivityPageActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ViewCustomerProfileActivity"
+            android:exported="false" />
+        <activity
+            android:name=".EditCustomerProfileActivity"
+            android:exported="false" />
+        <activity
             android:name=".CartDetailsActivity"
             android:exported="false" />
         <activity
