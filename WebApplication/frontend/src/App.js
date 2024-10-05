@@ -9,7 +9,9 @@ import NewVendor from "./Components/adminScreens/vendorManagement/newVendor/NewV
 import ExisitingVendor from "./Components/adminScreens/vendorManagement/existingVendor/AllVendors";
 import OrderManagement from "./Components/adminScreens/orderManagement/OrderManagement";
 import ProductCategory from "./Components/adminScreens/productManagement/ProductCategories";
-import UserDetails from "./Components/adminScreens/userManagement/EditViewuser"
+import UserDetails from "./Components/adminScreens/userManagement/EditViewuser";
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 // Vendor Management
 import VendorDashboard from "./Components/vendorScreens/vendorDashboard/VendorDashboard";
