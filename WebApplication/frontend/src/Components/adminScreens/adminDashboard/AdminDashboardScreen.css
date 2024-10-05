@@ -16,6 +16,15 @@
     justify-content: space-between;
   }
   
+  .dashboardsubheading {
+    font-family: 'Roboto', sans-serif; /* Use Google font */
+    font-size: 2rem; /* Adjust the size based on your design */
+    font-weight: 700; /* Bold heading */
+    color: #1f3a5f; /* Navy blue shade */
+    text-align: left; /* Align text to the left */
+    margin-bottom: 20px; /* Add space after the heading */
+  }
+  
   /* Main content area */
   .dashboard--content {
     flex-grow: 1; /* Take up the remaining space */

@@ -49,7 +49,7 @@ const AdminDashboard = () => {
         {/* Conditionally render Pending Orders table */}
         {pendingOrders.length > 0 && (
           <>
-            <h2>Pending Orders</h2>
+            <h3 className="dashboardsubheading">Pending Orders</h3>
             <table className="dashboard-table">
               <thead>
                 <tr>
@@ -78,7 +78,7 @@ const AdminDashboard = () => {
         {/* Conditionally render Low Stock Items table */}
         {lowStockItems.length > 0 && (
           <>
-            <h2>Low Stock Items</h2>
+            <h3 className="dashboardsubheading">Low Stock Items</h3>
             <table className="dashboard-table">
               <thead>
                 <tr>
