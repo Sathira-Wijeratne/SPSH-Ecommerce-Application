@@ -1,80 +1,80 @@
-/* Wrapper for the stock management screen */
+/* Wrapper around the entire content, including the sidebar and main area */
 .stock-management {
-    display: flex;
-    width: 70vw;
-    height: 100vh;
-    box-sizing: border-box;
-    overflow: hidden;
-  }
-  
-  /* Content area next to the MenuBar */
+  display: flex;
+  height: 100vh; /* Full viewport height */
+  width: 70vw; /* Full viewport width */
+  background-color: #fff; /* Light background color similar to the dashboard */
+}
+
+/* Sidebar menu styling */
+.menu {
+  width: 250px;
+  flex-shrink: 0;
+  padding: 20px;
+  height: 100vh;
+  box-sizing: border-box;
+  background-color: #f1f1f1;
+  border-radius: 10px;
+  z-index: 1;
+  overflow: auto;
+}
+
+/* Content area for stock management */
+.stock-management--content {
+  flex-grow: 1;
+  background: #fff;
+  margin: 20px;
+  border-radius: 20px;
+  padding: 2rem;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Soft shadow for content */
+  overflow: auto;
+  box-sizing: border-box;
+}
+
+/* Page header */
+.header-title {
+  font-size: 24px;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+/* Stock Table */
+.stock-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.stock-table th, .stock-table td {
+  padding: 15px;
+  text-align: left;
+  font-size: 16px;
+}
+
+/* Stock value styling */
+.low-stock {
+  color: red;
+  font-weight: bold;
+}
+
+/* Remove button */
+.remove-btn {
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 14px;
+  transition: background-color 0.3s ease;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
   .stock-management--content {
-    width: calc(100vw - 250px); /* Take the remaining width after the sidebar */
-    padding: 20px;
-    background-color: #f5f7fa;
-    overflow-y: auto;
-    box-sizing: border-box;
+      padding: 1rem;
   }
-  
-  /* Heading */
-  .stock-management--content h1 {
-    font-size: 24px;
-    margin-bottom: 20px;
-    color: #333;
+
+  .stock-table th, .stock-table td {
+      padding: 10px;
   }
-  
-  /* Stock table styling */
-  .stock-table {
-    width: 100%;
-    border-collapse: collapse;
-    background-color: #fff;
-    border-radius: 10px;
-    overflow: hidden;
-    table-layout: auto;
-  }
-  
-  .stock-table th,
-  .stock-table td {
-    padding: 15px;
-    text-align: left;
-    border-bottom: 1px solid #ddd;
-  }
-  
-  .stock-table th {
-    background-color: #f8f8f8;
-    font-weight: bold;
-    color: #555;
-  }
-  
-  .stock-table td {
-    color: #333;
-  }
-  
-  .stock-table tr:nth-child(even) {
-    background-color: #f9f9f9;
-  }
-  
-  .stock-table tr:hover {
-    background-color: #f1f1f1;
-  }
-  
-  /* Button to remove stock */
+
   .remove-btn {
-    padding: 8px 12px;
-    background-color: #d9534f;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
+      padding: 8px 12px;
   }
-  
-  .remove-btn:hover {
-    background-color: #c9302c;
-  }
-  
-  /* Low stock warning */
-  .low-stock {
-    color: #d9534f;
-    font-weight: bold;
-  }
-  
+}
