@@ -8,7 +8,7 @@ const DashboardContent = ({ pendingOrders, lowStockItems }) => {
 
   return (
     <div className="content--header">
-      <h1 className="header-title">Dashboard</h1>
+      <h1 className="hello">Dashboard</h1>
       <div className="header--activity">
         <div className="profile"></div>
         <div className="notify">

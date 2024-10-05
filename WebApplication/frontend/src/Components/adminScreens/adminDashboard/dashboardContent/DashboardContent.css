@@ -56,3 +56,9 @@
     content: "";
   }
   
+  .hello {
+    font-family: 'YourGoogleFontName', sans-serif; /* Replace with your imported font name */
+    font-size: 2.5rem; /* Adjust the size to your preference */
+    font-weight: 700; /* Bold */
+    color: #607894; /* Light navy blue shade */
+  }

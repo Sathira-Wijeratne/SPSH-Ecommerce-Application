@@ -1,14 +1,13 @@
 /* Container styling */
-.user-list-container {
-    background: #fff;
-    padding: 2rem;
-    border-radius: 10px;
-    width: 200px;
-    height: 850px;
-    max-width: 1500px;
-    margin: 2rem auto;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+.allinfocont{
+  width: 1500px;
+  height: 850px;
+  background: #fff;
+  position: relative;
+  left: 5%;
+  box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.1);
 }
+
 
 /* Table styling */
 .user-table {
