@@ -86,17 +86,22 @@ input[type="checkbox"] {
 
 /* Submit button styling */
 .submit-btn {
-    background-color: #27374d;
-    color: #dde6ed;
-    padding: 12px 20px;
-    border: none;
-    border-radius: 5px;
-    font-size: 1rem;
-    font-weight: 600;
-    cursor: pointer;
-    width: 10%;
-    transition: background-color 0.3s ease-in-out;
-}
+    background-color: #436292 !important;
+    color: #dde6ed !important;
+    padding: 12px 20px !important;
+    border: none !important;
+    border-radius: 5px !important;
+    font-size: 1rem !important;
+    font-weight: 600 !important;
+    cursor: pointer !important;
+    width: 10% !important;
+    transition: background-color 0.3s ease-in-out !important;
+  }
+  
+  .submit-btn:hover {
+    background-color: #1e2d43 !important;
+  }
+  
 
 .submit-btn:hover {
     background-color: #1e2d43;
