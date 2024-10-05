@@ -41,7 +41,7 @@ const NewVendor = () => {
     <div className="dashboard">
       <MenuBar />
       <div className="form-container">
-        <h1>Create New Vendor</h1>
+        <h1 className="hello">Create New Vendor</h1>
         <form onSubmit={handleSubmit}>
           <div className="form-group">
             <label>Name:</label>

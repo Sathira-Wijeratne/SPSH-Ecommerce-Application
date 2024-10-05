@@ -66,7 +66,7 @@ const EditViewuser = () => {
   return (
     <div className="user-details-container">
       <MenuBar />
-      <h1>{isEditing ? "Edit User" : "View User"}</h1>
+      <h1 className="hello">{isEditing ? "Edit User" : "View User"}</h1>
       <form onSubmit={handleSubmit}>
         <div className="form-group">
           <label>Name:</label>
