@@ -53,7 +53,7 @@ const ProductCategory = () => {
       <MenuBar />
       <div className="category-container">
         <div className="add-category-form">
-          <h1>Add New Category</h1>
+          <h1 className="hello">Add New Category</h1>
           <form onSubmit={handleAddCategory}>
             <input
               type="text"
@@ -61,7 +61,9 @@ const ProductCategory = () => {
               onChange={(e) => setNewCategory(e.target.value)}
               placeholder="Enter category name"
               required
+              style={{ marginBottom: "20px" }}
             />
+           
             <button type="submit">Add Category</button>
           </form>
         </div>
