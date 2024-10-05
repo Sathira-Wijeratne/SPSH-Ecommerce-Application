@@ -30,9 +30,9 @@ const AddProducts = () => {
         // Set next product ID
         setProductId(
           "P" +
-            (Number(res1.data[0].productId.substring(1)) + 1)
-              .toString()
-              .padStart(3, "0")
+          (Number(res1.data[0].productId.substring(1)) + 1)
+            .toString()
+            .padStart(3, "0")
         );
 
         axios
@@ -206,7 +206,7 @@ const AddProducts = () => {
             />
           </div>
 
-          <div className="form-group">
+          <div className="form-group full-width">
             <label>Product Image</label>
             <input
               type="file"
@@ -228,10 +228,13 @@ const AddProducts = () => {
             )}
           </div>
 
-          <button type="submit" className="btn-submit">
-            Add Product
-          </button>
+          <div className="form-group full-width">
+            <button type="submit" className="btn-submit">
+              Add Product
+            </button>
+          </div>
         </form>
+
       </div>
     </div>
   );
