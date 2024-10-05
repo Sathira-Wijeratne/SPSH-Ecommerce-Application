@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -21,10 +22,10 @@ import java.util.concurrent.Executors;
 
 public class CustomerSignUpActivity extends AppCompatActivity {
 
-    private EditText emailEditText, passwordEditText, confirmPasswordEditText;
+    private EditText emailEditText, passwordEditText, confirmPasswordEditText,nameEditText;
     private Button signUpButton, loginButton;
     private ExecutorService executorService;
-
+    private CheckBox termsCheckBox;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,7 +37,8 @@ public class CustomerSignUpActivity extends AppCompatActivity {
         confirmPasswordEditText = findViewById(R.id.confirmPasswordEditText);
         signUpButton = findViewById(R.id.signupButton);
         loginButton = findViewById(R.id.loginButton);
-
+        termsCheckBox = findViewById(R.id.termsCheckBox);
+        nameEditText = findViewById(R.id.nameEditText);
         // Initialize ExecutorService
         executorService = Executors.newSingleThreadExecutor();
 
@@ -71,6 +73,10 @@ public class CustomerSignUpActivity extends AppCompatActivity {
             Toast.makeText(CustomerSignUpActivity.this, "Passwords do not match", Toast.LENGTH_SHORT).show();
             return false;
         }
+        if (!termsCheckBox.isChecked()) {
+            Toast.makeText(CustomerSignUpActivity.this, "Please agree to the terms and conditions.", Toast.LENGTH_SHORT).show();
+            return false;
+        }
 
         return true;
     }
@@ -98,7 +104,7 @@ public class CustomerSignUpActivity extends AppCompatActivity {
                 // Build the JSON payload
                 JSONObject jsonParam = new JSONObject();
                 jsonParam.put("Id", "");
-                jsonParam.put("Name", "Tree"); // Default name or pass user's name if available
+                jsonParam.put("Name",nameEditText ); // Default name or pass user's name if available
                 jsonParam.put("Role", "Customer"); // Default role as 'Customer'
                 jsonParam.put("Email", email);
                 jsonParam.put("Password", password);
