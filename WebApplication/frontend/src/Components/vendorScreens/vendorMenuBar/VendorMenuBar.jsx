@@ -67,6 +67,13 @@ const VendorMenuBar = () => {
           Stock Management
         </a>
       </div>
+
+      {/* Logout button positioned at the bottom */}
+      <div className="logout-section">
+        <a href="#" className="item logout" onClick={onClickLogout}>
+          Logout
+        </a>
+      </div>
     </div>
   );
 };
