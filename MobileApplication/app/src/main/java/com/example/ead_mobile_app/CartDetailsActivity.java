@@ -259,7 +259,7 @@ private void addCartItemCard(String productId, String productName, int productPr
     private void addPayNowButton() {
         new Handler(Looper.getMainLooper()).post(() -> {
             Button payNowButton = new Button(this);
-            payNowButton.setText("Pay Now");
+            payNowButton.setText("Place Order");
             payNowButton.setLayoutParams(new LinearLayout.LayoutParams(
                     LinearLayout.LayoutParams.MATCH_PARENT,
                     LinearLayout.LayoutParams.WRAP_CONTENT
