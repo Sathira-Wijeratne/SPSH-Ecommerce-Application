@@ -57,6 +57,12 @@ public class CartDetailsActivity extends AppCompatActivity {
     private void fetchCartItems(String customerEmail) {
         executorService.execute(() -> {
             try {
+                // Clear the cartContainer and cartItems before fetching new items
+                new Handler(Looper.getMainLooper()).post(() -> {
+                    cartContainer.removeAllViews();  // Clear previous views
+                });
+                cartItems.clear();  // Clear previous cart items
+
                 String apiUrl = "http://192.168.137.1:2030/api/Carts/" + customerEmail;
                 URL url = new URL(apiUrl);
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
@@ -107,41 +113,148 @@ public class CartDetailsActivity extends AppCompatActivity {
         }
     }
 
-    private void addCartItemCard(String productId, String productName, int productPrice, int productQty, Bitmap productImage) {
-        new Handler(Looper.getMainLooper()).post(() -> {
-            LinearLayout cardLayout = new LinearLayout(this);
-            cardLayout.setOrientation(LinearLayout.VERTICAL);
-            cardLayout.setPadding(16, 16, 16, 16);
-            cardLayout.setGravity(Gravity.CENTER_VERTICAL);
-            cardLayout.setBackgroundResource(android.R.drawable.dialog_holo_light_frame);
-            cardLayout.setLayoutParams(new LinearLayout.LayoutParams(
-                    LinearLayout.LayoutParams.MATCH_PARENT,
-                    LinearLayout.LayoutParams.WRAP_CONTENT
-            ));
+//    private void addCartItemCard(String productId, String productName, int productPrice, int productQty, Bitmap productImage) {
+//        new Handler(Looper.getMainLooper()).post(() -> {
+//            LinearLayout cardLayout = new LinearLayout(this);
+//            cardLayout.setOrientation(LinearLayout.VERTICAL);
+//            cardLayout.setPadding(16, 16, 16, 16);
+//            cardLayout.setGravity(Gravity.CENTER_VERTICAL);
+//            cardLayout.setBackgroundResource(android.R.drawable.dialog_holo_light_frame);
+//            cardLayout.setLayoutParams(new LinearLayout.LayoutParams(
+//                    LinearLayout.LayoutParams.MATCH_PARENT,
+//                    LinearLayout.LayoutParams.WRAP_CONTENT
+//            ));
+//
+//            ImageView productImageView = new ImageView(this);
+//            productImageView.setImageBitmap(productImage);
+//            productImageView.setLayoutParams(new LinearLayout.LayoutParams(300, 300));
+//            cardLayout.addView(productImageView);
+//
+//            TextView nameTextView = new TextView(this);
+//            nameTextView.setText(productName);
+//            nameTextView.setTextSize(18);
+//            cardLayout.addView(nameTextView);
+//
+//            TextView priceTextView = new TextView(this);
+//            priceTextView.setText("Price: $" + productPrice);
+//            priceTextView.setTextSize(16);
+//            cardLayout.addView(priceTextView);
+//
+//            TextView qtyTextView = new TextView(this);
+//            qtyTextView.setText("Quantity: " + productQty);
+//            qtyTextView.setTextSize(14);
+//            cardLayout.addView(qtyTextView);
+//
+//            cartContainer.addView(cardLayout);
+//        });
+//    }
+private void addCartItemCard(String productId, String productName, int productPrice, int productQty, Bitmap productImage) {
+    new Handler(Looper.getMainLooper()).post(() -> {
+        LinearLayout cardLayout = new LinearLayout(this);
+        cardLayout.setOrientation(LinearLayout.HORIZONTAL);  // Horizontal layout for item details and delete button
+        cardLayout.setPadding(16, 16, 16, 16);
+        cardLayout.setGravity(Gravity.CENTER_VERTICAL);
+        cardLayout.setBackgroundResource(android.R.drawable.dialog_holo_light_frame);
+        cardLayout.setLayoutParams(new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT
+        ));
 
-            ImageView productImageView = new ImageView(this);
-            productImageView.setImageBitmap(productImage);
-            productImageView.setLayoutParams(new LinearLayout.LayoutParams(300, 300));
-            cardLayout.addView(productImageView);
+        // Image and text on the left
+        LinearLayout itemDetailsLayout = new LinearLayout(this);
+        itemDetailsLayout.setOrientation(LinearLayout.VERTICAL);
+        itemDetailsLayout.setLayoutParams(new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 2)); // Take 2/3 of width
 
-            TextView nameTextView = new TextView(this);
-            nameTextView.setText(productName);
-            nameTextView.setTextSize(18);
-            cardLayout.addView(nameTextView);
+        ImageView productImageView = new ImageView(this);
+        productImageView.setImageBitmap(productImage);
+        productImageView.setLayoutParams(new LinearLayout.LayoutParams(300, 300));
+        itemDetailsLayout.addView(productImageView);
 
-            TextView priceTextView = new TextView(this);
-            priceTextView.setText("Price: $" + productPrice);
-            priceTextView.setTextSize(16);
-            cardLayout.addView(priceTextView);
+        TextView nameTextView = new TextView(this);
+        nameTextView.setText(productName);
+        nameTextView.setTextSize(18);
+        itemDetailsLayout.addView(nameTextView);
 
-            TextView qtyTextView = new TextView(this);
-            qtyTextView.setText("Quantity: " + productQty);
-            qtyTextView.setTextSize(14);
-            cardLayout.addView(qtyTextView);
+        TextView priceTextView = new TextView(this);
+        priceTextView.setText("Price: $" + productPrice);
+        priceTextView.setTextSize(16);
+        itemDetailsLayout.addView(priceTextView);
 
-            cartContainer.addView(cardLayout);
+        TextView qtyTextView = new TextView(this);
+        qtyTextView.setText("Quantity: " + productQty);
+        qtyTextView.setTextSize(14);
+        itemDetailsLayout.addView(qtyTextView);
+
+        // Right side: overall price and delete button
+        LinearLayout rightSideLayout = new LinearLayout(this);
+        rightSideLayout.setOrientation(LinearLayout.VERTICAL);
+        rightSideLayout.setGravity(Gravity.CENTER_VERTICAL);
+        rightSideLayout.setLayoutParams(new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1)); // Take 1/3 of width
+
+        // Calculate overall price (price * quantity)
+        int overallPrice = productPrice * productQty;
+        TextView overallPriceTextView = new TextView(this);
+        overallPriceTextView.setText("Total: $" + overallPrice);
+        overallPriceTextView.setTextSize(16);
+        rightSideLayout.addView(overallPriceTextView);
+
+        // Delete button
+        Button deleteButton = new Button(this);
+        deleteButton.setText("Delete");
+        deleteButton.setLayoutParams(new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.WRAP_CONTENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT
+        ));
+
+        deleteButton.setOnClickListener(v -> {
+            // Logic to handle item deletion from the cart
+            removeCartItem(productId);
+        });
+
+        rightSideLayout.addView(deleteButton);
+
+        // Add both item details and right side layout to card layout
+        cardLayout.addView(itemDetailsLayout);
+        cardLayout.addView(rightSideLayout);
+
+        // Add the complete card layout to the container
+        cartContainer.addView(cardLayout);
+    });
+}
+
+    // Method to remove cart item (this could be further implemented to remove item from backend)
+    private void removeCartItem(String productId) {
+        executorService.execute(() -> {
+            try {
+                // Use the DELETE API to remove the product from the cart
+                String apiUrl = "http://192.168.137.1:2030/api/Carts/" + customerEmail + "/" + productId;
+                URL url = new URL(apiUrl);
+                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                connection.setRequestMethod("DELETE");
+                connection.setRequestProperty("Accept", "application/json");
+                connection.connect();
+
+                int responseCode = connection.getResponseCode();
+                if (responseCode == HttpURLConnection.HTTP_OK) {
+                    showToast("Item removed from cart.");
+                    // Remove the item from the cart list and update UI
+                    runOnUiThread(() -> {
+                        // Remove the item from the list and refresh the UI
+                        cartContainer.removeAllViews();
+                        fetchCartItems(customerEmail); // Fetch the updated cart items again
+                    });
+                } else {
+                    showToast("Failed to remove item from cart.");
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+                showToast("Error: " + e.getMessage());
+            }
         });
     }
+
+
+
 
     private void addPayNowButton() {
         new Handler(Looper.getMainLooper()).post(() -> {
