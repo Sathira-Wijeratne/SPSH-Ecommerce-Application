@@ -118,8 +118,8 @@ const AddProducts = () => {
   return (
     <div className="content">
       <MenuBar />
-      <div className="container mt-5"> {/* Use Bootstrap container */}
-        <h2 className="text-center mb-4">Add New Product</h2>
+      <div> {/* Use Bootstrap container */}
+        <h1 className="hello">Add New Product</h1>
         <form onSubmit={handleSubmit} className="row g-3"> {/* Bootstrap grid for form layout */}
           <div className="col-md-6">
             <label className="form-label">Product ID</label>
