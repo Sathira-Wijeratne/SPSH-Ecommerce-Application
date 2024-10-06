@@ -64,16 +64,34 @@
                 android:layout_gravity="center_horizontal"
                 android:paddingBottom="16dp" />
 
-            <!-- Add to Cart button at the bottom -->
-            <Button
-                android:id="@+id/addToCartButton"
-                android:layout_width="match_parent"
+            <!-- Horizontal LinearLayout for quantity input and Add to Cart button -->
+            <LinearLayout
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Add to Cart"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="16dp"
-                android:backgroundTint="@color/purple_500" />
+                android:orientation="horizontal"
+                android:gravity="center">
 
+                <!-- EditText for Quantity Input -->
+                <EditText
+                    android:id="@+id/quantityInput"
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:text="1"
+                    android:gravity="center"
+                    android:layout_marginEnd="8dp" />
+
+                <!-- Add to Cart button -->
+                <Button
+                    android:id="@+id/addToCartButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Add to Cart"
+                    android:backgroundTint="@color/purple_500" />
+
+            </LinearLayout>
+
+            <!-- View Cart button -->
             <Button
                 android:id="@+id/viewCartButton"
                 android:layout_width="wrap_content"

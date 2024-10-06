@@ -162,6 +162,19 @@ public class SingleItemViewActivity extends AppCompatActivity {
     }
 
     private void addToCart() {
+        // Fetch the quantity input by the user
+        EditText quantityInput = findViewById(R.id.quantityInput);
+        int quantity = 1;  // Default value
+
+        try {
+            quantity = Integer.parseInt(quantityInput.getText().toString());
+        } catch (NumberFormatException e) {
+            showToast("Please enter a valid quantity.");
+            return;
+        }
+
+        int finalQuantity = quantity;
+
         executorService.execute(() -> {
             try {
                 String apiUrl = "http://192.168.137.1:2030/api/Carts";
@@ -178,7 +191,7 @@ public class SingleItemViewActivity extends AppCompatActivity {
                 cartData.put("productId", productId);
                 cartData.put("productName", productName);
                 cartData.put("vendorEmail", vendorEmail);
-                cartData.put("productQty", 1);  // Default quantity is 1
+                cartData.put("productQty", finalQuantity);  // Use user-entered quantity
                 cartData.put("productPrice", productPrice);
                 cartData.put("imageBase64", imageBase64);
 
@@ -200,6 +213,7 @@ public class SingleItemViewActivity extends AppCompatActivity {
             }
         });
     }
+
 
     private void submitReview() {
         executorService.execute(() -> {
