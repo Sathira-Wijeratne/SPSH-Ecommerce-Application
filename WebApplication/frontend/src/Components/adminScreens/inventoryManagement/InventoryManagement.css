@@ -1,10 +1,26 @@
-/* Wrapper around the entire content, including the sidebar and main area */
+/* Parent container */
 .stock-management {
   display: flex;
-  height: 100vh; /* Full viewport height */
-  width: 70vw; /* Full viewport width */
-  background-color: #fff; /* Light background color similar to the dashboard */
+  justify-content: center; /* Center the content */
+  width: 100vw; /* Ensure full-width for the parent container */
 }
+
+/* Content area for stock management */
+.stock-management--content {
+  flex-grow: 1; /* Take up the remaining space */
+  padding: 20px;
+  background-color: #f5f7fa;
+  margin-left: 50px; /* Small gap between the sidebar and content */
+  box-sizing: border-box;
+  overflow-y: auto;
+  width: 70vw;
+  height: 100vh; /* Full height of the viewport */
+  overflow-x: hidden; /* Prevent horizontal overflow */
+  position: absolute;
+  top: 0px; /* Positions the container 30px below the top of its nearest positioned ancestor */
+  left: 250px; 
+}
+
 
 /* Sidebar menu styling */
 .menu {
@@ -19,17 +35,6 @@
   overflow: auto;
 }
 
-/* Content area for stock management */
-.stock-management--content {
-  flex-grow: 1;
-  background: #fff;
-  margin: 20px;
-  border-radius: 20px;
-  padding: 2rem;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Soft shadow for content */
-  overflow: auto;
-  box-sizing: border-box;
-}
 
 /* Page header */
 .header-title {
@@ -69,6 +74,7 @@
 @media (max-width: 768px) {
   .stock-management--content {
     padding: 1rem;
+    width: 100%;
   }
 
   .stock-table th,
