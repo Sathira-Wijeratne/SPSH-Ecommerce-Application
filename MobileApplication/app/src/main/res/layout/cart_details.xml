@@ -16,7 +16,21 @@
             android:id="@+id/main"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical" />
+            android:orientation="vertical">
+
+            <!-- Heading for Items in Cart -->
+            <TextView
+                android:id="@+id/cartHeading"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Items in Cart"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:layout_gravity="center_horizontal"
+                android:paddingBottom="16dp" />
+
+            <!-- Cart items will be displayed below -->
+        </LinearLayout>
 
     </ScrollView>
 
