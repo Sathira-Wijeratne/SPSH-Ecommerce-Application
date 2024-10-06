@@ -63,18 +63,6 @@
                 android:layout_gravity="center_horizontal"
                 android:paddingBottom="16dp" />
 
-            <!-- RatingBar below the product details -->
-            <RatingBar
-                android:id="@+id/ratingBar"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:numStars="5"
-                android:stepSize="1.0"
-            android:rating="0"
-            android:isIndicator="false"
-            style="@style/Widget.AppCompat.RatingBar.Indicator"
-            android:layout_gravity="center_horizontal" />
-
             <!-- Add to Cart button at the bottom -->
             <Button
                 android:id="@+id/addToCartButton"
@@ -93,6 +81,66 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="16dp" />
 
+            <!-- Review Button -->
+            <Button
+                android:id="@+id/addReviewButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Add Review"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="16dp" />
+
+            <!-- Review section -->
+            <LinearLayout
+                android:id="@+id/reviewContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone"
+                android:layout_marginTop="16dp">
+
+                <!-- Comment input field -->
+                <EditText
+                    android:id="@+id/commentInput"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Enter your comment"
+                    android:inputType="text"
+                    android:minHeight="48dp"
+                    android:padding="8dp" />
+
+                <!-- Star Rating and Submit button -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginTop="16dp">
+
+                    <!-- Rating bar for stars -->
+                    <RatingBar
+                        android:id="@+id/reviewRatingBar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:numStars="5"
+                        android:stepSize="1.0"
+                        android:rating="0"
+                        android:isIndicator="false"
+                        android:layout_weight="1"
+                        style="@style/Widget.AppCompat.RatingBar.Indicator" />
+
+                    <!-- Submit Review button -->
+                    <Button
+                        android:id="@+id/submitReviewButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Submit Review"
+                        android:layout_weight="1"
+                        android:layout_marginStart="16dp"
+                        android:layout_gravity="center" />
+                </LinearLayout>
+
+            </LinearLayout>
 
         </LinearLayout>
 
