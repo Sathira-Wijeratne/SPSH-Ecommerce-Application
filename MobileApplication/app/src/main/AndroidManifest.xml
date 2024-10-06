@@ -16,6 +16,9 @@
         android:theme="@style/Theme.EAD_Mobile_App"
         tools:targetApi="31">
         <activity
+            android:name=".SingleOrderDetailsActivity"
+            android:exported="false" />
+        <activity
             android:name=".TrackOrdersActivity"
             android:exported="false" />
         <activity
