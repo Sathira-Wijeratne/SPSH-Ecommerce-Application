@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import MenuBar from "../vendorMenuBar/VendorMenuBar";
 import "./InventoryManagement.css"; // Import the CSS
 import axios from "axios";
 import { Button, Table } from 'react-bootstrap'; // Import Bootstrap components
+import MenuBar from "../adminDashboard/menuBar/MenuBar";
 
 const InventoryManagement = () => {
   const [stock, setStock] = useState([]);
@@ -53,7 +53,7 @@ const InventoryManagement = () => {
 
   return (
     <div className="stock-management">
-      <MenuBar /> {/* Sidebar Menu */}
+      <MenuBar/>
       <div className="stock-management--content">
         <h1 className="header-title">Manage Stock</h1>
 
