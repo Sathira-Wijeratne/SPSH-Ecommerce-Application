@@ -54,6 +54,12 @@ const MenuBar = () => {
     navigate("/"); // Redirect to the login page after logout
   };
 
+  //Function to navigate to Inventory management 
+  const onClickInventoryManagement=(e) =>{
+    e.preventDefault();
+    navigate("/Admin/InventoryManagement");
+  };
+
   return (
     <div className="menu">
       <div className="logo">
@@ -72,6 +78,9 @@ const MenuBar = () => {
 
         <a href="#" className="item" onClick={onClickLoadAllUSers}>
           User Management
+        </a>
+        <a href="#" className="item" onClick={onClickAllOrderManagement}>
+          Order Management
         </a>
 
         {role !== "CSR" ? (
@@ -111,9 +120,13 @@ const MenuBar = () => {
           <></>
         )}
 
-        <a href="#" className="item" onClick={onClickAllOrderManagement}>
-          Order Management
+        
+
+        <a href="#" className="item" onClick={onClickInventoryManagement}>
+          Inventory Management
         </a>
+
+
       </div>
 
       {/* Logout option */}
