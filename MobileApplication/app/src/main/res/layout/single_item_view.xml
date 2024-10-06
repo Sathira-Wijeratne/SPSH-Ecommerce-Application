@@ -20,15 +20,7 @@
             android:orientation="vertical"
             android:gravity="center_horizontal">
 
-            <!-- Image at the top -->
-            <ImageView
-                android:id="@+id/productImage"
-                android:layout_width="match_parent"
-                android:layout_height="400dp"
-                android:layout_gravity="center_horizontal"
-                android:scaleType="fitCenter" />
-
-            <!-- TextView for product name -->
+            <!-- TextView for product name (Moved above the ImageView) -->
             <TextView
                 android:id="@+id/productName"
                 android:layout_width="wrap_content"
@@ -36,7 +28,16 @@
                 android:textSize="22sp"
                 android:textStyle="bold"
                 android:layout_gravity="center_horizontal"
-                android:paddingTop="16dp" />
+                android:paddingTop="16dp"
+                android:paddingBottom="16dp" />
+
+            <!-- Image at the top -->
+            <ImageView
+                android:id="@+id/productImage"
+                android:layout_width="match_parent"
+                android:layout_height="400dp"
+                android:layout_gravity="center_horizontal"
+                android:scaleType="fitCenter" />
 
             <!-- TextView for price -->
             <TextView
