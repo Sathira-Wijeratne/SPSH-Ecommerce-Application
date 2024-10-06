@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./InventoryManagement.css"; // Import the CSS
 import axios from "axios";
-import { Button, Table, FormControl } from 'react-bootstrap'; // Import Bootstrap components
+import { Button, Table, FormControl } from "react-bootstrap"; // Import Bootstrap components
 import MenuBar from "../adminDashboard/menuBar/MenuBar";
 
 const InventoryManagement = () => {
@@ -10,12 +10,10 @@ const InventoryManagement = () => {
   const vendorEmail = sessionStorage.getItem("email");
 
   useEffect(() => {
-    axios
-      .get(`http://192.168.137.1:2030/api/Products/stocks-vendor/${vendorEmail}`)
-      .then((res) => {
-        console.log(res.data);
-        setStock(res.data);
-      });
+    axios.get(`http://192.168.137.1:2030/api/Products `).then((res) => {
+      console.log(res.data);
+      setStock(res.data);
+    });
   }, []);
 
   const handleRemoveStock = (productId) => {
@@ -51,9 +49,10 @@ const InventoryManagement = () => {
   };
 
   // Function to filter stock based on search term
-  const filteredStock = stock.filter((product) => 
-    product.productId.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    product.name.toLowerCase().includes(searchTerm.toLowerCase())
+  const filteredStock = stock.filter(
+    (product) =>
+      product.productId.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      product.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   return (
@@ -61,7 +60,7 @@ const InventoryManagement = () => {
       <MenuBar />
       <div className="stock-management--content">
         <h1 className="hello">Manage Stock</h1>
-        
+
         {/* Search Bar */}
         <FormControl
           type="text"
@@ -71,7 +70,9 @@ const InventoryManagement = () => {
           onChange={(e) => setSearchTerm(e.target.value)}
         />
 
-        <Table striped bordered hover className="stock-table"> {/* Bootstrap Table */}
+        <Table striped bordered hover className="stock-table">
+          {" "}
+          {/* Bootstrap Table */}
           <thead>
             <tr>
               <th>Product ID</th>
