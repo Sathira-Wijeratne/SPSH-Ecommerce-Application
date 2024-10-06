@@ -42,13 +42,13 @@ const MenuBar = () => {
     navigate("/Admin/OrderManagement");
   };
 
-    //function to navigate to Product Management
-    const onClickProductManagement = (e) => {
-      e.preventDefault();
-      navigate("/Admin/ProductManagement");
-    };
+  //function to navigate to Product Management
+  const onClickProductManagement = (e) => {
+    e.preventDefault();
+    navigate("/Admin/ProductManagement");
+  };
 
-    // Function to handle logout
+  // Function to handle logout
   const onClickLogout = () => {
     sessionStorage.clear();
     navigate("/"); // Redirect to the login page after logout
@@ -70,13 +70,9 @@ const MenuBar = () => {
           <></>
         )}
 
-        {role !== "CSR" ? (
-          <a href="#" className="item" onClick={onClickLoadAllUSers}>
-            User Management
-          </a>
-        ) : (
-          <></>
-        )}
+        <a href="#" className="item" onClick={onClickLoadAllUSers}>
+          User Management
+        </a>
 
         {role !== "CSR" ? (
           <>
