@@ -1,10 +1,12 @@
 package com.example.ead_mobile_app;
 
 import android.os.Bundle;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -110,14 +112,55 @@ public class OrderHistoryActivity extends AppCompatActivity {
             TextView orderIdTextView = orderCardView.findViewById(R.id.orderIdTextView);
             TextView productNameTextView = orderCardView.findViewById(R.id.productNameTextView);
             TextView productQuantityTextView = orderCardView.findViewById(R.id.productQuantityTextView);
+            LinearLayout buttonsLayout = orderCardView.findViewById(R.id.buttonsLayout);
+            Button editButton = orderCardView.findViewById(R.id.editButton);
+            Button cancelButton = orderCardView.findViewById(R.id.cancelButton);
 
+            // Set the order data
             orderIdTextView.setText("Order ID: " + order.getString("orderId"));
             productNameTextView.setText("Product: " + order.getString("productName"));
             productQuantityTextView.setText("Quantity: " + order.getString("productQuantity"));
 
+            // If the status is "Processing", show the Edit and Cancel buttons
+            if (status.equals("Processing")) {
+                buttonsLayout.setVisibility(View.VISIBLE);  // Show the buttons
+
+                // Add actions for Edit and Cancel buttons
+                editButton.setOnClickListener(v -> {
+                    // Logic to handle edit functionality
+                    handleEditOrder(order);
+                });
+
+                cancelButton.setOnClickListener(v -> {
+                    // Logic to handle cancel functionality
+                    handleCancelOrder(order);
+                });
+            }
+
+            // Add the card to the container
             ordersContainer.addView(orderCardView);
+
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
+
+    private void handleEditOrder(JSONObject order) {
+        // Logic to edit the order
+        String orderId = order.optString("orderId");
+        // You can implement edit functionality here
+        showToast("Edit button clicked for Order ID: " + orderId);
+    }
+
+    private void handleCancelOrder(JSONObject order) {
+        // Logic to cancel the order
+        String orderId = order.optString("orderId");
+        // Implement cancel functionality here
+        showToast("Cancel button clicked for Order ID: " + orderId);
+    }
+
+    private void showToast(String message) {
+        runOnUiThread(() -> Toast.makeText(OrderHistoryActivity.this, message, Toast.LENGTH_SHORT).show());
+    }
+
 }
