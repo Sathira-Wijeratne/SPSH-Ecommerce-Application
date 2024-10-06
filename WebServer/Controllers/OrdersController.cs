@@ -268,5 +268,19 @@ namespace SPSH_Ecommerce_Application.Controllers
             return Ok(orders);
         }
 
+        // Retrieves the next order ID - Developer Senadheera P.V.P.P
+        [HttpGet("get-next-oid")]
+        public async Task<ActionResult<List<Order>>> GetNextOrderID()
+        {
+            var ordersCollection = _mongoDBService.GetOrdersCollection();
+            var sortDefinition = Builders<Order>.Sort.Descending(o => o.OrderId);
+            var orders = await ordersCollection.Find(o => true).Sort(sortDefinition).Limit(1).Project(o => new { o.OrderId }).FirstOrDefaultAsync();
+
+            int nextOid = Int32.Parse(orders.OrderId.Substring(1)) + 1;
+            String newOrderId = "O" + nextOid.ToString("D3");
+
+            return Ok(new { newOid = newOrderId });
+        }
+
     }
 }
