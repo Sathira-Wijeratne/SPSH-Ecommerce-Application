@@ -95,3 +95,70 @@
   border: 1px solid #ccc;
   border-radius: 4px;
 }
+
+/* Dialog box styling */
+.dialog-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5); /* Transparent dark background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.dialog-box {
+  background: #fff;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  width: 400px;
+  max-width: 90%;
+  text-align: center;
+}
+
+.dialog-box h3 {
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+  color: #27374d;
+}
+
+.dialog-box p {
+  margin-bottom: 1.5rem;
+  font-size: 1rem;
+  color: #555;
+}
+
+.dialog-buttons {
+  display: flex;
+  justify-content: space-between;
+}
+
+.dialog-buttons button {
+  width: 45%;
+  padding: 10px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.dialog-buttons button:first-child {
+  background-color: #f44336; /* Delete button color */
+  color: white;
+}
+
+.dialog-buttons button:first-child:hover {
+  background-color: #d63d2b;
+}
+
+.dialog-buttons button:last-child {
+  background-color: #27374d; /* Cancel button color */
+  color: white;
+}
+
+.dialog-buttons button:last-child:hover {
+  background-color: #1e2d43;
+}
