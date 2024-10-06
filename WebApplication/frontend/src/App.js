@@ -13,6 +13,7 @@ import ExisitingVendor from "./Components/adminScreens/vendorManagement/existing
 import OrderManagement from "./Components/adminScreens/orderManagement/OrderManagement";
 import ProductCategory from "./Components/adminScreens/productManagement/ProductCategories";
 import UserDetails from "./Components/adminScreens/userManagement/EditViewuser";
+import NotificationPage from "./Components/adminScreens/notificationManagement/NotificationManagement";
 
 
 
@@ -49,6 +50,7 @@ function App() {
         <Route path="/Admin/ProductManagement" element={<ProductCategory />} />
         <Route path="/Admin/UserManagement/ViewUser/:email" element={<UserDetails />}/>
         <Route path="/Admin/InventoryManagement" element = {<InventoryManagement/>}/>
+        <Route path="/Admin/NotificationPannel" element = {<NotificationPage/>}/>
         
 
 
