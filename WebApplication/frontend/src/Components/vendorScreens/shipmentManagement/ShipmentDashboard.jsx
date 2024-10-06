@@ -72,7 +72,17 @@ const ShipmentDashboard = () => {
       <VendorMenuBar />
 
       <div className="order-management--content">
-        <h1 className="header-title">Manage Orders</h1>
+        <h1
+          style={{
+            fontFamily: "'YourGoogleFontName', sans-serif",
+            fontSize: "2.5rem",
+            fontWeight: 700,
+            color: "#607894"
+          }}
+        >
+          Manage Orders
+        </h1>
+
         <table className="order-table">
           <thead>
             <tr>

@@ -55,7 +55,7 @@ const StockManagement = () => {
     <div className="stock-management">
       <MenuBar /> {/* Sidebar Menu */}
       <div className="stock-management--content">
-        <h1 className="header-title">Manage Stock</h1>
+        <h1 className="hello">Manage Stock</h1>
 
         <Table striped bordered hover className="stock-table"> {/* Bootstrap Table */}
           <thead>
