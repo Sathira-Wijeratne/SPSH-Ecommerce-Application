@@ -116,7 +116,7 @@ public class OrderHistoryActivity extends AppCompatActivity {
             TextView productNameTextView = orderCardView.findViewById(R.id.productNameTextView);
             TextView productQuantityTextView = orderCardView.findViewById(R.id.productQuantityTextView);
             LinearLayout buttonsLayout = orderCardView.findViewById(R.id.buttonsLayout);
-            Button editButton = orderCardView.findViewById(R.id.editButton);
+//            Button editButton = orderCardView.findViewById(R.id.editButton);
             Button cancelButton = orderCardView.findViewById(R.id.cancelButton);
 
             // Set the order data
@@ -129,10 +129,10 @@ public class OrderHistoryActivity extends AppCompatActivity {
                 buttonsLayout.setVisibility(View.VISIBLE);  // Show the buttons
 
                 // Add actions for Edit and Cancel buttons
-                editButton.setOnClickListener(v -> {
-                    // Logic to handle edit functionality
-                    handleEditOrder(order);
-                });
+//                editButton.setOnClickListener(v -> {
+//                    // Logic to handle edit functionality
+//                    handleEditOrder(order);
+//                });
 
                 cancelButton.setOnClickListener(v -> {
                     // Logic to handle cancel functionality
