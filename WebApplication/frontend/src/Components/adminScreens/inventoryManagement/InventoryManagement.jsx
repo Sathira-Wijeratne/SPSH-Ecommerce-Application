@@ -1,18 +1,17 @@
 import React, { useEffect, useState } from "react";
 import "./InventoryManagement.css"; // Import the CSS
 import axios from "axios";
-import { Button, Table } from 'react-bootstrap'; // Import Bootstrap components
+import { Button, Table, FormControl } from 'react-bootstrap'; // Import Bootstrap components
 import MenuBar from "../adminDashboard/menuBar/MenuBar";
 
 const InventoryManagement = () => {
   const [stock, setStock] = useState([]);
+  const [searchTerm, setSearchTerm] = useState(""); // Search term state
   const vendorEmail = sessionStorage.getItem("email");
 
   useEffect(() => {
     axios
-      .get(
-        `http://192.168.137.1:2030/api/Products/stocks-vendor/${vendorEmail}`
-      )
+      .get(`http://192.168.137.1:2030/api/Products/stocks-vendor/${vendorEmail}`)
       .then((res) => {
         console.log(res.data);
         setStock(res.data);
@@ -51,11 +50,26 @@ const InventoryManagement = () => {
     }
   };
 
+  // Function to filter stock based on search term
+  const filteredStock = stock.filter((product) => 
+    product.productId.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    product.name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
   return (
     <div className="stock-management">
-      <MenuBar/>
+      <MenuBar />
       <div className="stock-management--content">
-        <h1 className="header-title">Manage Stock</h1>
+        <h1 className="hello">Manage Stock</h1>
+        
+        {/* Search Bar */}
+        <FormControl
+          type="text"
+          placeholder="Search by Product ID or Name"
+          className="search-bar"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
 
         <Table striped bordered hover className="stock-table"> {/* Bootstrap Table */}
           <thead>
@@ -67,8 +81,8 @@ const InventoryManagement = () => {
             </tr>
           </thead>
           <tbody>
-            {stock.map((product) => (
-              <tr key={product.ProductId}>
+            {filteredStock.map((product) => (
+              <tr key={product.productId}>
                 <td>{product.productId}</td>
                 <td>{product.name}</td>
                 <td>
