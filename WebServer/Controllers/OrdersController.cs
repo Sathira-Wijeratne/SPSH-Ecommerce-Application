@@ -256,7 +256,7 @@ namespace SPSH_Ecommerce_Application.Controllers
             return Ok(orders);
         }
 
-        // Retrieves orders by status and product id
+        // Retrieves orders by status and product id - Developer Senadheera P.V.P.P
         [HttpGet("get-by-status-prodid/{status}/{ProductId}")]
         public async Task<ActionResult<Order>> GetByStatusProdID(string status, string ProductId)
         {
@@ -270,7 +270,7 @@ namespace SPSH_Ecommerce_Application.Controllers
             return Ok(orders);
         }
 
-        // Retrieves orders by vendor and status
+        // Retrieves orders by vendor and status - Developer Senadheera P.V.P.P
         [HttpGet("get-by-vendor-status/{vendorEmail}/{status}")]
         public async Task<ActionResult<Order>> GetByVendorStatus(string vendorEmail, string status)
         {
@@ -283,6 +283,6 @@ namespace SPSH_Ecommerce_Application.Controllers
 
             return Ok(orders);
         }
-
+ 
     }
 }
