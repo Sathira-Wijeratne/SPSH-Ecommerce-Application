@@ -5,35 +5,36 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@android:color/white"
     tools:context=".VendorListActivity">
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:fillViewport="true">
+<ScrollView
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:fillViewport="true">
 
-        <LinearLayout
-            android:id="@+id/vendorContainer"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="16dp">
+<LinearLayout
+    android:id="@+id/vendorContainer"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp">
 
-            <!-- Vendor Details Heading -->
-            <TextView
-                android:id="@+id/vendorHeading"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Vendor Details"
-                android:textSize="24sp"
-                android:textStyle="bold"
-                android:textColor="@android:color/black"
-                android:layout_gravity="center"
-                android:layout_marginBottom="16dp" />
+    <!-- Vendor Details Heading -->
+    <TextView
+        android:id="@+id/vendorHeading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Vendor Details"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:textColor="@android:color/black"
+    android:layout_gravity="center"
+    android:layout_marginBottom="16dp" />
 
-            <!-- Vendor cards will be dynamically added here -->
-        </LinearLayout>
+    <!-- Vendor cards will be dynamically added here -->
+</LinearLayout>
 
-    </ScrollView>
+</ScrollView>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
