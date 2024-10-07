@@ -63,9 +63,9 @@ const InventoryManagement = () => {
   );
 
   return (
-    <div className="stock-management">
+    <div className="stock-management--content">
       <MenuBar />
-      <div className="stock-management--content">
+      
         <h1 className="hello">Manage Stock</h1>
 
         {/* Search Bar */}
@@ -138,7 +138,7 @@ const InventoryManagement = () => {
           </div>
         )}
       </div>
-    </div>
+   
   );
 };
 
