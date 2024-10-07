@@ -35,7 +35,7 @@ public class AllActivityPageActivity extends AppCompatActivity {
         LinearLayout viewProfileLayout = findViewById(R.id.editProfile);
         LinearLayout shoppingLayout = findViewById(R.id.settings);
         LinearLayout trackOrdersLayout = findViewById(R.id.myStats);
-        LinearLayout orderHistoryLayout = findViewById(R.id.inviteFriend);
+        LinearLayout notificationsLayout = findViewById(R.id.inviteFriend);
 
         // Set an OnClickListener for "View Profile" to navigate to ViewCustomerProfileActivity
         viewProfileLayout.setOnClickListener(v -> {
@@ -60,8 +60,8 @@ public class AllActivityPageActivity extends AppCompatActivity {
         });
 
         // Set an OnClickListener for "Order History" to navigate to OrderHistoryActivity
-        orderHistoryLayout.setOnClickListener(v -> {
-            Intent orderHistoryIntent = new Intent(AllActivityPageActivity.this, OrderHistoryActivity.class);
+        notificationsLayout.setOnClickListener(v -> {
+            Intent orderHistoryIntent = new Intent(AllActivityPageActivity.this, NotificationPageActivity.class);
             orderHistoryIntent.putExtra("customerEmail", customerEmail); // Pass the email to the next activity
             startActivity(orderHistoryIntent);
         });
