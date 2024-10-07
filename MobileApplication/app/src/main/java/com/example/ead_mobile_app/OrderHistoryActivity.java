@@ -124,6 +124,10 @@ public class OrderHistoryActivity extends AppCompatActivity {
             productNameTextView.setText("Product: " + order.getString("productName"));
             productQuantityTextView.setText("Quantity: " + order.getString("productQuantity"));
 
+            orderIdTextView.setTextColor(getResources().getColor(android.R.color.black));
+            productNameTextView.setTextColor(getResources().getColor(android.R.color.black));
+            productQuantityTextView.setTextColor(getResources().getColor(android.R.color.black));
+
             // If the status is "Processing", show the Edit and Cancel buttons
             if (status.equals("Processing")) {
                 buttonsLayout.setVisibility(View.VISIBLE);  // Show the buttons
