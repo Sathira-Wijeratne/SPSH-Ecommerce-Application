@@ -27,6 +27,8 @@ namespace SPSH_Ecommerce_Application.Controllers
             _mongoDBService = mongoDBService;
         }
 
+        //General idea for controller methods referenced from - https://code-maze.com/getting-started-aspnetcore-mongodb/
+
         // Retrieve all the rates from the database
         [HttpGet]
         public async Task<ActionResult<List<Rate>>> Get()

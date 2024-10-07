@@ -27,6 +27,8 @@ namespace SPSH_Ecommerce_Application.Controllers
             _mongoDBService = mongoDBService;
         }
 
+        //General idea for controller methods referenced from - https://code-maze.com/getting-started-aspnetcore-mongodb/
+
         //Retrieves all the shopping cart items for a given customer
         [HttpGet("{customerEmail}")]
         public async Task<ActionResult<List<Cart>>> Get(string customerEmail)

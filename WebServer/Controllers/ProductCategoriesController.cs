@@ -31,6 +31,8 @@ namespace SPSH_Ecommerce_Application.Controllers
             _mongoDBService = mongoDBService;
         }
 
+        //General idea for controller methods referenced from - https://code-maze.com/getting-started-aspnetcore-mongodb/
+
         // Retrieves all product categories from the database
         [HttpGet]
         public async Task<ActionResult<List<ProductCategory>>> Get()
