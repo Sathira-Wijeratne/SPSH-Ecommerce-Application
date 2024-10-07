@@ -173,16 +173,19 @@ private void addCartItemCard(String productId, String productName, int productPr
         TextView nameTextView = new TextView(this);
         nameTextView.setText(productName);
         nameTextView.setTextSize(18);
+        nameTextView.setTextColor(getResources().getColor(android.R.color.black));
         itemDetailsLayout.addView(nameTextView);
 
         TextView priceTextView = new TextView(this);
         priceTextView.setText("Price: $" + productPrice);
         priceTextView.setTextSize(16);
+        priceTextView.setTextColor(getResources().getColor(android.R.color.black));
         itemDetailsLayout.addView(priceTextView);
 
         TextView qtyTextView = new TextView(this);
         qtyTextView.setText("Quantity: " + productQty);
         qtyTextView.setTextSize(14);
+        qtyTextView.setTextColor(getResources().getColor(android.R.color.black));
         itemDetailsLayout.addView(qtyTextView);
 
         // Right side: overall price and delete button
@@ -196,6 +199,7 @@ private void addCartItemCard(String productId, String productName, int productPr
         TextView overallPriceTextView = new TextView(this);
         overallPriceTextView.setText("Total: $" + overallPrice);
         overallPriceTextView.setTextSize(16);
+        overallPriceTextView.setTextColor(getResources().getColor(android.R.color.black));
         rightSideLayout.addView(overallPriceTextView);
 
         // Delete button

@@ -207,18 +207,21 @@ public class ItemListPageActivity extends AppCompatActivity {
             TextView nameTextView = new TextView(this);
             nameTextView.setText(name);
             nameTextView.setTextSize(18);
+            nameTextView.setTextColor(getResources().getColor(android.R.color.black));
             productInfoLayout.addView(nameTextView);
 
             // Product Price
             TextView priceTextView = new TextView(this);
             priceTextView.setText("Price: $" + price);
             priceTextView.setTextSize(16);
+            priceTextView.setTextColor(getResources().getColor(android.R.color.black));
             productInfoLayout.addView(priceTextView);
 
             // Product Stock
             TextView stockTextView = new TextView(this);
             stockTextView.setText("Available: " + stock);
             stockTextView.setTextSize(14);
+            stockTextView.setTextColor(getResources().getColor(android.R.color.black));
             productInfoLayout.addView(stockTextView);
 
             // Add product info layout to the card
