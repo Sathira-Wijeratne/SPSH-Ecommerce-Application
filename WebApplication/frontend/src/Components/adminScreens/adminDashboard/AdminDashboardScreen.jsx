@@ -40,7 +40,7 @@ const AdminDashboard = () => {
   }, []);
 
   return (
-    <div className="content">
+    <div className="mncontent">
       <MenuBar />
       <div className="dashboard--content">
         <Content pendingOrders={pendingOrders} lowStockItems={lowStockItems} />
