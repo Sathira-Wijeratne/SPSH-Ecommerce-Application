@@ -1,0 +1,121 @@
+/* Main Content area for stock management */
+.stock-management--content {
+  display: flex; /* Use flexbox to align content */
+  flex-direction: column; /* Align children (search bar, table, etc.) vertically */
+  flex-grow: 1; /* Take up the remaining space */
+  padding: 20px;
+  background-color: #f5f7fa;
+  box-sizing: border-box;
+  width: 70vw;/* Adjust width accounting for the sidebar */
+  height: 100vh; /* Full height of the viewport */
+  overflow-x: hidden; /* Prevent horizontal overflow */
+  overflow-y: auto; /* Allow vertical scrolling */
+  position: relative;
+  left: 120px;
+}
+
+/* Sidebar menu styling */
+.menu {
+  width: 250px;
+  flex-shrink: 0;
+  padding: 20px;
+  height: 100vh;
+  box-sizing: border-box;
+  background-color: #f1f1f1;
+  border-radius: 10px;
+  z-index: 1;
+  overflow-y: auto; /* Sidebar scrolls independently */
+}
+
+/* Table Styling */
+.stock-table {
+  width: 100%; /* Ensure table takes full width without overflowing */
+  border-collapse: collapse;
+  table-layout: fixed; /* Prevent the table from expanding too much */
+}
+
+.stock-table th, .stock-table td {
+  padding: 10px; /* Adjust padding to ensure the table fits within the viewport */
+  text-align: left;
+  font-size: 16px;
+  word-wrap: break-word; /* Ensure content wraps instead of overflowing */
+}
+
+/* Stock value styling */
+.low-stock {
+  color: red;
+  font-weight: bold;
+}
+
+/* Remove button */
+.remove-btn {
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 14px;
+  transition: background-color 0.3s ease;
+}
+
+/* Dialog overlay */
+.dialog-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5); /* Transparent dark background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000; /* Ensure it's always on top */
+}
+
+/* Dialog box styling */
+.dialog-box {
+  background: #fff;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  width: 400px;
+  max-width: 90%;
+  text-align: center;
+}
+
+.dialog-buttons {
+  display: flex;
+  justify-content: space-between;
+}
+
+.dialog-buttons button {
+  width: 45%;
+  padding: 10px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.dialog-buttons button:first-child {
+  background-color: #f44336; /* Delete button color */
+  color: white;
+}
+
+.dialog-buttons button:last-child {
+  background-color: #27374d; /* Cancel button color */
+  color: white;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .stock-management--content {
+    width: 100vw; /* Make content full width on smaller screens */
+    left: 0;
+  }
+
+  .stock-table th, .stock-table td {
+    padding: 8px;
+  }
+
+  .remove-btn {
+    padding: 8px 12px;
+  }
+}

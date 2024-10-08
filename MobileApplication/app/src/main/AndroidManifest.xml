@@ -16,6 +16,33 @@
         android:theme="@style/Theme.EAD_Mobile_App"
         tools:targetApi="31">
         <activity
+            android:name=".VendorListActivity"
+            android:exported="false" />
+        <activity
+            android:name=".NotificationPageActivity"
+            android:exported="false" />
+        <activity
+            android:name=".SingleOrderDetailsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".TrackOrdersActivity"
+            android:exported="false" />
+        <activity
+            android:name=".OrderHistoryActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AllActivityPageActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ViewCustomerProfileActivity"
+            android:exported="false" />
+        <activity
+            android:name=".EditCustomerProfileActivity"
+            android:exported="false" />
+        <activity
+            android:name=".CartDetailsActivity"
+            android:exported="false" />
+        <activity
             android:name=".SingleItemViewActivity"
             android:exported="false" />
         <activity

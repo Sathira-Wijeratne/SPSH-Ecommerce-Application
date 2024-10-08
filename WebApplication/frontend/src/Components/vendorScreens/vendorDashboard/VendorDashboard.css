@@ -17,6 +17,16 @@
   width: 100%;
   border-collapse: collapse;
 }
+.dashboard--content {
+  height: 100vh; /* Set height to 100% of the viewport height */
+  width: calc(100vw - 300px); 
+  display: flex; /* Flexbox for easy alignment */
+  flex-direction: column; /* Adjust content direction if needed */
+  padding: 20px; /* Optional padding */
+  overflow-y: auto; /* Allows scrolling if content overflows */
+}
+
+
 
 .orders-table th,
 .orders-table td {

@@ -25,13 +25,13 @@ namespace SPSH_Ecommerce_Application
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
-            // MongoDB decimal serialization configuration
+            // MongoDB decimal serialization configuration - referenced from : https://stackoverflow.com/questions/43473147/how-to-use-decimal-type-in-mongodb
             BsonSerializer.RegisterSerializer(typeof(decimal), new DecimalSerializer(BsonType.Decimal128));
             BsonSerializer.RegisterSerializer(typeof(decimal?), new NullableSerializer<decimal>(new DecimalSerializer(BsonType.Decimal128)));
-            //MongoDB configuration
+            
+            //MongoDB configuration - referenced from : https://code-maze.com/getting-started-aspnetcore-mongodb/
             builder.Services.Configure<MongoDBSettings>(
                 builder.Configuration.GetSection("MongoDB"));
-
             builder.Services.AddSingleton<MongoDBService>();
 
             builder.Services.AddControllers();

@@ -42,11 +42,23 @@ const MenuBar = () => {
     navigate("/Admin/OrderManagement");
   };
 
-    //function to navigate to Product Management
-    const onClickProductManagement = (e) => {
-      e.preventDefault();
-      navigate("/Admin/ProductManagement");
-    };
+  //function to navigate to Product Management
+  const onClickProductManagement = (e) => {
+    e.preventDefault();
+    navigate("/Admin/ProductManagement");
+  };
+
+  // Function to handle logout
+  const onClickLogout = () => {
+    sessionStorage.clear();
+    navigate("/"); // Redirect to the login page after logout
+  };
+
+  //Function to navigate to Inventory management 
+  const onClickInventoryManagement=(e) =>{
+    e.preventDefault();
+    navigate("/Admin/InventoryManagement");
+  };
 
   return (
     <div className="menu">
@@ -64,17 +76,15 @@ const MenuBar = () => {
           <></>
         )}
 
-        {role !== "CSR" ? (
-          <a href="#" className="item" onClick={onClickLoadAllUSers}>
-            User Management
-          </a>
-        ) : (
-          <></>
-        )}
+        <a href="#" className="item" onClick={onClickLoadAllUSers}>
+          User Management
+        </a>
+        <a href="#" className="item" onClick={onClickAllOrderManagement}>
+          Order Management
+        </a>
 
         {role !== "CSR" ? (
           <>
-            {/* Vendor Management Menu with Sub-Menus */}
             <div className="item" onClick={toggleSubMenuForVendor}>
               Vendor Management
             </div>
@@ -103,19 +113,25 @@ const MenuBar = () => {
         )}
 
         {role !== "CSR" ? (
-          <>
-            {/* <a href="#" className="item">Vendor Management</a> */}
-            <a href="#" className="item" onClick={onClickProductManagement}>
-              Product Management
-            </a>
-          </>
+          <a href="#" className="item" onClick={onClickProductManagement}>
+            Product Management
+          </a>
         ) : (
           <></>
         )}
 
-        <a href="#" className="item" onClick={onClickAllOrderManagement}>
-          Order Management
+        
+
+        <a href="#" className="item" onClick={onClickInventoryManagement}>
+          Inventory Management
         </a>
+
+
+      </div>
+
+      {/* Logout option */}
+      <div className="logout" onClick={onClickLogout}>
+        Logout
       </div>
     </div>
   );

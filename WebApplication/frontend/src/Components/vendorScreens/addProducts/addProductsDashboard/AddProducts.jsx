@@ -27,26 +27,21 @@ const AddProducts = () => {
     axios
       .get("http://192.168.137.1:2030/api/Products/last-product")
       .then((res1) => {
-        // Set next product ID
         setProductId(
           "P" +
-            (Number(res1.data[0].productId.substring(1)) + 1)
-              .toString()
-              .padStart(3, "0")
+          (Number(res1.data[0].productId.substring(1)) + 1)
+            .toString()
+            .padStart(3, "0")
         );
 
         axios
           .get("http://192.168.137.1:2030/api/ProductCategories/active")
           .then((res) => {
-            // default category
             setFirstActiveCategory(res.data[0].categoryName);
             setProductCategory(res.data[0].categoryName);
 
-            var cat = [];
-            for (var i = 0; i < res.data.length; i++) {
-              cat.push(res.data[i].categoryName);
-              setCategories(cat);
-            }
+            const cat = res.data.map(item => item.categoryName);
+            setCategories(cat);
           });
       });
   }, []);
@@ -64,7 +59,7 @@ const AddProducts = () => {
       vendorEmail,
       imageBase64,
     };
-    if (isProductExisting === false) {
+    if (!isProductExisting) {
       axios
         .post("http://192.168.137.1:2030/api/Products", product)
         .then((res) => {
@@ -95,7 +90,7 @@ const AddProducts = () => {
     }
   };
 
-  function searchExistingItem(prodID) {
+  const searchExistingItem = (prodID) => {
     axios
       .get(
         `http://192.168.137.1:2030/api/Products/vendor-prodid/${vendorEmail}/${prodID}`
@@ -110,7 +105,6 @@ const AddProducts = () => {
         setImageBase64(res.data.imageBase64);
       })
       .catch((err) => {
-        // 404
         setIsProductExisting(false);
         setProductCategory(firstActiveCategory);
         setName("");
@@ -119,18 +113,19 @@ const AddProducts = () => {
         setStock(0);
         setImageBase64("");
       });
-  }
+  };
 
   return (
     <div className="content">
       <MenuBar />
-      <div className="add-product-content">
-        <h2 className="title">Add New Product</h2>
-        <form onSubmit={handleSubmit}>
-          <div className="form-group">
-            <label>Product ID</label>
+      <div> {/* Use Bootstrap container */}
+        <h1 className="hello">Add New Product</h1>
+        <form onSubmit={handleSubmit} className="row g-3"> {/* Bootstrap grid for form layout */}
+          <div className="col-md-6">
+            <label className="form-label">Product ID</label>
             <input
               type="text"
+              className="form-control"
               name="productId"
               value={productId}
               onChange={(e) => {
@@ -140,10 +135,11 @@ const AddProducts = () => {
             />
           </div>
 
-          <div className="form-group">
-            <label>Product Name</label>
+          <div className="col-md-6">
+            <label className="form-label">Product Name</label>
             <input
               type="text"
+              className="form-control"
               name="name"
               value={name}
               onChange={(e) => {
@@ -152,9 +148,10 @@ const AddProducts = () => {
             />
           </div>
 
-          <div className="form-group">
-            <label>Description</label>
+          <div className="col-md-6">
+            <label className="form-label">Description</label>
             <textarea
+              className="form-control"
               name="description"
               value={description}
               onChange={(e) => {
@@ -163,9 +160,10 @@ const AddProducts = () => {
             ></textarea>
           </div>
 
-          <div className="form-group">
-            <label>Category</label>
+          <div className="col-md-6">
+            <label className="form-label">Category</label>
             <select
+              className="form-select"
               name="productCategory"
               value={productCategory}
               onChange={(e) => {
@@ -180,11 +178,12 @@ const AddProducts = () => {
             </select>
           </div>
 
-          <div className="form-group">
-            <label>Price</label>
+          <div className="col-md-6">
+            <label className="form-label">Price</label>
             <input
               type="number"
               step={"0.01"}
+              className="form-control"
               name="price"
               value={price}
               onChange={(e) => {
@@ -193,11 +192,12 @@ const AddProducts = () => {
             />
           </div>
 
-          <div className="form-group">
-            <label>Stock</label>
+          <div className="col-md-6">
+            <label className="form-label">Stock</label>
             <input
               type="number"
               min={1}
+              className="form-control"
               name="stock"
               value={newStock}
               onChange={(e) => {
@@ -206,10 +206,11 @@ const AddProducts = () => {
             />
           </div>
 
-          <div className="form-group">
-            <label>Product Image</label>
+          <div className="col-md-12">
+            <label className="form-label">Product Image</label>
             <input
               type="file"
+              className="form-control"
               onChange={(e) => {
                 const file = e.target.files[0];
                 const reader = new FileReader();
@@ -223,14 +224,20 @@ const AddProducts = () => {
               <img
                 src={imageBase64}
                 alt="Product Preview"
-                className="image-preview"
+                className="image-preview mt-3"
               />
             )}
           </div>
 
-          <button type="submit" className="btn-submit">
-            Add Product
-          </button>
+          <div className="col-12">
+            <button
+              type="submit"
+              className="btn btn-primary w-100"
+              style={{ backgroundColor: "#001f3f", borderColor: "#001f3f" }}
+            >
+              Add Product
+            </button>
+          </div>
         </form>
       </div>
     </div>

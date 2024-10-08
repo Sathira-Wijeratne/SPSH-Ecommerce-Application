@@ -1,10 +1,5 @@
 /* Wrapper for the whole content including the sidebar and main content */
-.content {
-    display: flex;
-    height: 100vh; /* Full height */
-    box-sizing: border-box;
-  }
-  
+
   /* Sidebar MenuBar styling */
   .sidebar {
     width: 250px; /* Fixed width for the sidebar */
@@ -16,18 +11,26 @@
     justify-content: space-between;
   }
   
+  .dashboardsubheading {
+    font-family: 'Roboto', sans-serif; /* Use Google font */
+    font-size: 2rem; /* Adjust the size based on your design */
+    font-weight: 700; /* Bold heading */
+    color: #1f3a5f; /* Navy blue shade */
+    text-align: left; /* Align text to the left */
+    margin-bottom: 20px; /* Add space after the heading */
+  }
+  
   /* Main content area */
   .dashboard--content {
     flex-grow: 1; /* Take up the remaining space */
-    background: #fff;
     border-radius: 20px;
-    padding: 2rem;
-    display: flex;
+    padding: 1rem;
     flex-direction: column;
     justify-content: flex-start;
     box-sizing: border-box;
-    overflow: auto;
-    margin-left: 250px; /* Add margin to avoid overlap with sidebar */
+    position: absolute;
+    top: 0px; 
+    left: 300px; 
   }
   
   /* Table and Title Styling */

@@ -28,6 +28,8 @@ namespace SPSH_Ecommerce_Application.Controllers
             _mongoDBService = mongoDBService;
         }
 
+        //General idea for controller methods referenced from - https://code-maze.com/getting-started-aspnetcore-mongodb/
+
         // Retrieves all orders from the database - Developer Wijeratne D.M.S.D
         [HttpGet]
         public async Task<ActionResult<List<Order>>> Get()
@@ -254,7 +256,7 @@ namespace SPSH_Ecommerce_Application.Controllers
             return Ok(orders);
         }
 
-        // Retrieves orders by status and product id
+        // Retrieves orders by status and product id - Developer Senadheera P.V.P.P
         [HttpGet("get-by-status-prodid/{status}/{ProductId}")]
         public async Task<ActionResult<Order>> GetByStatusProdID(string status, string ProductId)
         {
@@ -266,6 +268,34 @@ namespace SPSH_Ecommerce_Application.Controllers
             }
 
             return Ok(orders);
+        }
+
+        // Retrieves orders by vendor and status - Developer Senadheera P.V.P.P
+        [HttpGet("get-by-vendor-status/{vendorEmail}/{status}")]
+        public async Task<ActionResult<Order>> GetByVendorStatus(string vendorEmail, string status)
+        {
+            var ordersCollection = _mongoDBService.GetOrdersCollection();
+            var orders = await ordersCollection.Find(o => o.VendorEmail == vendorEmail && o.Status == status).ToListAsync();
+            if (orders == null)
+            {
+                return NotFound(new { message = "Orders not found" });
+            }
+
+            return Ok(orders);
+        }
+ 
+        // Retrieves the next order ID - Developer Senadheera P.V.P.P
+        [HttpGet("get-next-oid")]
+        public async Task<ActionResult<List<Order>>> GetNextOrderID()
+        {
+            var ordersCollection = _mongoDBService.GetOrdersCollection();
+            var sortDefinition = Builders<Order>.Sort.Descending(o => o.OrderId);
+            var orders = await ordersCollection.Find(o => true).Sort(sortDefinition).Limit(1).Project(o => new { o.OrderId }).FirstOrDefaultAsync();
+
+            int nextOid = Int32.Parse(orders.OrderId.Substring(1)) + 1;
+            String newOrderId = "O" + nextOid.ToString("D3");
+
+            return Ok(new { newOid = newOrderId });
         }
 
     }

@@ -72,3 +72,20 @@
     background: #27374d;
     color: #dde6ed;
 }
+
+/* Style for Logout button */
+.logout-section {
+    margin-top: auto;
+    padding-top: 20px;
+  }
+  
+  .logout {
+    text-align: center;
+    padding: 10px;
+    border-radius: 10px;
+  }
+  
+  .logout:hover {
+    background-color: #27374d;
+    color: #fff;
+  }

@@ -12,7 +12,7 @@ const NewVendor = () => {
     role: "Vendor",
     email: "",
     password: "",
-    activated: false,
+    activated: true,
   });
 
   const handleChange = (e) => {
@@ -41,7 +41,7 @@ const NewVendor = () => {
     <div className="dashboard">
       <MenuBar />
       <div className="form-container">
-        <h1>Create New Vendor</h1>
+        <h1 className="hello">Create New Vendor</h1>
         <form onSubmit={handleSubmit}>
           <div className="form-group">
             <label>Name:</label>
@@ -76,7 +76,7 @@ const NewVendor = () => {
             />
           </div>
 
-          <div className="form-group">
+          {/* <div className="form-group">
             <label>Activated:</label>
             <input
               type="checkbox"
@@ -84,7 +84,7 @@ const NewVendor = () => {
               checked={formData.activated}
               onChange={handleChange}
             />
-          </div>
+          </div> */}
 
           <button type="submit" className="submit-btn">
             Submit

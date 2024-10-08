@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import MenuBar from "../vendorMenuBar/VendorMenuBar";
 import "./StockManagement.css"; // Import the CSS
 import axios from "axios";
+import { Button, Table } from 'react-bootstrap'; // Import Bootstrap components
 
 const StockManagement = () => {
   const [stock, setStock] = useState([]);
@@ -54,9 +55,9 @@ const StockManagement = () => {
     <div className="stock-management">
       <MenuBar /> {/* Sidebar Menu */}
       <div className="stock-management--content">
-        <h1>Manage Stock</h1>
+        <h1 className="hello">Manage Stock</h1>
 
-        <table className="stock-table">
+        <Table striped bordered hover className="stock-table"> {/* Bootstrap Table */}
           <thead>
             <tr>
               <th>Product ID</th>
@@ -77,19 +78,19 @@ const StockManagement = () => {
                     <span>{product.stock}</span>
                   )}
                 </td>
-
                 <td>
-                  <button
-                    className="remove-btn"
+                  <Button
+                    variant="danger" // Bootstrap variant for red button
                     onClick={() => handleRemoveStock(product.productId)}
+                    className="remove-btn"
                   >
                     Remove Stock
-                  </button>
+                  </Button>
                 </td>
               </tr>
             ))}
           </tbody>
-        </table>
+        </Table>
       </div>
     </div>
   );

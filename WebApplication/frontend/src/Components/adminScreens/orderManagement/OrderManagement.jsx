@@ -2,9 +2,29 @@ import React, { useEffect, useState } from "react";
 import AdminMenuBar from "../adminDashboard/menuBar/MenuBar";
 import "./OrderManagement.css"; // Import CSS for this screen
 import axios from "axios";
+import { Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Button } from "@mui/material";
+import { styled } from "@mui/material/styles"; // For custom styles
+
+const StyledDialog = styled(Dialog)(({ theme }) => ({
+  "& .MuiDialog-paper": {
+    backgroundColor: "#ADCBE3", // Navy blue background for dialog
+    color: "#002147", // White text color
+  },
+}));
+
+const StyledButton = styled(Button)(({ theme }) => ({
+  backgroundColor: "#ffffff", // White background
+  color: "#002147", // Navy blue text color
+  "&:hover": {
+    backgroundColor: "#cccccc", // Light gray on hover
+  },
+}));
 
 const OrderManagement = () => {
   const [orders, setOrders] = useState([]);
+  const [openDialog, setOpenDialog] = useState(false);
+  const [selectedOrder, setSelectedOrder] = useState(null);
+  const [dialogType, setDialogType] = useState(""); // To differentiate between Cancel or Complete
 
   useEffect(() => {
     axios.get("http://192.168.137.1:2030/api/Orders").then((res) => {
@@ -13,57 +33,55 @@ const OrderManagement = () => {
     });
   }, []);
 
-  // Sample data for orders, you can replace this with your fetched data.
-  // const [orders, setOrders] = useState([
-  //     {
-  //         OrderId: "0001",
-  //         ProductName: "Galaxy Z Fold 6",
-  //         CustomerEmail: "customer@spsh.lk",
-  //         Status: "Processing",
-  //         ProductUnitPrice: 578900,
-  //     },
-  //     {
-  //         OrderId: "0002",
-  //         ProductName: "Asus Zenbook 14x OLED",
-  //         CustomerEmail: "customer2@spsh.lk",
-  //         Status: "Cancelled",
-  //         ProductUnitPrice: 678900,
-  //     },
-  // ]);
-
-  // Function to mark an order as "Delivered"
-  const markAsCompleted = (orderId) => {
-    var userRes = window.confirm(
-      `Are you sure you want to mark ${orderId} order as completed?`
-    );
-    if (userRes === true) {
-      axios
-        .patch(
-          `http://192.168.137.1:2030/api/Orders/manage/${orderId}?status=Completed`
-        )
-        .then((res) => {
-          if (res.status === 200) {
-            window.location.reload();
-          } else {
-            alert("Network error!");
-          }
-        })
-        .catch((err) => {
-          alert(err);
-        });
-    }
+  const handleDialogOpen = (order, type) => {
+    setSelectedOrder(order);
+    setDialogType(type);
+    setOpenDialog(true);
   };
 
-  // Function to mark an order as "Cancelled"
-  const markAsCancelled = (orderId) => {
-    var userRes = window.confirm(
-      `Are you sure you want cancel ${orderId} order?`
-    );
-    if (userRes === true) {
+  const handleDialogClose = () => {
+    setOpenDialog(false);
+    setSelectedOrder(null);
+    setDialogType("");
+  };
+
+  // Function to handle order completion
+  const handleCompleteOrder = () => {
+    const order = selectedOrder;
+    if (order.status === "Processing") {
       axios
-        .patch(
-          `http://192.168.137.1:2030/api/Orders/manage/${orderId}?status=Cancelled`
-        )
+        .get(`http://192.168.137.1:2030/api/Products/${order.productId}`)
+        .then((res1) => {
+          if (order.productQuantity <= res1.data.stock) {
+            const updatedProduct = {
+              ...res1.data,
+              stock: res1.data.stock - order.productQuantity,
+            };
+            axios
+              .put(`http://192.168.137.1:2030/api/Products/${res1.data.productId}`, updatedProduct)
+              .then((res2) => {
+                if (res2.status === 200) {
+                  axios
+                    .patch(`http://192.168.137.1:2030/api/Orders/manage/${order.orderId}?status=Completed`)
+                    .then((res) => {
+                      if (res.status === 200) {
+                        window.location.reload();
+                      } else {
+                        alert("Network error!");
+                      }
+                    })
+                    .catch((err) => {
+                      alert(err);
+                    });
+                }
+              });
+          } else {
+            alert("Insufficient Stocks!");
+          }
+        });
+    } else {
+      axios
+        .patch(`http://192.168.137.1:2030/api/Orders/manage/${order.orderId}?status=Completed`)
         .then((res) => {
           if (res.status === 200) {
             window.location.reload();
@@ -75,6 +93,25 @@ const OrderManagement = () => {
           alert(err);
         });
     }
+    handleDialogClose();
+  };
+
+  // Function to handle order cancellation
+  const handleCancelOrder = () => {
+    const orderId = selectedOrder.orderId;
+    axios
+      .patch(`http://192.168.137.1:2030/api/Orders/manage/${orderId}?status=Cancelled`)
+      .then((res) => {
+        if (res.status === 200) {
+          window.location.reload();
+        } else {
+          alert("Network error!");
+        }
+      })
+      .catch((err) => {
+        alert(err);
+      });
+    handleDialogClose();
   };
 
   return (
@@ -82,7 +119,7 @@ const OrderManagement = () => {
       <AdminMenuBar />
 
       <div className="order-management--content">
-        <h1 className="header-title">Manage Orders</h1>
+        <h1 className="header">Manage Orders</h1>
         <table className="order-table">
           <thead>
             <tr>
@@ -91,6 +128,7 @@ const OrderManagement = () => {
               <th>Customer Email</th>
               <th>Status</th>
               <th>Price</th>
+              <th>Customer Note</th>
               <th>Action</th>
             </tr>
           </thead>
@@ -102,21 +140,21 @@ const OrderManagement = () => {
                 <td>{order.customerEmail}</td>
                 <td>{order.status}</td>
                 <td>Rs. {order.productUnitPrice}</td>
+                <td>{order.note}</td>
                 <td>
-                  {order.status === "Processing" ||
-                  order.status === "Delivered" ? (
+                  {order.status === "Processing" || order.status === "Delivered" ? (
                     <button
                       className="deliver-btn"
-                      onClick={() => markAsCompleted(order.orderId)}
+                      onClick={() => handleDialogOpen(order, "complete")}
                     >
-                      Mark as Completed
+                      Completed
                     </button>
                   ) : order.status === "Requested to cancel" ? (
                     <button
                       className="cancel-btn"
-                      onClick={() => markAsCancelled(order.orderId)}
+                      onClick={() => handleDialogOpen(order, "cancel")}
                     >
-                      Cancel Order
+                      Cancel
                     </button>
                   ) : (
                     <span>-</span>
@@ -127,6 +165,30 @@ const OrderManagement = () => {
           </tbody>
         </table>
       </div>
+
+      {/* Styled Confirmation Dialog */}
+      <StyledDialog open={openDialog} onClose={handleDialogClose}>
+        <DialogTitle>{dialogType === "cancel" ? "Cancel Order" : "Complete Order"}</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            {dialogType === "cancel"
+              ? `Customer Cancellation Note: ${selectedOrder?.note}`
+              : `Are you sure you want to complete order ${selectedOrder?.orderId}?`}
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <StyledButton onClick={handleDialogClose} color="primary">
+            No
+          </StyledButton>
+          <StyledButton
+            onClick={dialogType === "cancel" ? handleCancelOrder : handleCompleteOrder}
+            color="primary"
+            autoFocus
+          >
+            Yes
+          </StyledButton>
+        </DialogActions>
+      </StyledDialog>
     </div>
   );
 };

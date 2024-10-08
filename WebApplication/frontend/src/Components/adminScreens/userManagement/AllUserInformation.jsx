@@ -52,8 +52,8 @@ const UserList = () => {
   };
 
   return (
-    <div className="user-list-container">
-      <h2>User Management</h2>
+    <div className="allinfocont">
+      <h1 className="hello">User Management</h1>
       <table className="user-table">
         <thead>
           <tr>

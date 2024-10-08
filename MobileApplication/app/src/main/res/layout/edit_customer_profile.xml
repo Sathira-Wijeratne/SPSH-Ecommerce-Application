@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    tools:context=".EditCustomerProfileActivity">
+
+    <!-- Profile Section -->
+<ImageView
+android:id="@+id/appLogo"
+android:layout_width="100dp"
+android:layout_height="100dp"
+android:src="@drawable/ecommerce_logo"
+android:layout_marginTop="32dp"
+app:layout_constraintTop_toTopOf="parent"
+app:layout_constraintStart_toStartOf="parent"
+app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Title: Edit Profile -->
+<TextView
+android:id="@+id/editProfileTitle"
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:text="Edit Profile"
+android:textSize="24sp"
+android:textStyle="bold"
+android:textColor="@android:color/black"
+    android:layout_marginTop="16dp"
+    app:layout_constraintTop_toBottomOf="@id/appLogo"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Customer Email -->
+<TextView
+android:id="@+id/customerEmailTextView"
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:text="Email: example@example.com"
+android:textSize="18sp"
+android:textColor="@android:color/black"
+    android:layout_marginTop="16dp"
+    app:layout_constraintTop_toBottomOf="@id/editProfileTitle"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Editable Name Field -->
+<EditText
+android:id="@+id/nameEditText"
+android:layout_width="0dp"
+android:layout_height="wrap_content"
+android:hint="Name"
+android:inputType="textPersonName"
+android:textColor="@android:color/black"
+    android:layout_marginTop="16dp"
+    app:layout_constraintTop_toBottomOf="@id/customerEmailTextView"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintWidth_percent="0.8" />
+
+    <!-- Role (Disabled) -->
+<EditText
+android:id="@+id/roleEditText"
+android:layout_width="0dp"
+android:layout_height="wrap_content"
+android:hint="Role"
+android:enabled="false"
+android:inputType="text"
+android:textColor="@android:color/black"
+    android:layout_marginTop="16dp"
+    app:layout_constraintTop_toBottomOf="@id/nameEditText"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintWidth_percent="0.8" />
+
+    <!-- Change Password Button -->
+<Button
+android:id="@+id/changePasswordButton"
+android:layout_width="0dp"
+android:layout_height="wrap_content"
+android:text="Change Password"
+android:textColor="@android:color/white"
+android:backgroundTint="@color/blue_500"
+android:layout_marginTop="24dp"
+app:layout_constraintTop_toBottomOf="@id/roleEditText"
+app:layout_constraintStart_toStartOf="parent"
+app:layout_constraintEnd_toEndOf="parent"
+app:layout_constraintWidth_percent="0.8" />
+
+    <!-- Cancel Button -->
+<Button
+android:id="@+id/cancelButton"
+android:layout_width="0dp"
+android:layout_height="wrap_content"
+android:text="Cancel"
+android:textColor="@android:color/white"
+android:backgroundTint="@color/red"
+android:layout_marginTop="16dp"
+app:layout_constraintTop_toBottomOf="@id/changePasswordButton"
+app:layout_constraintStart_toStartOf="parent"
+app:layout_constraintEnd_toEndOf="parent"
+app:layout_constraintWidth_percent="0.8" />
+
+    <!-- New Password Input Field -->
+<EditText
+android:id="@+id/newPasswordEditText"
+android:layout_width="0dp"
+android:layout_height="wrap_content"
+android:hint="New Password"
+android:inputType="textPassword"
+android:textColor="@android:color/black"
+    android:layout_marginTop="16dp"
+    android:visibility="gone"
+    app:layout_constraintTop_toBottomOf="@id/cancelButton"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintWidth_percent="0.8" />
+
+    <!-- Confirm Password Input Field -->
+<EditText
+android:id="@+id/confirmPasswordEditText"
+android:layout_width="0dp"
+android:layout_height="wrap_content"
+android:hint="Confirm Password"
+android:inputType="textPassword"
+android:textColor="@android:color/black"
+    android:layout_marginTop="16dp"
+    android:visibility="gone"
+    app:layout_constraintTop_toBottomOf="@id/newPasswordEditText"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintWidth_percent="0.8" />
+
+    <!-- Submit Button -->
+<Button
+android:id="@+id/submitButton"
+android:layout_width="0dp"
+android:layout_height="wrap_content"
+android:text="Submit"
+android:textColor="@android:color/white"
+android:backgroundTint="@color/green"
+android:layout_marginTop="16dp"
+android:visibility="gone"
+app:layout_constraintTop_toBottomOf="@id/confirmPasswordEditText"
+app:layout_constraintStart_toStartOf="parent"
+app:layout_constraintEnd_toEndOf="parent"
+app:layout_constraintWidth_percent="0.8" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
