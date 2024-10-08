@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
@@ -14,7 +15,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="My Orders"
-        android:textSize="24sp"
+        android:textSize="36sp"
         android:textStyle="bold"
         android:textColor="@android:color/black"
         app:layout_constraintTop_toTopOf="parent"
@@ -22,104 +23,80 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="24dp" />
 
-    <!-- Central Circle: My Orders -->
-    <TextView
-        android:id="@+id/myOrdersCircle"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:gravity="center"
-        android:text="My Orders"
-        android:textColor="@android:color/white"
-        android:textSize="16sp"
-        android:backgroundTint="@color/blue"
-        android:background="@drawable/circle_shape"
+    <!-- Vertical list of buttons -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp"
         app:layout_constraintTop_toBottomOf="@id/titleText"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="40dp" />
+        android:layout_marginTop="24dp">
 
-    <!-- Top Left Circle: Delivered -->
-    <TextView
-        android:id="@+id/deliveredCircle"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:gravity="center"
-        android:text="Delivered"
-        android:textColor="@android:color/white"
-        android:textSize="14sp"
-        android:backgroundTint="@color/green"
-        android:background="@drawable/circle_shape"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/myOrdersCircle"
-        android:layout_marginTop="120dp"
-        android:layout_marginStart="40dp" />
+        <!-- Delivered Button -->
+        <Button
+            android:id="@+id/deliveredCircle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Delivered"
+            android:textSize="28sp"
+            android:backgroundTint="@color/green"
+            android:textColor="@android:color/white"
+            android:layout_marginBottom="16dp"
+            app:layout_constraintDimensionRatio="0:0"
+        app:layout_constraintWidth_percent="0.8"
+        android:minHeight="100dp"
+        android:layout_marginTop="16dp"/>
 
-    <!-- Top Right Circle: Completed -->
-    <TextView
-        android:id="@+id/completedCircle"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:gravity="center"
-        android:text="Completed"
-        android:textColor="@android:color/white"
-        android:textSize="14sp"
-        android:backgroundTint="@color/red"
-        android:background="@drawable/circle_shape"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/myOrdersCircle"
-        android:layout_marginTop="120dp"
-        android:layout_marginEnd="40dp" />
+        <!-- Completed Button -->
+        <Button
+            android:id="@+id/completedCircle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Completed"
+            android:textSize="28sp"
+            android:backgroundTint="@color/red"
+            android:textColor="@android:color/white"
+            android:minHeight="100dp"
+            android:layout_marginBottom="16dp" />
 
-    <!-- Bottom Left Circle: Processing -->
-    <TextView
-        android:id="@+id/processingCircle"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:gravity="center"
-        android:text="Processing"
-        android:textColor="@android:color/white"
-        android:textSize="14sp"
-        android:backgroundTint="@color/orange"
-        android:background="@drawable/circle_shape"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/myOrdersCircle"
-        android:layout_marginBottom="120dp"
-        android:layout_marginStart="40dp" />
+        <!-- Processing Button -->
+        <Button
+            android:id="@+id/processingCircle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Processing"
+            android:textSize="28sp"
+            android:backgroundTint="@color/orange"
+            android:textColor="@android:color/white"
+            android:minHeight="100dp"
+            android:layout_marginBottom="16dp" />
 
-    <!-- Bottom Right Circle: Cancelled -->
-    <TextView
-        android:id="@+id/cancelledCircle"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:gravity="center"
-        android:text="Cancelled"
-        android:textColor="@android:color/white"
-        android:textSize="14sp"
-        android:backgroundTint="@color/purple"
-        android:background="@drawable/circle_shape"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/myOrdersCircle"
-        android:layout_marginBottom="120dp"
-        android:layout_marginEnd="40dp" />
+        <!-- Cancelled Button -->
+        <Button
+            android:id="@+id/cancelledCircle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Cancelled"
+            android:textSize="28sp"
+            android:backgroundTint="@color/purple"
+            android:textColor="@android:color/white"
+            android:minHeight="100dp"
+            android:layout_marginBottom="16dp" />
 
-    <!-- Bottom Middle Circle: Requested to Cancel -->
-    <TextView
-        android:id="@+id/requestedToCancelCircle"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:gravity="center"
-        android:text="Requested to Cancel"
-        android:textColor="@android:color/white"
-        android:textSize="12sp"
-        android:backgroundTint="@color/yellow"
-        android:background="@drawable/circle_shape"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginBottom="60dp" />
+        <!-- Fifth Button: Requested to Cancel -->
+        <Button
+            android:id="@+id/requestedToCancelCircle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Requested to Cancel"
+            android:textSize="28sp"
+            android:backgroundTint="@color/blue"
+            android:textColor="@android:color/white"
+            android:minHeight="100dp"
+            android:layout_marginBottom="16dp" />
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

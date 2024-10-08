@@ -27,9 +27,8 @@
                 android:layout_gravity="center"
                 android:contentDescription="Sign up logo"
                 android:layout_marginBottom="16dp"/>
+
             <!-- Title Text -->
-
-
             <TextView
                 android:id="@+id/signupTitle"
                 android:layout_width="wrap_content"
@@ -60,6 +59,7 @@
                 android:inputType="textPersonName"
                 android:layout_marginTop="10dp"
                 android:background="@drawable/edittext_background"
+                android:textColorHint="@android:color/darker_gray"
                 android:padding="12dp"/>
 
             <!-- Email Input -->
@@ -71,6 +71,7 @@
                 android:inputType="textEmailAddress"
                 android:layout_marginTop="16dp"
                 android:background="@drawable/edittext_background"
+                android:textColorHint="@android:color/darker_gray"
                 android:padding="12dp"/>
 
             <!-- Password Input -->
@@ -82,6 +83,7 @@
                 android:inputType="textPassword"
                 android:layout_marginTop="16dp"
                 android:background="@drawable/edittext_background"
+                android:textColorHint="@android:color/darker_gray"
                 android:padding="12dp"/>
 
             <!-- Confirm Password Input -->
@@ -93,6 +95,7 @@
                 android:inputType="textPassword"
                 android:layout_marginTop="16dp"
                 android:background="@drawable/edittext_background"
+                android:textColorHint="@android:color/darker_gray"
                 android:padding="12dp"/>
 
             <!-- Terms and Conditions CheckBox -->
@@ -134,10 +137,10 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Sign Up"
-                    android:backgroundTint="@color/yellow_500"
                     android:textColor="@color/black"
                     android:padding="12dp"
-                    android:background="@drawable/rounded_yellow_button"/>
+                    android:backgroundTint="@android:color/holo_blue_dark"
+                />
 
                 <!-- Cancel Button -->
                 <Button
@@ -146,11 +149,10 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Cancel"
-                    android:backgroundTint="@color/gray"
-                    android:textColor="@color/black"
-                    android:padding="12dp"
-                    android:background="@drawable/rounded_button_background"
-                    android:layout_marginStart="16dp"/>
+                    android:backgroundTint="@android:color/holo_red_light"
+                android:textColor="@color/black"
+                android:padding="12dp"
+                android:layout_marginStart="16dp"/>
             </LinearLayout>
 
         </LinearLayout>
