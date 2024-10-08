@@ -112,19 +112,50 @@ public class MainProductsPageActivity extends AppCompatActivity {
 
 
     // Method to dynamically add category cards
+//    private void addCategoryCard(String categoryName) {
+//        new Handler(Looper.getMainLooper()).post(() -> {
+//            TextView categoryCard = new TextView(this);
+//            categoryCard.setText(categoryName);
+//            categoryCard.setBackgroundResource(R.drawable.category_card_background);
+//            categoryCard.setGravity(Gravity.CENTER);
+//            categoryCard.setPadding(16, 16, 16, 16);  // Padding inside the card
+//            categoryCard.setTextSize(18);
+//            categoryCard.setTextColor(Color.BLACK);  // Set text color to black
+//
+//            // Set layout parameters for square shape
+//            GridLayout.LayoutParams params = new GridLayout.LayoutParams();
+//            params.width = params.height = getResources().getDisplayMetrics().widthPixels / 2 - 48; // Square width and height minus margins
+//            params.setMargins(16, 16, 16, 16);  // Margin between cards
+//            categoryCard.setLayoutParams(params);
+//
+//            // Set click listener to pass the selected category
+//            categoryCard.setOnClickListener(v -> {
+//                // Intent to navigate to ItemListPageActivity
+//                Intent intent = new Intent(MainProductsPageActivity.this, ItemListPageActivity.class);
+//                intent.putExtra("category", categoryName); // Pass the selected category
+//                intent.putExtra("customerEmail", customerEmail);
+//                startActivity(intent);  // Start ItemListPageActivity
+//            });
+//
+//            // Add category card to GridLayout
+//            categoryGridLayout.addView(categoryCard);
+//        });
+//    }
+
     private void addCategoryCard(String categoryName) {
         new Handler(Looper.getMainLooper()).post(() -> {
             TextView categoryCard = new TextView(this);
             categoryCard.setText(categoryName);
-            categoryCard.setBackgroundResource(R.drawable.category_card_background);
+            categoryCard.setBackgroundColor(Color.parseColor("#ADD8E6"));  // Light blue background
             categoryCard.setGravity(Gravity.CENTER);
             categoryCard.setPadding(16, 16, 16, 16);  // Padding inside the card
             categoryCard.setTextSize(18);
             categoryCard.setTextColor(Color.BLACK);  // Set text color to black
 
-            // Set layout parameters for square shape
+            // Set layout parameters for full width and increased height
             GridLayout.LayoutParams params = new GridLayout.LayoutParams();
-            params.width = params.height = getResources().getDisplayMetrics().widthPixels / 2 - 48; // Square width and height minus margins
+            params.width = GridLayout.LayoutParams.MATCH_PARENT; // Full width
+            params.height = (int) (getResources().getDisplayMetrics().heightPixels * 0.2); // Increase height (20% of screen height)
             params.setMargins(16, 16, 16, 16);  // Margin between cards
             categoryCard.setLayoutParams(params);
 
@@ -138,10 +169,10 @@ public class MainProductsPageActivity extends AppCompatActivity {
             });
 
             // Add category card to GridLayout
+            categoryGridLayout.setColumnCount(1); // Ensure it stacks vertically
             categoryGridLayout.addView(categoryCard);
         });
     }
-
 
 
 
