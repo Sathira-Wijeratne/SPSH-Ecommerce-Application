@@ -5,33 +5,44 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@android:color/white"
     tools:context=".CartDetailsActivity">
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="16dp">
+    <!-- TextView for the page heading "Shopping Cart" -->
+<TextView
+android:id="@+id/shoppingCartHeading"
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:text="Shopping Cart"
+android:textSize="26sp"
+android:textStyle="bold"
+android:textColor="@android:color/black"
+    android:gravity="center"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    android:paddingTop="20dp"
+    android:paddingBottom="16dp"/>
 
-        <LinearLayout
-            android:id="@+id/main"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+    <!-- ScrollView to hold the cart items -->
+<ScrollView
+android:layout_width="match_parent"
+android:layout_height="0dp"
+android:padding="16dp"
+app:layout_constraintTop_toBottomOf="@id/shoppingCartHeading"
+app:layout_constraintBottom_toBottomOf="parent">
 
-            <!-- Heading for Items in Cart -->
-            <TextView
-                android:id="@+id/cartHeading"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Items in Cart"
-                android:textSize="24sp"
-                android:textStyle="bold"
-                android:layout_gravity="center_horizontal"
-                android:paddingBottom="16dp" />
+<LinearLayout
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@android:color/white">  <!-- Set the background to white to ensure consistency -->
 
-            <!-- Cart items will be displayed below -->
-        </LinearLayout>
+    <!-- Cart items will be displayed dynamically below -->
 
-    </ScrollView>
+</LinearLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
