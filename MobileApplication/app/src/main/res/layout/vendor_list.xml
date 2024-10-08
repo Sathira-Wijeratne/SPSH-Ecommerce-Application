@@ -25,12 +25,12 @@ android:fillViewport="true">
         android:id="@+id/vendorHeading"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Vendor Details"
-        android:textSize="24sp"
-        android:textStyle="bold"
+        android:layout_gravity="center"
+        android:layout_marginBottom="16dp"
+        android:text="Vendor Ranking"
         android:textColor="@android:color/black"
-    android:layout_gravity="center"
-    android:layout_marginBottom="16dp" />
+        android:textSize="24sp"
+        android:textStyle="bold" />
 
     <!-- Vendor cards will be dynamically added here -->
 </LinearLayout>
