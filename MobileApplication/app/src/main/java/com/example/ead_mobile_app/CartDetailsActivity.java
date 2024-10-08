@@ -352,6 +352,8 @@ private void addCartItemCard(String productId, String productName, int productPr
                     }
                 }
 
+                clearCart();
+
                 // After submitting all products, show a success message with the order ID
                 showToast("Order CREATED Successfully. Order ID: " + orderId);
 
@@ -386,5 +388,22 @@ private void addCartItemCard(String productId, String productName, int productPr
         new Handler(Looper.getMainLooper()).post(() ->
                 Toast.makeText(CartDetailsActivity.this, message, Toast.LENGTH_SHORT).show()
         );
+    }
+
+    private void clearCart(){
+        executorService.execute(() -> {
+            try {
+                String urlString = "http://192.168.137.1:2030/api/Carts/" + customerEmail;
+                URL url = new URL(urlString);
+                HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+                urlConnection.setRequestMethod("DELETE");
+
+                int responseCode = urlConnection.getResponseCode();
+
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
     }
 }
