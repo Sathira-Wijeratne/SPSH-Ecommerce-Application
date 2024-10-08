@@ -41,6 +41,7 @@ public class SingleItemViewActivity extends AppCompatActivity {
     private int productPrice;
     private String vendorEmail;
     private String imageBase64;  // For storing image data
+    private boolean isRated = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -224,7 +225,11 @@ public class SingleItemViewActivity extends AppCompatActivity {
                 String apiUrl = "http://192.168.137.1:2030/api/Rates";
                 URL url = new URL(apiUrl);
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-                connection.setRequestMethod("POST");
+                if(!isRated){
+                    connection.setRequestMethod("POST");
+                }else {
+                    connection.setRequestMethod("PUT");
+                }
                 connection.setRequestProperty("Content-Type", "application/json");
                 connection.setDoOutput(true);
 
@@ -245,7 +250,10 @@ public class SingleItemViewActivity extends AppCompatActivity {
                 int responseCode = connection.getResponseCode();
                 if (responseCode == HttpURLConnection.HTTP_CREATED) {
                     showToast("Review submitted successfully");
-                } else {
+                } else if(responseCode == 204){
+                    showToast("Review updated successfully");
+                }
+                else {
                     showToast("Failed to submit review");
                 }
             } catch (Exception e) {
@@ -273,6 +281,7 @@ public class SingleItemViewActivity extends AppCompatActivity {
 
                 int responseCode = connection.getResponseCode();
                 if (responseCode == HttpURLConnection.HTTP_OK) {
+                    isRated = true;
                     BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
                     StringBuilder response = new StringBuilder();
                     String line;
@@ -281,7 +290,10 @@ public class SingleItemViewActivity extends AppCompatActivity {
                     }
                     reader.close();
                     processReviewResponse(response.toString());
-                } else {
+                } else if(responseCode == 204){
+                    isRated = false;
+                }
+                else {
                     showToast("Failed to fetch product details");
                 }
             } catch (Exception e) {
