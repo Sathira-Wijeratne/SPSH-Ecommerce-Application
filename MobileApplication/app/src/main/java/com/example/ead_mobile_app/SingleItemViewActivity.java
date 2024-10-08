@@ -133,6 +133,9 @@ public class SingleItemViewActivity extends AppCompatActivity {
             // Update the UI with product details
             new Handler(Looper.getMainLooper()).post(() -> displayProductDetails(productName, productPrice, stock, vendorEmail, bitmap));
 
+            // Fetch review details.
+            fetchReviewDetails(customerEmail, vendorEmail);
+
         } catch (JSONException e) {
             e.printStackTrace();
             showToast("Failed to parse product details");
@@ -150,7 +153,7 @@ public class SingleItemViewActivity extends AppCompatActivity {
 
         // Set product price
         TextView priceTextView = findViewById(R.id.productPrice);
-        priceTextView.setText("Price: $" + price);
+        priceTextView.setText("Price: Rs. " + price);
 
         // Set product stock
         TextView stockTextView = findViewById(R.id.productStock);
@@ -256,5 +259,50 @@ public class SingleItemViewActivity extends AppCompatActivity {
         new Handler(Looper.getMainLooper()).post(() ->
                 Toast.makeText(SingleItemViewActivity.this, message, Toast.LENGTH_SHORT).show()
         );
+    }
+
+    private void fetchReviewDetails(String customerEmail, String vendorEmail) {
+        executorService.execute(() -> {
+            try {
+                String apiUrl = "http://192.168.137.1:2030/api/Rates/" + customerEmail + "/" + vendorEmail;
+                URL url = new URL(apiUrl);
+                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                connection.setRequestMethod("GET");
+                connection.setRequestProperty("Accept", "application/json");
+                connection.connect();
+
+                int responseCode = connection.getResponseCode();
+                if (responseCode == HttpURLConnection.HTTP_OK) {
+                    BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+                    StringBuilder response = new StringBuilder();
+                    String line;
+                    while ((line = reader.readLine()) != null) {
+                        response.append(line);
+                    }
+                    reader.close();
+                    processReviewResponse(response.toString());
+                } else {
+                    showToast("Failed to fetch product details");
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+                showToast("Error: " + e.getMessage());
+            }
+        });
+    }
+
+    private void processReviewResponse(String response) {
+        try {
+            JSONObject review = new JSONObject(response);
+            commentInput.setText(review.getString("comment"));
+            ratingBar.setRating(review.getInt("stars"));
+
+            // Update the UI with product details
+//            new Handler(Looper.getMainLooper()).post(() -> displayProductDetails(productName, productPrice, stock, vendorEmail, bitmap));
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+            showToast("Failed to parse product details");
+        }
     }
 }
