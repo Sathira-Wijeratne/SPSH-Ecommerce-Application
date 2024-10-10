@@ -119,7 +119,10 @@ const AddProducts = () => {
     <div className="content">
       <MenuBar />
       <div> {/* Use Bootstrap container */}
-        <h1 className="hello">Add New Product</h1>
+        {/* Conditionally change the heading based on isProductExisting */}
+        <h1 className="hello">
+          {isProductExisting ? "Edit Product" : "Add New Product"}
+        </h1>
         <form onSubmit={handleSubmit} className="row g-3"> {/* Bootstrap grid for form layout */}
           <div className="col-md-6">
             <label className="form-label">Product ID</label>
@@ -235,7 +238,7 @@ const AddProducts = () => {
               className="btn btn-primary w-100"
               style={{ backgroundColor: "#001f3f", borderColor: "#001f3f" }}
             >
-              Add Product
+              {isProductExisting ? "Update Product" : "Add Product"}
             </button>
           </div>
         </form>
