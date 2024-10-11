@@ -292,7 +292,7 @@ public class ItemListPageActivity extends AppCompatActivity {
 
             // Product Price
             TextView priceTextView = new TextView(this);
-            priceTextView.setText("Price: $" + price);
+            priceTextView.setText("Price: Rs." + price);
             priceTextView.setTextSize(16);
             priceTextView.setTextColor(getResources().getColor(android.R.color.black));
             productInfoLayout.addView(priceTextView);
