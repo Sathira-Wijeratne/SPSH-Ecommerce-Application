@@ -72,7 +72,7 @@ public class CustomerSignUpActivity extends AppCompatActivity {
 
         // Validate name (no numbers or special characters allowed)
         if (!name.matches("[a-zA-Z ]+")) {
-            Toast.makeText(CustomerSignUpActivity.this, "Name can only contain letters and spaces", Toast.LENGTH_SHORT).show();
+            Toast.makeText(CustomerSignUpActivity.this, "Name can only contain letters", Toast.LENGTH_SHORT).show();
             return false;
         }
 
