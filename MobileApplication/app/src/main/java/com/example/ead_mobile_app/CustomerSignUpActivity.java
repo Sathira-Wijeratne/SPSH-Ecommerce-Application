@@ -63,9 +63,28 @@ public class CustomerSignUpActivity extends AppCompatActivity {
         String email = emailEditText.getText().toString().trim();
         String password = passwordEditText.getText().toString().trim();
         String confirmPassword = confirmPasswordEditText.getText().toString().trim();
+        String name = nameEditText.getText().toString().trim();
 
-        if (email.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()) {
+        if (email.isEmpty() || password.isEmpty() || confirmPassword.isEmpty() || name.isEmpty()) {
             Toast.makeText(CustomerSignUpActivity.this, "All fields are required", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        // Validate name (no numbers or special characters allowed)
+        if (!name.matches("[a-zA-Z ]+")) {
+            Toast.makeText(CustomerSignUpActivity.this, "Name can only contain letters", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        // Validate email format
+        if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            Toast.makeText(CustomerSignUpActivity.this, "Please enter a valid email address", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        // Validate password length (at least 8 characters) and combination of letters and numbers
+        if (password.length() < 8 || !password.matches(".*[A-Za-z].*") || !password.matches(".*\\d.*")) {
+            Toast.makeText(CustomerSignUpActivity.this, "Password must be at least 8 characters long and include both letters and numbers", Toast.LENGTH_SHORT).show();
             return false;
         }
 
@@ -92,6 +111,7 @@ public class CustomerSignUpActivity extends AppCompatActivity {
 
     // Method to handle the sign-up request using ExecutorService
     private void sendSignUpRequest(String email, String password) {
+        String name = nameEditText.getText().toString().trim();
         executorService.execute(() -> {
             try {
                 // Set up the URL connection
@@ -104,7 +124,7 @@ public class CustomerSignUpActivity extends AppCompatActivity {
                 // Build the JSON payload
                 JSONObject jsonParam = new JSONObject();
                 jsonParam.put("Id", "");
-                jsonParam.put("Name",nameEditText ); // Default name or pass user's name if available
+                jsonParam.put("Name",name ); // Default name or pass user's name if available
                 jsonParam.put("Role", "Customer"); // Default role as 'Customer'
                 jsonParam.put("Email", email);
                 jsonParam.put("Password", password);

@@ -113,41 +113,7 @@ public class CartDetailsActivity extends AppCompatActivity {
         }
     }
 
-//    private void addCartItemCard(String productId, String productName, int productPrice, int productQty, Bitmap productImage) {
-//        new Handler(Looper.getMainLooper()).post(() -> {
-//            LinearLayout cardLayout = new LinearLayout(this);
-//            cardLayout.setOrientation(LinearLayout.VERTICAL);
-//            cardLayout.setPadding(16, 16, 16, 16);
-//            cardLayout.setGravity(Gravity.CENTER_VERTICAL);
-//            cardLayout.setBackgroundResource(android.R.drawable.dialog_holo_light_frame);
-//            cardLayout.setLayoutParams(new LinearLayout.LayoutParams(
-//                    LinearLayout.LayoutParams.MATCH_PARENT,
-//                    LinearLayout.LayoutParams.WRAP_CONTENT
-//            ));
-//
-//            ImageView productImageView = new ImageView(this);
-//            productImageView.setImageBitmap(productImage);
-//            productImageView.setLayoutParams(new LinearLayout.LayoutParams(300, 300));
-//            cardLayout.addView(productImageView);
-//
-//            TextView nameTextView = new TextView(this);
-//            nameTextView.setText(productName);
-//            nameTextView.setTextSize(18);
-//            cardLayout.addView(nameTextView);
-//
-//            TextView priceTextView = new TextView(this);
-//            priceTextView.setText("Price: $" + productPrice);
-//            priceTextView.setTextSize(16);
-//            cardLayout.addView(priceTextView);
-//
-//            TextView qtyTextView = new TextView(this);
-//            qtyTextView.setText("Quantity: " + productQty);
-//            qtyTextView.setTextSize(14);
-//            cardLayout.addView(qtyTextView);
-//
-//            cartContainer.addView(cardLayout);
-//        });
-//    }
+
 private void addCartItemCard(String productId, String productName, int productPrice, int productQty, Bitmap productImage) {
     new Handler(Looper.getMainLooper()).post(() -> {
         LinearLayout cardLayout = new LinearLayout(this);

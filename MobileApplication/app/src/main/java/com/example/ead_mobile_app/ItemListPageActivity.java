@@ -183,80 +183,7 @@ public class ItemListPageActivity extends AppCompatActivity {
     }
 
 
-//private void addItemCard(String productId, String name, int price, int stock) {
-//    runOnUiThread(() -> {
-//        // Create the card layout
-//        LinearLayout cardLayout = new LinearLayout(this);
-//        cardLayout.setOrientation(LinearLayout.HORIZONTAL);
-//        cardLayout.setPadding(16, 16, 16, 16);
-//        cardLayout.setBackgroundResource(android.R.drawable.dialog_holo_light_frame);
-//        cardLayout.setLayoutParams(new LinearLayout.LayoutParams(
-//                LinearLayout.LayoutParams.MATCH_PARENT,
-//                LinearLayout.LayoutParams.WRAP_CONTENT
-//        ));
-//
-//        // Left part of the card (Product details)
-//        LinearLayout productInfoLayout = new LinearLayout(this);
-//        productInfoLayout.setOrientation(LinearLayout.VERTICAL);
-//        productInfoLayout.setLayoutParams(new LinearLayout.LayoutParams(
-//                0,
-//                LinearLayout.LayoutParams.WRAP_CONTENT,
-//                1  // Give this layout more weight so it takes most space
-//        ));
-//
-//        // Product Name
-//        TextView nameTextView = new TextView(this);
-//        nameTextView.setText(name);
-//        nameTextView.setTextSize(18);
-//        nameTextView.setTextColor(getResources().getColor(android.R.color.black));
-//        productInfoLayout.addView(nameTextView);
-//
-//        // Product Price
-//        TextView priceTextView = new TextView(this);
-//        priceTextView.setText("Price: $" + price);
-//        priceTextView.setTextSize(16);
-//        priceTextView.setTextColor(getResources().getColor(android.R.color.black));
-//        productInfoLayout.addView(priceTextView);
-//
-//        // Product Stock
-//        TextView stockTextView = new TextView(this);
-//        stockTextView.setText("Available: " + stock);
-//        stockTextView.setTextSize(14);
-//        stockTextView.setTextColor(getResources().getColor(android.R.color.black));
-//        productInfoLayout.addView(stockTextView);
-//
-//        // Add product info layout to the card
-//        cardLayout.addView(productInfoLayout);
-//
-//        // Add "View" Button to the right side of the card
-//        Button viewButton = new Button(this);
-//        viewButton.setText("View");
-//        viewButton.setTextColor(getResources().getColor(android.R.color.white));
-//        viewButton.setBackgroundColor(getResources().getColor(android.R.color.holo_blue_light)); // Light blue background
-//
-//        LinearLayout.LayoutParams buttonLayoutParams = new LinearLayout.LayoutParams(
-//                LinearLayout.LayoutParams.WRAP_CONTENT,
-//                LinearLayout.LayoutParams.WRAP_CONTENT
-//        );
-//        buttonLayoutParams.setMargins(16, 0, 16, 0); // Add left and right margin to center the button better
-//        viewButton.setLayoutParams(buttonLayoutParams);
-//
-//        // Set an OnClickListener for the button
-//        viewButton.setOnClickListener(v -> {
-//            // Navigate to SingleItemViewActivity, passing the productId and customerEmail
-//            Intent intent = new Intent(ItemListPageActivity.this, SingleItemViewActivity.class);
-//            intent.putExtra("productId", productId);  // Pass the productId to SingleItemViewActivity
-//            intent.putExtra("customerEmail", customerEmail);  // Pass the customerEmail
-//            startActivity(intent);
-//        });
-//
-//        // Add the View button to the card layout
-//        cardLayout.addView(viewButton);
-//
-//        // Add the card to the main item container
-//        itemContainer.addView(cardLayout);
-//    });
-//}
+
 
     private void addItemCard(String productId, String name, int price, int stock) {
         runOnUiThread(() -> {
@@ -292,7 +219,7 @@ public class ItemListPageActivity extends AppCompatActivity {
 
             // Product Price
             TextView priceTextView = new TextView(this);
-            priceTextView.setText("Price: $" + price);
+            priceTextView.setText("Price: Rs." + price);
             priceTextView.setTextSize(16);
             priceTextView.setTextColor(getResources().getColor(android.R.color.black));
             productInfoLayout.addView(priceTextView);
