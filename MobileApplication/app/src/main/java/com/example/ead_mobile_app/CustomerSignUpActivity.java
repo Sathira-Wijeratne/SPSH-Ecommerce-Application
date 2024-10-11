@@ -63,11 +63,31 @@ public class CustomerSignUpActivity extends AppCompatActivity {
         String email = emailEditText.getText().toString().trim();
         String password = passwordEditText.getText().toString().trim();
         String confirmPassword = confirmPasswordEditText.getText().toString().trim();
-
-        if (email.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()) {
+        String name = nameEditText.getText().toString().trim();
+        if (email.isEmpty() || password.isEmpty() || confirmPassword.isEmpty() || name.isEmpty()) {
             Toast.makeText(CustomerSignUpActivity.this, "All fields are required", Toast.LENGTH_SHORT).show();
             return false;
         }
+        if (!name.matches("[a-zA-Z ]+")) {
+            Toast.makeText(CustomerSignUpActivity.this, "Name can only contain letters", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            Toast.makeText(CustomerSignUpActivity.this, "Please enter a valid email address", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        if (password.length() < 8 || !password.matches(".*[A-Za-z].*") || !password.matches(".*\\d.*")) {
+            Toast.makeText(CustomerSignUpActivity.this, "Password must be at least 8 characters long and include both letters and numbers", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        if (!name.matches("[a-zA-Z ]+")) {
+            Toast.makeText(CustomerSignUpActivity.this, "Name can only contain letters", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
 
         if (!password.equals(confirmPassword)) {
             Toast.makeText(CustomerSignUpActivity.this, "Passwords do not match", Toast.LENGTH_SHORT).show();
@@ -93,6 +113,7 @@ public class CustomerSignUpActivity extends AppCompatActivity {
     // Method to handle the sign-up request using ExecutorService
     private void sendSignUpRequest(String email, String password) {
         executorService.execute(() -> {
+            String name = nameEditText.getText().toString().trim();
             try {
                 // Set up the URL connection
                 URL url = new URL("http://192.168.137.1:2030/api/Users"); // API URL
@@ -104,7 +125,7 @@ public class CustomerSignUpActivity extends AppCompatActivity {
                 // Build the JSON payload
                 JSONObject jsonParam = new JSONObject();
                 jsonParam.put("Id", "");
-                jsonParam.put("Name",nameEditText ); // Default name or pass user's name if available
+                jsonParam.put("Name",name ); // Default name or pass user's name if available
                 jsonParam.put("Role", "Customer"); // Default role as 'Customer'
                 jsonParam.put("Email", email);
                 jsonParam.put("Password", password);
