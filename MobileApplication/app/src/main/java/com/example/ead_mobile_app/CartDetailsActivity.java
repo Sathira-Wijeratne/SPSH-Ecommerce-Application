@@ -177,7 +177,7 @@ private void addCartItemCard(String productId, String productName, int productPr
         itemDetailsLayout.addView(nameTextView);
 
         TextView priceTextView = new TextView(this);
-        priceTextView.setText("Price: $" + productPrice);
+        priceTextView.setText("Price: Rs." + productPrice);
         priceTextView.setTextSize(16);
         priceTextView.setTextColor(getResources().getColor(android.R.color.black));
         itemDetailsLayout.addView(priceTextView);
