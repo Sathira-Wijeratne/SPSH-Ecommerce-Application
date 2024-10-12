@@ -26,13 +26,13 @@ namespace SPSH_Ecommerce_Application
 
             // Add services to the container.
             // MongoDB decimal serialization configuration - referenced from : https://stackoverflow.com/questions/43473147/how-to-use-decimal-type-in-mongodb
-            BsonSerializer.RegisterSerializer(typeof(decimal), new DecimalSerializer(BsonType.Decimal128));
+            BsonSerializer.RegisterSerializer(typeof(decimal), new DecimalSerializer(BsonType.Decimal128)); //tell MongoDB’s C# driver to use BSON’s Decimal128 type for storing and retrieving decimal values from MongoDB
             BsonSerializer.RegisterSerializer(typeof(decimal?), new NullableSerializer<decimal>(new DecimalSerializer(BsonType.Decimal128)));
             
             //MongoDB configuration - referenced from : https://code-maze.com/getting-started-aspnetcore-mongodb/
             builder.Services.Configure<MongoDBSettings>(
-                builder.Configuration.GetSection("MongoDB"));
-            builder.Services.AddSingleton<MongoDBService>();
+                builder.Configuration.GetSection("MongoDB")); //maps values in appsettings.json to MongoDBSettings class variables
+            builder.Services.AddSingleton<MongoDBService>(); //registers MongoDBService as a singleton service
 
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

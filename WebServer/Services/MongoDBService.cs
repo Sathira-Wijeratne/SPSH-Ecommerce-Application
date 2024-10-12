@@ -23,8 +23,8 @@ namespace SPSH_Ecommerce_Application.Services
 
         public MongoDBService(IOptions<MongoDBSettings> mongoDBSettings)
         {
-            var client = new MongoClient(mongoDBSettings.Value.ConnectionString);
-            _database = client.GetDatabase(mongoDBSettings.Value.DatabaseName);
+            var client = new MongoClient(mongoDBSettings.Value.ConnectionString); //mongoclient object manage connection with MongoDB server
+            _database = client.GetDatabase(mongoDBSettings.Value.DatabaseName); //client used to access database, database reference stored in _database
         }
 
         public IMongoCollection<Product> GetProductsCollection()

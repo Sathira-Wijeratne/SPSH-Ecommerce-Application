@@ -197,7 +197,7 @@ private void addCartItemCard(String productId, String productName, int productPr
         // Calculate overall price (price * quantity)
         int overallPrice = productPrice * productQty;
         TextView overallPriceTextView = new TextView(this);
-        overallPriceTextView.setText("Total: $" + overallPrice);
+        overallPriceTextView.setText("Total: Rs." + overallPrice);
         overallPriceTextView.setTextSize(16);
         overallPriceTextView.setTextColor(getResources().getColor(android.R.color.black));
         rightSideLayout.addView(overallPriceTextView);

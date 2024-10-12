@@ -147,7 +147,7 @@ const OrderManagement = () => {
                       className="deliver-btn"
                       onClick={() => handleDialogOpen(order, "complete")}
                     >
-                      Completed
+                      Mark as Completed
                     </button>
                   ) : order.status === "Requested to cancel" ? (
                     <button
